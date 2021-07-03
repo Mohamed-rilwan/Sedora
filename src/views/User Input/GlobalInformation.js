@@ -45,6 +45,7 @@ function GlobalInformation(props) {
   console.log(props.data);
   const [globalInfo, setGlobalInfo] = useState(props.data);
   var regex = /^-?\d+\.?\d*$/;
+  var regexOnlyNumber = new RegExp("[^0-9]", "g");
 
   const handleData = (event) => {
     console.log(parseInt(event.target.value));
@@ -59,20 +60,22 @@ function GlobalInformation(props) {
       (event.target.name === "probabilityOfDropOverWater" &&
         regex.test(event.target.value) &&
         parseInt(event.target.value) <= 1) ||
-      event.target.name === "probabilityOfWindDirection" ||
-      regex.test(event.target.value) ||
-      event.target.value <= 1
+      (event.target.name === "probabilityOfWindDirection" &&
+        regex.test(event.target.value) &&
+        parseInt(event.target.value) <= 1)
     ) {
       const items = { ...globalInfo };
-      event.target.name === "probabilityOfDropOverWater" ||
-      (event.target.name === "probabilityOfWindDirection" &&
-        parseFloat(event.target.value) > 1)
+      ((event.target.name === "probabilityOfDropOverWater" ||
+        event.target.name === "probabilityOfWindDirection") &&
+        regex.test(event.target.value) &&
+        parseFloat(event.target.value) > 1) ||
+      (event.target.name === "numberOfLiftManifest" &&
+        regexOnlyNumber.test(event.target.value))
         ? (items[event.target.name] = "")
         : (items[event.target.name] = event.target.value);
-      // items[event.target.name] = event.target.value;
       setGlobalInfo(items);
       props.handleData(items);
-      console.log(items);
+      console.log(regexOnlyNumber.test(items["numberOfLiftManifest"]));
     }
   };
   return (

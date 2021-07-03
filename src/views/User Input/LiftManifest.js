@@ -2,15 +2,23 @@ import React, { useState } from "react";
 // reactstrap components
 import { Card, CardBody, CardHeader, CardTitle, Table } from "reactstrap";
 
+const data = {
+  liftPerYear: [],
+  description: [],
+  mass: [],
+  length: [],
+  depth: [],
+  height: [],
+};
 function LiftManifest(props) {
   console.log(props);
-  const [globalInfo, setGlobalInfo] = useState([]);
+  const [liftManifest, setLiftManifest] = useState(data);
 
-  const handleData = (event) => {
-    const items = { ...globalInfo };
-    items[event.target.name] = event.target.value;
-    console.log(items);
-    setGlobalInfo(items);
+  const handleChange = (event, index) => {
+    const items = { ...liftManifest };
+    items[event.target.name][index] = event.target.value;
+    setLiftManifest(items);
+    props.handleChange(items);
   };
   return (
     <>
@@ -38,22 +46,40 @@ function LiftManifest(props) {
                   <tr>
                     <th scope="row">{i + 1}</th>
                     <td>
-                      <input name="liftPerYear"></input>
+                      <input
+                        name="liftPerYear"
+                        onChange={(e) => handleChange(e, i)}
+                      ></input>
                     </td>
                     <td>
-                      <input name="description"></input>
+                      <input
+                        name="description"
+                        onChange={(e) => handleChange(e, i)}
+                      ></input>
                     </td>
                     <td>
-                      <input name="mass"></input>
+                      <input
+                        name="mass"
+                        onChange={(e) => handleChange(e, i)}
+                      ></input>
                     </td>
                     <td>
-                      <input name="length"></input>
+                      <input
+                        name="length"
+                        onChange={(e) => handleChange(e, i)}
+                      ></input>
                     </td>
                     <td>
-                      <input name="depth"></input>
+                      <input
+                        name="depth"
+                        onChange={(e) => handleChange(e, i)}
+                      ></input>
                     </td>
                     <td>
-                      <input name="height"></input>
+                      <input
+                        name="height"
+                        onChange={(e) => handleChange(e, i)}
+                      ></input>
                     </td>
                   </tr>
                 ))}

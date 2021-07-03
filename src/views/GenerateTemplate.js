@@ -59,7 +59,14 @@ const sampleData = {
     dragCoefficient: "",
     massCoefficient: "",
   },
-  liftManifest: [],
+  liftManifest: {
+    liftPerYear: [],
+    description: [],
+    mass: [],
+    length: [],
+    depth: [],
+    height: [],
+  },
   targetLayout: [],
   ImpactType: [],
   ImpactProtection: [],
@@ -92,6 +99,12 @@ function Example() {
   const handleGlobalData = (item) => {
     const info = { ...data };
     info.globalInformation = item;
+    setData(info);
+  };
+
+  const handleLiftManifestData = (item) => {
+    const info = { ...data };
+    info.liftManifest = item;
     setData(info);
     console.log(info);
   };
@@ -170,6 +183,7 @@ function Example() {
             )}
             {currentPage === 1 && (
               <LiftManifest
+                handleChange={handleLiftManifestData}
                 numberOfItem={parseInt(
                   data.globalInformation["numberOfLiftManifest"]
                 )}
