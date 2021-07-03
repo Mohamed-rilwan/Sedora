@@ -30,14 +30,14 @@ var routes = [
   {
     path: "/generate",
     name: "Generate Template",
-    icon: "nc-icon nc-bank",
+    icon: "nc-icon nc-atom",
     component: GenerateTemplate,
     layout: "/admin",
   },
   {
     path: "/exiting",
     name: "Calcaulate",
-    icon: "nc-icon nc-bank",
+    icon: "nc-icon nc-cloud-upload-94",
     component: ExistingTemplate,
     layout: "/admin",
   },
@@ -71,7 +71,7 @@ var routes = [
   },
   {
     path: "/user-page",
-    name: "User Profile",
+    name: "Team",
     icon: "nc-icon nc-single-02",
     component: UserPage,
     layout: "/admin",
