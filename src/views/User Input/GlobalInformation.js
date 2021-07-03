@@ -44,14 +44,36 @@ const defaultGlobalInfo = {
 function GlobalInformation(props) {
   console.log(props.data);
   const [globalInfo, setGlobalInfo] = useState(props.data);
+  var regex = /^-?\d+\.?\d*$/;
 
   const handleData = (event) => {
-    const items = { ...globalInfo };
-
-    items[event.target.name] = event.target.value;
-    setGlobalInfo(items);
-    props.handleData(items);
-    console.log(items);
+    console.log(parseInt(event.target.value));
+    if (
+      regex.test(event.target.value) ||
+      event.target.value === "" ||
+      event.target.name === "typeOfPipeline" ||
+      event.target.name === "dragCoefficient" ||
+      event.target.name === "massCoefficient" ||
+      event.target.name === "materialOfConstruction" ||
+      event.target.name === "materialOfInnerPipeline" ||
+      (event.target.name === "probabilityOfDropOverWater" &&
+        regex.test(event.target.value) &&
+        parseInt(event.target.value) <= 1) ||
+      event.target.name === "probabilityOfWindDirection" ||
+      regex.test(event.target.value) ||
+      event.target.value <= 1
+    ) {
+      const items = { ...globalInfo };
+      event.target.name === "probabilityOfDropOverWater" ||
+      (event.target.name === "probabilityOfWindDirection" &&
+        parseFloat(event.target.value) > 1)
+        ? (items[event.target.name] = "")
+        : (items[event.target.name] = event.target.value);
+      // items[event.target.name] = event.target.value;
+      setGlobalInfo(items);
+      props.handleData(items);
+      console.log(items);
+    }
   };
   return (
     <>
