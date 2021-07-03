@@ -47,21 +47,31 @@ function ExistingTemplate(props) {
             <CardTitle tag="h5">
               Choose an existing file for Frequency Calculation
             </CardTitle>
+            <FormText color="muted">
+              Validate the file for all the input values before uploading
+            </FormText>
           </CardHeader>
           <CardBody style={{ height: "266px" }}>
             <FormGroup>
-              <>
-                <Button onClick={handleClick}>Upload a file</Button>
+              <div>
+                <Button
+                  style={{
+                    width: "500px",
+                    height: "100px",
+                    backgroundColor: "#70D4D6",
+                    margin: "5% 0 0 30%",
+                  }}
+                  onClick={handleClick}
+                >
+                  Upload a file
+                </Button>
                 <input
                   type="file"
                   ref={hiddenFileInput}
                   onChange={handleChange}
                   style={{ display: "none" }}
                 />
-              </>
-              <FormText color="muted">
-                Validate the file for all the input values before uploading
-              </FormText>
+              </div>
             </FormGroup>
           </CardBody>
           <CardFooter>
