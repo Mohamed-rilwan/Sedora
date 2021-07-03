@@ -56,7 +56,7 @@ function ExistingTemplate(props) {
               <div>
                 <Button
                   style={{
-                    width: "500px",
+                    width: "50%",
                     height: "100px",
                     backgroundColor: "#70D4D6",
                     margin: "5% 0 0 30%",
