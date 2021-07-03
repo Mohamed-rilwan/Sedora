@@ -125,12 +125,14 @@ function Example() {
           size="md"
           aria-label="Page navigation example"
         >
-          <PaginationItem disabled={currentPage === 0}>
+          <PaginationItem
+            disabled={currentPage === 0 || disableNavigation(currentPage - 1)}
+          >
             <PaginationLink
               previous
               href="#"
               onClick={() =>
-                setCurrentPage(currentPage < 1 ? currentPage - 1 : 0)
+                setCurrentPage(currentPage > 1 ? currentPage - 1 : 0)
               }
             />
           </PaginationItem>
@@ -145,7 +147,9 @@ function Example() {
               </PaginationLink>
             </PaginationItem>
           ))}
-          <PaginationItem disabled={currentPage === 4}>
+          <PaginationItem
+            disabled={currentPage === 4 || disableNavigation(currentPage + 1)}
+          >
             <PaginationLink
               next
               href="#"
