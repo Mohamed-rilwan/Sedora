@@ -31,6 +31,7 @@ import {
   Row,
 } from "reactstrap";
 import GlobalInformation from "./User Input/GlobalInformation";
+import ImpactEnergy from "./User Input/ImpactEnergy";
 import ImpactProtection from "./User Input/ImpactProtection";
 import ImpactType from "./User Input/ImpactType";
 import LiftManifest from "./User Input/LiftManifest";
@@ -78,6 +79,7 @@ const stepName = (step) => {
   if (step === 2) return "Target Layout";
   if (step === 3) return "Impact Type";
   if (step === 4) return "Impact Protection";
+  if (step === 5) return "Calculated Impact Energy";
 };
 
 const impactProp = (value) => {
@@ -89,12 +91,13 @@ const impactProp = (value) => {
     : impact;
 };
 
-function Example() {
+function GenerateTemplate() {
   const [currentPage, setCurrentPage] = useState(0);
   const [validInfo, setValidInfo] = useState(false);
+  const [showImpactEnergy, setShowImpactEnergy] = useState(false);
   const [data, setData] = useState(sampleData);
 
-  const pagesCount = 5;
+  const pagesCount = 6;
 
   const handleGlobalData = (item) => {
     const info = { ...data };
@@ -104,9 +107,26 @@ function Example() {
 
   const handleLiftManifestData = (item) => {
     const info = { ...data };
+    let emptyArray = false;
+    for (let i = 0; i < data.globalInformation["numberOfLiftManifest"]; i++) {
+      item.depth[i] === undefined ||
+      item.depth[i] === "" ||
+      item.length[i] === undefined ||
+      item.length[i] === "" ||
+      item.height[i] === undefined ||
+      item.height[i] === "" ||
+      item.mass[i] === undefined ||
+      item.mass[i] === "" ||
+      item.description[i] === undefined ||
+      item.description[i] === "" ||
+      item.liftPerYear[i] === undefined ||
+      item.liftPerYear[i] === "undefined"
+        ? (emptyArray = false)
+        : (emptyArray = true);
+    }
+    setShowImpactEnergy(emptyArray);
     info.liftManifest = item;
     setData(info);
-    console.log(info);
   };
 
   const handlePageClick = (e, index) => {
@@ -126,6 +146,8 @@ function Example() {
           data.globalInformation["maxWaterDepth"] === "" ||
           data.globalInformation["maxDistanceFomDropPoint"] === ""
         );
+      case 5:
+        return !showImpactEnergy;
       default:
         break;
     }
@@ -161,13 +183,13 @@ function Example() {
             </PaginationItem>
           ))}
           <PaginationItem
-            disabled={currentPage === 4 || disableNavigation(currentPage + 1)}
+            disabled={currentPage === 5 || disableNavigation(currentPage + 1)}
           >
             <PaginationLink
               next
               href="#"
               onClick={() =>
-                setCurrentPage(currentPage < 5 ? currentPage + 1 : 4)
+                setCurrentPage(currentPage < 6 ? currentPage + 1 : 5)
               }
             />
           </PaginationItem>
@@ -183,7 +205,8 @@ function Example() {
             )}
             {currentPage === 1 && (
               <LiftManifest
-                handleChange={handleLiftManifestData}
+                data={data.liftManifest ?? null}
+                handleData={handleLiftManifestData}
                 numberOfItem={parseInt(
                   data.globalInformation["numberOfLiftManifest"]
                 )}
@@ -219,11 +242,33 @@ function Example() {
                 )}
               />
             )}
+            {currentPage === 5 && (
+              <ImpactEnergy
+                data={data ?? null}
+                handleData={handleLiftManifestData}
+                numberOfItem={parseInt(
+                  data.globalInformation["numberOfLiftManifest"]
+                )}
+              />
+            )}
           </Col>
         </Row>
 
         <Button
-          style={{ marginLeft: "45%" }}
+          style={{ marginLeft: "30%" }}
+          className="btn-round"
+          color="primary"
+          type="submit"
+          onClick={() => {
+            setCurrentPage(5);
+          }}
+          disabled={!showImpactEnergy}
+        >
+          Calculate Impact Energy
+        </Button>
+
+        <Button
+          style={{ marginLeft: "2%" }}
           className="btn-round"
           color="primary"
           type="submit"
@@ -236,4 +281,4 @@ function Example() {
   );
 }
 
-export default Example;
+export default GenerateTemplate;

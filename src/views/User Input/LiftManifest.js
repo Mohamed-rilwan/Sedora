@@ -11,14 +11,23 @@ const data = {
   height: [],
 };
 function LiftManifest(props) {
-  console.log(props);
-  const [liftManifest, setLiftManifest] = useState(data);
+  const [liftManifest, setLiftManifest] = useState(props.data);
+  var regexWithDecimal = /^-?\d+\.?\d*$/;
+  const regexOnlyNumber = new RegExp("[^0-9]", "g");
 
-  const handleChange = (event, index) => {
-    const items = { ...liftManifest };
-    items[event.target.name][index] = event.target.value;
-    setLiftManifest(items);
-    props.handleChange(items);
+  const handleData = (event, index) => {
+    if (
+      regexWithDecimal.test(event.target.value) ||
+      event.target.name === "description" ||
+      event.target.value === ""
+    ) {
+      const items = { ...liftManifest };
+      items[event.target.name][index] = event.target.value;
+
+      setLiftManifest(items);
+      console.log(items);
+      props.handleData(items);
+    }
   };
   return (
     <>
@@ -47,38 +56,44 @@ function LiftManifest(props) {
                     <th scope="row">{i + 1}</th>
                     <td>
                       <input
+                        value={liftManifest.liftPerYear[i]}
                         name="liftPerYear"
-                        onChange={(e) => handleChange(e, i)}
+                        onChange={(e) => handleData(e, i)}
                       ></input>
                     </td>
                     <td>
                       <input
+                        value={liftManifest.description[i]}
                         name="description"
-                        onChange={(e) => handleChange(e, i)}
+                        onChange={(e) => handleData(e, i)}
                       ></input>
                     </td>
                     <td>
                       <input
+                        value={liftManifest["mass"][i]}
                         name="mass"
-                        onChange={(e) => handleChange(e, i)}
+                        onChange={(e) => handleData(e, i)}
                       ></input>
                     </td>
                     <td>
                       <input
+                        value={liftManifest["length"][i]}
                         name="length"
-                        onChange={(e) => handleChange(e, i)}
+                        onChange={(e) => handleData(e, i)}
                       ></input>
                     </td>
                     <td>
                       <input
+                        value={liftManifest["depth"][i]}
                         name="depth"
-                        onChange={(e) => handleChange(e, i)}
+                        onChange={(e) => handleData(e, i)}
                       ></input>
                     </td>
                     <td>
                       <input
+                        value={liftManifest["height"][i]}
                         name="height"
-                        onChange={(e) => handleChange(e, i)}
+                        onChange={(e) => handleData(e, i)}
                       ></input>
                     </td>
                   </tr>

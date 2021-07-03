@@ -44,13 +44,12 @@ const defaultGlobalInfo = {
 function GlobalInformation(props) {
   console.log(props.data);
   const [globalInfo, setGlobalInfo] = useState(props.data);
-  var regex = /^-?\d+\.?\d*$/;
+  var regexWithDecimal = /^-?\d+\.?\d*$/;
   var regexOnlyNumber = new RegExp("[^0-9]", "g");
 
   const handleData = (event) => {
-    console.log(parseInt(event.target.value));
     if (
-      regex.test(event.target.value) ||
+      regexWithDecimal.test(event.target.value) ||
       event.target.value === "" ||
       event.target.name === "typeOfPipeline" ||
       event.target.name === "dragCoefficient" ||
@@ -58,16 +57,16 @@ function GlobalInformation(props) {
       event.target.name === "materialOfConstruction" ||
       event.target.name === "materialOfInnerPipeline" ||
       (event.target.name === "probabilityOfDropOverWater" &&
-        regex.test(event.target.value) &&
+        regexWithDecimal.test(event.target.value) &&
         parseInt(event.target.value) <= 1) ||
       (event.target.name === "probabilityOfWindDirection" &&
-        regex.test(event.target.value) &&
+        regexWithDecimal.test(event.target.value) &&
         parseInt(event.target.value) <= 1)
     ) {
       const items = { ...globalInfo };
       ((event.target.name === "probabilityOfDropOverWater" ||
         event.target.name === "probabilityOfWindDirection") &&
-        regex.test(event.target.value) &&
+        regexWithDecimal.test(event.target.value) &&
         parseFloat(event.target.value) > 1) ||
       (event.target.name === "numberOfLiftManifest" &&
         regexOnlyNumber.test(event.target.value))
@@ -75,7 +74,6 @@ function GlobalInformation(props) {
         : (items[event.target.name] = event.target.value);
       setGlobalInfo(items);
       props.handleData(items);
-      console.log(regexOnlyNumber.test(items["numberOfLiftManifest"]));
     }
   };
   return (
