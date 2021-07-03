@@ -8,6 +8,7 @@ import {
   CardTitle,
   Col,
   Form,
+  FormFeedback,
   FormGroup,
   Input,
   InputGroup,
@@ -17,14 +18,39 @@ import {
   Row,
 } from "reactstrap";
 
-function GlobalInformation() {
-  const [globalInfo, setGlobalInfo] = useState([]);
+const defaultGlobalInfo = {
+  maxWaterDept: "",
+  dropFrequency: "",
+  densityOfWater: "",
+  probabilityOfDropOverWater: "",
+  probabilityOfWindDirection: "",
+  maxDistanceFomDropPoint: "",
+  numberOfLiftManifest: "",
+  typeOfPipeline: "",
+  pipelineSize: "",
+  innerPipeSize: "",
+  odOfPipeline: "",
+  odOfInnerPipeline: "",
+  wallThickness: "",
+  wallThicknessOfInnerPipe: "",
+  materialOfConstruction: "",
+  materialOfInnerPipeline: "",
+  yieldStress: "",
+  yieldStressOfInnerPipe: "",
+  dragCoefficient: "",
+  massCoefficient: "",
+};
+
+function GlobalInformation(props) {
+  const [globalInfo, setGlobalInfo] = useState(defaultGlobalInfo);
 
   const handleData = (event) => {
     const items = { ...globalInfo };
-    items[event.target.name] = event.target.value;
-    console.log(items);
-    setGlobalInfo(items);
+    const re = /^[0-9\b]+$/;
+    if (event.target.value === "" || re.test(event.target.value)) {
+      items[event.target.name] = event.target.value;
+      setGlobalInfo(items);
+    }
   };
   return (
     <>
@@ -43,7 +69,14 @@ function GlobalInformation() {
                   <Col>
                     <Label for="exampleEmail">Max Water Depth</Label>
                     <InputGroup>
-                      <Input name="maxWaterDept" onChange={handleData} />
+                      <Input
+                        value={globalInfo["maxWaterDept"]}
+                        required
+                        pattern="[0-9]{0,5}"
+                        name="maxWaterDept"
+                        onChange={handleData}
+                      />
+
                       <InputGroupAddon addonType="append">
                         <InputGroupText>m</InputGroupText>
                       </InputGroupAddon>
@@ -74,8 +107,8 @@ function GlobalInformation() {
                       Probability of drop over water
                     </Label>
                     <Input
-                      name="ProbabilityOfDropOverWater"
-                      id="Probability of drop over water"
+                      name="probabilityOfDropOverWater"
+                      id="probability of drop over water"
                       onChange={handleData}
                     />
                   </Col>
@@ -87,7 +120,7 @@ function GlobalInformation() {
                       Probability of wind direction (FPSO)
                     </Label>
                     <Input
-                      name="ProbabilityOfWindDirection"
+                      name="probabilityOfWindDirection"
                       id="exampleEmail"
                       onChange={handleData}
                     />
@@ -100,7 +133,7 @@ function GlobalInformation() {
                     </Label>
                     <InputGroup>
                       <Input
-                        name="MaxDistanceFomDropPoint"
+                        name="maxDistanceFomDropPoint"
                         onChange={handleData}
                       />
                       <InputGroupAddon addonType="append">
@@ -113,7 +146,7 @@ function GlobalInformation() {
                       Number of Item in Lift Manifest
                     </Label>
                     <Input
-                      name="NumberOfLiftManifest"
+                      name="numberOfLiftManifest"
                       id="Number of Item in Lift Manifest "
                       onChange={handleData}
                     />
@@ -122,7 +155,7 @@ function GlobalInformation() {
                 <Label for="exampleSelect">Type of Pipeline / Riser</Label>
                 <Input
                   type="select"
-                  name="TypeOfPipeline"
+                  name="typeOfPipeline"
                   id="typesOfPipe"
                   onChange={handleData}
                 >
@@ -279,7 +312,7 @@ function GlobalInformation() {
                     </Label>
                     <Input
                       type="select"
-                      name="dragCoeeficient"
+                      name="dragCoefficient"
                       id="dragCoefficient"
                       onChange={handleData}
                     >
@@ -294,8 +327,8 @@ function GlobalInformation() {
                     </Label>
                     <Input
                       type="select"
-                      name="massCoeficient"
-                      id="massCoeeficient"
+                      name="massCoefficient"
+                      id="massCoefficient"
                       onChange={handleData}
                     >
                       <option>Lower End Value</option>
