@@ -12,29 +12,7 @@ import {
 function ImpactType(props) {
   const [globalInfo, setGlobalInfo] = useState([]);
 
-  let depth = Array.from(
-    { length: props.maxWaterDepth / 10 },
-    (_, i) => (i + 1) * 10
-  );
-  depth =
-    props.maxWaterDept % 10 !== 0
-      ? [...depth, depth[depth.length - 1] + (props.maxWaterDepth % 10)]
-      : depth;
-
-  let distance = Array.from(
-    { length: props.maxDistanceFomDropPoint / 10 },
-    (_, i) => (i + 1) * 10
-  );
-
-  distance =
-    props.maxDistanceFomDropPoint % 10 !== 0
-      ? [
-          ...distance,
-          distance[distance.length - 1] + (props.maxDistanceFomDropPoint % 10),
-        ]
-      : distance;
-
-  console.log(props, depth, distance);
+  const { depth, distance } = props;
 
   const handleData = (event) => {
     const items = { ...globalInfo };

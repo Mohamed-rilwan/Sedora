@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Card, CardBody, CardHeader, CardTitle, Table } from "reactstrap";
 
 function LiftManifest(props) {
+  console.log(props);
   const [globalInfo, setGlobalInfo] = useState([]);
 
   const handleData = (event) => {
@@ -33,7 +34,7 @@ function LiftManifest(props) {
                 </tr>
               </thead>
               <tbody>
-                {[...Array(props.numberOfitem)].map((page, i) => (
+                {[...Array(props.numberOfItem)].map((page, i) => (
                   <tr>
                     <th scope="row">{i + 1}</th>
                     <td>

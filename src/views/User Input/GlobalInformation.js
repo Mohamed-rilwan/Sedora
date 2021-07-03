@@ -19,7 +19,7 @@ import {
 } from "reactstrap";
 
 const defaultGlobalInfo = {
-  maxWaterDept: "",
+  maxWaterDepth: "",
   dropFrequency: "",
   densityOfWater: "",
   probabilityOfDropOverWater: "",
@@ -42,15 +42,16 @@ const defaultGlobalInfo = {
 };
 
 function GlobalInformation(props) {
-  const [globalInfo, setGlobalInfo] = useState(defaultGlobalInfo);
+  console.log(props.data);
+  const [globalInfo, setGlobalInfo] = useState(props.data);
 
   const handleData = (event) => {
     const items = { ...globalInfo };
-    const re = /^[0-9\b]+$/;
-    if (event.target.value === "" || re.test(event.target.value)) {
-      items[event.target.name] = event.target.value;
-      setGlobalInfo(items);
-    }
+
+    items[event.target.name] = event.target.value;
+    setGlobalInfo(items);
+    props.handleData(items);
+    console.log(items);
   };
   return (
     <>
@@ -60,6 +61,7 @@ function GlobalInformation(props) {
           <p className="card-category">
             Enter Input information to generate template
           </p>
+          <p6 className="card-category">All Fields are necessary</p6>
         </CardHeader>
         <CardBody>
           <div>
@@ -70,10 +72,10 @@ function GlobalInformation(props) {
                     <Label for="exampleEmail">Max Water Depth</Label>
                     <InputGroup>
                       <Input
-                        value={globalInfo["maxWaterDept"]}
+                        value={globalInfo["maxWaterDepth"]}
                         required
                         pattern="[0-9]{0,5}"
-                        name="maxWaterDept"
+                        name="maxWaterDepth"
                         onChange={handleData}
                       />
 
@@ -85,7 +87,11 @@ function GlobalInformation(props) {
                   <Col>
                     <Label for="exampleEmail">Drop Frequency per lift</Label>
                     <InputGroup>
-                      <Input name="dropFrequency" onChange={handleData} />
+                      <Input
+                        value={globalInfo["dropFrequency"]}
+                        name="dropFrequency"
+                        onChange={handleData}
+                      />
                       <InputGroupAddon addonType="append">
                         <InputGroupText>per lift</InputGroupText>
                       </InputGroupAddon>
@@ -96,7 +102,11 @@ function GlobalInformation(props) {
                   <Col>
                     <Label for="exampleEmail">Density of Water</Label>
                     <InputGroup>
-                      <Input name="densityOfWater" onChange={handleData} />
+                      <Input
+                        value={globalInfo["densityOfWater"]}
+                        name="densityOfWater"
+                        onChange={handleData}
+                      />
                       <InputGroupAddon addonType="append">
                         <InputGroupText>Kg/m3</InputGroupText>
                       </InputGroupAddon>
@@ -107,6 +117,7 @@ function GlobalInformation(props) {
                       Probability of drop over water
                     </Label>
                     <Input
+                      value={globalInfo["probabilityOfDropOverWater"]}
                       name="probabilityOfDropOverWater"
                       id="probability of drop over water"
                       onChange={handleData}
@@ -120,6 +131,7 @@ function GlobalInformation(props) {
                       Probability of wind direction (FPSO)
                     </Label>
                     <Input
+                      value={globalInfo["probabilityOfWindDirection"]}
                       name="probabilityOfWindDirection"
                       id="exampleEmail"
                       onChange={handleData}
@@ -133,6 +145,7 @@ function GlobalInformation(props) {
                     </Label>
                     <InputGroup>
                       <Input
+                        value={globalInfo["maxDistanceFomDropPoint"]}
                         name="maxDistanceFomDropPoint"
                         onChange={handleData}
                       />
@@ -146,6 +159,7 @@ function GlobalInformation(props) {
                       Number of Item in Lift Manifest
                     </Label>
                     <Input
+                      value={globalInfo["numberOfLiftManifest"]}
                       name="numberOfLiftManifest"
                       id="Number of Item in Lift Manifest "
                       onChange={handleData}
@@ -154,6 +168,7 @@ function GlobalInformation(props) {
                 </Row>
                 <Label for="exampleSelect">Type of Pipeline / Riser</Label>
                 <Input
+                  value={globalInfo["typeOfPipeline"]}
                   type="select"
                   name="typeOfPipeline"
                   id="typesOfPipe"
@@ -171,19 +186,27 @@ function GlobalInformation(props) {
                   <Col>
                     <Label for="exampleEmail">Pipeline Size</Label>
                     <InputGroup>
-                      <Input name="pipelineSize" onChange={handleData} />
+                      <Input
+                        value={globalInfo["pipelineSize"]}
+                        name="pipelineSize"
+                        onChange={handleData}
+                      />
                       <InputGroupAddon addonType="append">
                         <InputGroupText>inches</InputGroupText>
                       </InputGroupAddon>
                     </InputGroup>
                   </Col>
                   <Col>
-                    {globalInfo["TypeOfPipeline"] ===
+                    {globalInfo["typeOfPipeline"] ===
                       "Steel Pipe-in-Pipe / Riser" && (
                       <>
                         <Label for="exampleEmail">Inner Pipe size</Label>
                         <InputGroup>
-                          <Input name="innerPipeSize" onChange={handleData} />
+                          <Input
+                            value={globalInfo["innerPipeSize"]}
+                            name="innerPipeSize"
+                            onChange={handleData}
+                          />
                           <InputGroupAddon addonType="append">
                             <InputGroupText>inches</InputGroupText>
                           </InputGroupAddon>
@@ -196,19 +219,24 @@ function GlobalInformation(props) {
                   <Col>
                     <Label for="exampleEmail">OD of Pipeline / Umbilical</Label>
                     <InputGroup>
-                      <Input name="odOfPipeline" onChange={handleData} />
+                      <Input
+                        value={globalInfo["odOfPipeline"]}
+                        name="odOfPipeline"
+                        onChange={handleData}
+                      />
                       <InputGroupAddon addonType="append">
                         <InputGroupText>m</InputGroupText>
                       </InputGroupAddon>
                     </InputGroup>
                   </Col>
                   <Col>
-                    {globalInfo["TypeOfPipeline"] ===
+                    {globalInfo["typeOfPipeline"] ===
                       "Steel Pipe-in-Pipe / Riser" && (
                       <>
                         <Label for="exampleEmail">OD of Innner Pipe</Label>
                         <InputGroup>
                           <Input
+                            value={globalInfo["odOfInnerPipeline"]}
                             name="odOfInnerPipeline"
                             onChange={handleData}
                           />
@@ -224,14 +252,18 @@ function GlobalInformation(props) {
                   <Col>
                     <Label for="exampleEmail">Wall Thickness</Label>
                     <InputGroup>
-                      <Input name="wallThickness" onChange={handleData} />
+                      <Input
+                        value={globalInfo["wallThickness"]}
+                        name="wallThickness"
+                        onChange={handleData}
+                      />
                       <InputGroupAddon addonType="append">
                         <InputGroupText>m</InputGroupText>
                       </InputGroupAddon>
                     </InputGroup>
                   </Col>
                   <Col>
-                    {globalInfo["TypeOfPipeline"] ===
+                    {globalInfo["typeOfPipeline"] ===
                       "Steel Pipe-in-Pipe / Riser" && (
                       <>
                         <Label for="exampleEmail">
@@ -239,6 +271,7 @@ function GlobalInformation(props) {
                         </Label>
                         <InputGroup>
                           <Input
+                            value={globalInfo["wallThicknessOfInnerPipe"]}
                             name="wallThicknessOfInnerPipe"
                             onChange={handleData}
                           />
@@ -254,18 +287,20 @@ function GlobalInformation(props) {
                   <Col>
                     <Label for="exampleEmail">Material of Construction</Label>
                     <Input
+                      value={globalInfo["materialOfConstruction"]}
                       name="materialOfConstruction"
                       onChange={handleData}
                     />
                   </Col>
                   <Col>
-                    {globalInfo["TypeOfPipeline"] ===
+                    {globalInfo["typeOfPipeline"] ===
                       "Steel Pipe-in-Pipe / Riser" && (
                       <>
                         <Label for="exampleEmail">
                           Material of Inner Pipeline
                         </Label>
                         <Input
+                          value={globalInfo["materialOfInnerPipeline"]}
                           name="materialOfInnerPipeline"
                           onChange={handleData}
                         />
@@ -277,14 +312,18 @@ function GlobalInformation(props) {
                   <Col>
                     <Label for="exampleEmail">Yield Stress of material</Label>
                     <InputGroup>
-                      <Input name="yieldStress" onChange={handleData} />
+                      <Input
+                        value={globalInfo["yieldStress"]}
+                        name="yieldStress"
+                        onChange={handleData}
+                      />
                       <InputGroupAddon addonType="append">
                         <InputGroupText>N/m2</InputGroupText>
                       </InputGroupAddon>
                     </InputGroup>
                   </Col>
                   <Col>
-                    {globalInfo["TypeOfPipeline"] ===
+                    {globalInfo["typeOfPipeline"] ===
                       "Steel Pipe-in-Pipe / Riser" && (
                       <>
                         <Label for="exampleEmail">
@@ -292,6 +331,7 @@ function GlobalInformation(props) {
                         </Label>
                         <InputGroup>
                           <Input
+                            value={globalInfo["yieldStressOfInnerPipe"]}
                             name="yieldStressOfInnerPipe"
                             onChange={handleData}
                           />
@@ -311,6 +351,7 @@ function GlobalInformation(props) {
                       Drag Coefficient of the object (Cd)
                     </Label>
                     <Input
+                      value={globalInfo["dragCoefficient"]}
                       type="select"
                       name="dragCoefficient"
                       id="dragCoefficient"
@@ -326,6 +367,7 @@ function GlobalInformation(props) {
                       Added Mass coefficient (Ca)
                     </Label>
                     <Input
+                      value={globalInfo["massCoefficient"]}
                       type="select"
                       name="massCoefficient"
                       id="massCoefficient"

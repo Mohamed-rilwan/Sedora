@@ -36,6 +36,35 @@ import ImpactType from "./User Input/ImpactType";
 import LiftManifest from "./User Input/LiftManifest";
 import TargetLayout from "./User Input/TargetLayout";
 
+const sampleData = {
+  globalInformation: {
+    maxWaterDepth: "",
+    dropFrequency: "",
+    densityOfWater: "",
+    probabilityOfDropOverWater: "",
+    probabilityOfWindDirection: "",
+    maxDistanceFomDropPoint: "",
+    numberOfLiftManifest: "",
+    typeOfPipeline: "",
+    pipelineSize: "",
+    innerPipeSize: "",
+    odOfPipeline: "",
+    odOfInnerPipeline: "",
+    wallThickness: "",
+    wallThicknessOfInnerPipe: "",
+    materialOfConstruction: "",
+    materialOfInnerPipeline: "",
+    yieldStress: "",
+    yieldStressOfInnerPipe: "",
+    dragCoefficient: "",
+    massCoefficient: "",
+  },
+  liftManifest: [],
+  targetLayout: [],
+  ImpactType: [],
+  ImpactProtection: [],
+};
+
 const stepName = (step) => {
   if (step === 0) return "Global Information";
   if (step === 1) return "Lift Manifest";
@@ -44,16 +73,49 @@ const stepName = (step) => {
   if (step === 4) return "Impact Protection";
 };
 
+const impactProp = (value) => {
+  let impact = Array.from({ length: value > 10 ? value / 10 : 1 }, (_, i) =>
+    value > 10 ? (i + 1) * 10 : value
+  );
+  return value % 10 !== 0 && value > 10
+    ? [...impact, impact[impact.length - 1] + (value % 10)]
+    : impact;
+};
+
 function Example() {
   const [currentPage, setCurrentPage] = useState(0);
   const [validInfo, setValidInfo] = useState(false);
+  const [data, setData] = useState(sampleData);
 
   const pagesCount = 5;
+
+  const handleGlobalData = (item) => {
+    const info = { ...data };
+    info.globalInformation = item;
+    setData(info);
+    console.log(info);
+  };
 
   const handlePageClick = (e, index) => {
     console.log(index);
     e.preventDefault();
     setCurrentPage(index);
+  };
+
+  const disableNavigation = (step) => {
+    switch (step) {
+      case 1:
+        return !data.globalInformation["numberOfLiftManifest"];
+      case 2:
+      case 3:
+      case 4:
+        return (
+          data.globalInformation["maxWaterDepth"] === "" ||
+          data.globalInformation["maxDistanceFomDropPoint"] === ""
+        );
+      default:
+        break;
+    }
   };
   return (
     <>
@@ -73,7 +135,11 @@ function Example() {
             />
           </PaginationItem>
           {[...Array(pagesCount)].map((page, i) => (
-            <PaginationItem active={i === currentPage} key={i}>
+            <PaginationItem
+              disabled={disableNavigation(i)}
+              active={i === currentPage}
+              key={i}
+            >
               <PaginationLink onClick={(e) => handlePageClick(e, i)} href="#">
                 {stepName(i)}
               </PaginationLink>
@@ -92,24 +158,47 @@ function Example() {
 
         <Row>
           <Col md="12">
-            {currentPage === 0 && <GlobalInformation />}
-            {currentPage === 1 && <LiftManifest numberOfitem={10} />}
+            {currentPage === 0 && (
+              <GlobalInformation
+                data={data.globalInformation ?? null}
+                handleData={handleGlobalData}
+              />
+            )}
+            {currentPage === 1 && (
+              <LiftManifest
+                numberOfItem={parseInt(
+                  data.globalInformation["numberOfLiftManifest"]
+                )}
+              />
+            )}
             {currentPage === 2 && (
               <TargetLayout
-                maxWaterDepth={210.46}
-                maxDistanceFomDropPoint={110.45}
+                depth={impactProp(
+                  parseInt(data.globalInformation["maxWaterDepth"])
+                )}
+                distance={impactProp(
+                  parseInt(data.globalInformation["maxDistanceFomDropPoint"])
+                )}
               />
             )}
             {currentPage === 3 && (
               <ImpactType
-                maxWaterDepth={210.46}
-                maxDistanceFomDropPoint={110.45}
+                depth={impactProp(
+                  parseInt(data.globalInformation["maxWaterDepth"])
+                )}
+                distance={impactProp(
+                  parseInt(data.globalInformation["maxDistanceFomDropPoint"])
+                )}
               />
             )}
             {currentPage === 4 && (
               <ImpactProtection
-                maxWaterDepth={210.46}
-                maxDistanceFomDropPoint={110.45}
+                depth={impactProp(
+                  parseInt(data.globalInformation["maxWaterDepth"])
+                )}
+                distance={impactProp(
+                  parseInt(data.globalInformation["maxDistanceFomDropPoint"])
+                )}
               />
             )}
           </Col>
