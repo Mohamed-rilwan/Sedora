@@ -3,14 +3,31 @@ import React, { useState } from "react";
 import { Card, CardBody, CardHeader, CardTitle, Table } from "reactstrap";
 
 function TargetLayout(props) {
-  const [globalInfo, setGlobalInfo] = useState([]);
+  console.log(props);
   const { depth, distance } = props;
+  var inputArray = [];
+  // for (var dep = 0; dep < depth; dep++) {
+  //   for (var dist = 0; dist < distance; dist++) {
+  //     inputArray[dep][dist] = {
+  //       distance: distance[dist],
+  //       depth: depth[dep],
+  //       value: "",
+  //     };
+  //   }
+  // }
+  console.log(inputArray);
+  const [targetLayout, setTargetLayout] = useState(inputArray);
 
-  const handleData = (event) => {
-    const items = { ...globalInfo };
-    items[event.target.name] = event.target.value;
+  const handleData = (event, depth, distance, depIndex, distIndex) => {
+    const items = targetLayout;
+    console.log(depIndex, distIndex, items);
+    items[(depIndex, distIndex)] = {
+      distance: distance,
+      depth: depth,
+      value: event.target.value,
+    };
+    setTargetLayout(items);
     console.log(items);
-    setGlobalInfo(items);
   };
   return (
     <>
@@ -29,12 +46,17 @@ function TargetLayout(props) {
                 ))}
               </thead>
               <tbody>
-                {depth.map((depth, i) => (
+                {depth.map((dep, depIndex) => (
                   <tr>
-                    <th>{depth}</th>
-                    {distance.map((item, index) => (
+                    <th>{dep}</th>
+                    {distance.map((dist, distIndex) => (
                       <td>
-                        <input style={{ width: "100%" }}></input>
+                        <input
+                          onChange={(e) =>
+                            handleData(e, dep, dist, depIndex, distIndex)
+                          }
+                          style={{ width: "100%" }}
+                        ></input>
                       </td>
                     ))}
                   </tr>

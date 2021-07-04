@@ -25,7 +25,6 @@ function LiftManifest(props) {
       items[event.target.name][index] = event.target.value;
 
       setLiftManifest(items);
-      console.log(items);
       props.handleData(items);
     }
   };

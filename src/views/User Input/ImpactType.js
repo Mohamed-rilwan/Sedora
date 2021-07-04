@@ -17,7 +17,6 @@ function ImpactType(props) {
   const handleData = (event) => {
     const items = { ...globalInfo };
     items[event.target.name] = event.target.value;
-    console.log(items);
     setGlobalInfo(items);
   };
   return (

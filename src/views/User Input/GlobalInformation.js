@@ -42,7 +42,6 @@ const defaultGlobalInfo = {
 };
 
 function GlobalInformation(props) {
-  console.log(props.data);
   const [globalInfo, setGlobalInfo] = useState(props.data);
   var regexWithDecimal = /^-?\d+\.?\d*$/;
   var regexOnlyNumber = new RegExp("[^0-9]", "g");
@@ -72,8 +71,10 @@ function GlobalInformation(props) {
         regexOnlyNumber.test(event.target.value))
         ? (items[event.target.name] = "")
         : (items[event.target.name] = event.target.value);
+      console.log(items);
       setGlobalInfo(items);
       props.handleData(items);
+      console.log(event.target.value, event.target.name);
     }
   };
   return (
@@ -380,6 +381,7 @@ function GlobalInformation(props) {
                       id="dragCoefficient"
                       onChange={handleData}
                     >
+                      <option></option>
                       <option>Lower End Value</option>
                       <option>Medium Value</option>
                       <option>Upper End Value</option>
@@ -396,6 +398,7 @@ function GlobalInformation(props) {
                       id="massCoefficient"
                       onChange={handleData}
                     >
+                      <option></option>
                       <option>Lower End Value</option>
                       <option>Medium Value</option>
                       <option>Upper End Value</option>

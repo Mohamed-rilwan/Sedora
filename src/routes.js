@@ -25,6 +25,7 @@ import Maps from "views/Map.js";
 import UserPage from "views/User.js";
 import GenerateTemplate from "views/GenerateTemplate";
 import ExistingTemplate from "views/ExitingTemplate";
+import test from "views/test";
 
 var routes = [
   {
@@ -41,6 +42,14 @@ var routes = [
     component: ExistingTemplate,
     layout: "/admin",
   },
+  {
+    path: "/test",
+    name: "test",
+    icon: "nc-icon nc-cloud-upload-94",
+    component: test,
+    layout: "/admin",
+  },
+
   {
     path: "/dashboard",
     name: "Dashboard",

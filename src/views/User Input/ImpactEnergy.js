@@ -2,84 +2,227 @@ import React, { useState } from "react";
 // reactstrap components
 import { Card, CardBody, CardHeader, CardTitle, Table } from "reactstrap";
 
+const impactEnergyAddOns = {
+  dnslShapeDescription: [],
+  weightCategory: [],
+  angularDeviationCategoryNumber: [],
+  angularDeviation: [],
+  volumeOfObject: [],
+  projectedArea: [],
+  volumeOfWaterDisplaced: [],
+  ca: [],
+  cd: [],
+  addedMass: [],
+  subseaTerminalVelocity: [],
+  subseaImpactEnergy: [],
+  DropInAirVelocity: [],
+  DepthImpactEnergy: [],
+};
 function ImpactEnergy(props) {
-  const [liftManifest, setLiftManifest] = useState(props.data?.liftManifest);
-  const [impactEnergy, setImpactEnergy] = useState(props.data);
+  const { data } = props;
+  const [impactEnergy, setImpactEnergy] = useState({
+    ...props.data?.liftManifest,
+    ...impactEnergyAddOns,
+  });
 
-  const handleImpactCalculation = (col, index) => {
-    if (col === "DNVGL Shape Description") {
-      return liftManifest.length[index] > 3 * liftManifest.depth[index]
-        ? "Flat Long shaped"
-        : "Box/round shaped";
-    }
-    if (col === "Weight Category") {
-      return liftManifest.mass[index] < 2
-        ? "<2"
-        : liftManifest.mass[index] < 8
-        ? "2-8"
-        : liftManifest.mass[index] < 10
-        ? ">8"
-        : ">>8";
-    }
-    if (col === "Angular Deviation Category Number") {
-      //return liftManifest.mass[index]< 2? "<2" : liftManifest.mass[index]< 8 ? "2-8" :liftManifest.mass[index]< 10 ? ">8" : ">>8"
-    }
-    if (col === "Angular Deviation (Deg)") {
-      // return liftManifest.mass[index]< 2? "<2" : liftManifest.mass[index]< 8 ? "2-8" :liftManifest.mass[index]< 10 ? ">8" : ">>8"
-    }
-    if (col === "Volume  of Object (m3)") {
-      return (
-        liftManifest.length[index] *
-        liftManifest.depth[index] *
-        liftManifest.height[index]
-      );
-    }
-    if (col === "Projected Area (m2)") {
-      // return (
-      //   liftManifest.length[index] *
-      //   liftManifest.depth[index] *
-      //   liftManifest.height[index]
-      // );
-    }
-    if (col === "Volume of Water Displaced (m3)") {
-      return (liftManifest.mass[index] * 1000) / 7810;
-    }
-    if (col === "Ca") {
-      // return (
-      //   liftManifest.mass[index] * 1000/7810
-      // );
-    }
-    if (col === "Cd") {
-      // return (
-      //   liftManifest.mass[index] * 1000/7810
-      // );
-    }
-    if (col === "Added Mass (Ma) (Te)") {
-      // return (
-      //   liftManifest.mass[index] * 1000/7810
-      // );
-    }
-    if (col === "Subsea Terminal Velocity (m/s)") {
-      // return (
-      //   liftManifest.mass[index] * 1000/7810
-      // );
-    }
-    if (col === "Subsea Impact Energy (KJ)") {
-      // return (
-      //   liftManifest.mass[index] * 1000/7810
-      // );
-    }
-    if (col === " 30m drop in air velocity (m/s)") {
-      // return (
-      //   liftManifest.mass[index] * 1000/7810
-      // );
-    }
-    if (col === "< 50m depth Impact Energy (KJ)") {
-      // return (
-      //   liftManifest.mass[index] * 1000/7810
-      // );
-    }
-  };
+  useState(() => {
+    const item = { ...props.data?.liftManifest, ...impactEnergyAddOns };
+    [
+      ...Array(parseInt(data?.globalInformation.numberOfLiftManifest)).keys(),
+    ].map((_, index) =>
+      Object.keys({
+        ...props.data?.liftManifest,
+        ...impactEnergyAddOns,
+      }).forEach((col) => {
+        if (col === "dnslShapeDescription") {
+          item[col][index] =
+            impactEnergy.length[index] > 3 * impactEnergy.depth[index]
+              ? "Flat Long shaped"
+              : "Box/round shaped";
+        }
+        if (col === "weightCategory") {
+          item[col][index] =
+            item.mass[index] < 2
+              ? "<2"
+              : item.mass[index] < 8
+              ? "2-8"
+              : item.mass[index] < 10
+              ? ">8"
+              : ">>8";
+        }
+        console.log(
+          item.dnslShapeDescription[index],
+          item.weightCategory[index]
+        );
+        if (col === "angularDeviationCategoryNumber") {
+          item[col][index] =
+            item.dnslShapeDescription[index] === "Flat Long shaped" &&
+            item.weightCategory[index] === "<2"
+              ? "1"
+              : item.dnslShapeDescription[index] === "Flat Long shaped" &&
+                item.weightCategory[index] === "2-8"
+              ? "2"
+              : item.dnslShapeDescription[index] === "Flat Long shaped" &&
+                item.weightCategory[index] === ">8"
+              ? "3"
+              : item.dnslShapeDescription[index] === "Flat Long shaped" &&
+                item.weightCategory[index] === ">>8"
+              ? "3"
+              : item.dnslShapeDescription[index] === "Box/round shaped" &&
+                item.weightCategory[index] === "<2"
+              ? "4"
+              : item.dnslShapeDescription[index] === "Box/round shaped" &&
+                item.weightCategory[index] === "2-8"
+              ? "5"
+              : item.dnslShapeDescription[index] === "Box/round shaped" &&
+                item.weightCategory[index] === ">8"
+              ? "6"
+              : item.dnslShapeDescription[index] === "Box/round shaped" &&
+                item.weightCategory[index] === ">>8"
+              ? "7"
+              : "undefined";
+        }
+        if (col === "angularDeviation") {
+          item[col][index] =
+            item["angularDeviationCategoryNumber"][index] === "1"
+              ? "15"
+              : item["angularDeviationCategoryNumber"][index] === "2"
+              ? "9"
+              : item["angularDeviationCategoryNumber"][index] === "3"
+              ? "5"
+              : item["angularDeviationCategoryNumber"][index] === "4"
+              ? "10"
+              : item["angularDeviationCategoryNumber"][index] === "5"
+              ? "5"
+              : item["angularDeviationCategoryNumber"][index] === "6"
+              ? "3"
+              : item["angularDeviationCategoryNumber"][index] === "7"
+              ? "2"
+              : "check";
+        }
+        if (col === "volumeOfObject") {
+          item[col][index] =
+            item["length"][index] *
+            item["depth"][index] *
+            item["height"][index];
+        }
+        if (col === "projectedArea") {
+          item[col][index] =
+            item["angularDeviationCategoryNumber"][index] <= 3
+              ? item["length"][index] *
+                item.depth[index] *
+                Math.sin((45 * Math.PI) / 180)
+              : item.depth[index] * item.height[index];
+        }
+        if (col === "volumeOfWaterDisplaced") {
+          item[col][index] = (item.mass[index] * 1000) / 7810;
+        }
+        if (col === "ca") {
+          item[col][index] =
+            parseInt(item.angularDeviationCategoryNumber) < 4 &&
+            data.globalInformation.massCoefficient === "Lower End Value"
+              ? "0.1"
+              : parseInt(item.angularDeviationCategoryNumber) < 3 &&
+                data.globalInformation.massCoefficient === "Medium Value"
+              ? "0.55"
+              : parseInt(item.angularDeviationCategoryNumber) < 3 &&
+                data.globalInformation.massCoefficient === "Upper End Value"
+              ? "1"
+              : parseInt(item.angularDeviationCategoryNumber) > 3 &&
+                parseInt(item.angularDeviationCategoryNumber) < 8 &&
+                data.globalInformation.massCoefficient === "Lower End Value"
+              ? "0.6"
+              : parseInt(item.angularDeviationCategoryNumber) > 3 &&
+                parseInt(item.angularDeviationCategoryNumber) < 8 &&
+                data.globalInformation.massCoefficient === "Medium Value"
+              ? "1.05"
+              : parseInt(item.angularDeviationCategoryNumber) > 3 &&
+                parseInt(item.angularDeviationCategoryNumber) < 8 &&
+                data.globalInformation.massCoefficient === "Upper End Value"
+              ? "1.5"
+              : parseInt(item.angularDeviationCategoryNumber) === 8 &&
+                data.globalInformation.massCoefficient === "Lower End Value"
+              ? "1"
+              : parseInt(item.angularDeviationCategoryNumber) === 8 &&
+                data.globalInformation.massCoefficient === "Medium Value"
+              ? "1.5"
+              : parseInt(item.angularDeviationCategoryNumber) === 8 &&
+                data.globalInformation.massCoefficient === "Upper End Value"
+              ? "2"
+              : "ERROR";
+        }
+
+        if (col === "cd") {
+          item[col][index] =
+            parseInt(item.angularDeviationCategoryNumber[index]) < 4 &&
+            data.globalInformation.dragCoefficient === "Lower End Value"
+              ? "0.7"
+              : parseInt(item.angularDeviationCategoryNumber[index]) < 3 &&
+                data.globalInformation.dragCoefficient === "Medium Value"
+              ? "1.1"
+              : parseInt(item.angularDeviationCategoryNumber[index]) < 3 &&
+                data.globalInformation.dragCoefficient === "Upper End Value"
+              ? "1.5"
+              : parseInt(item.angularDeviationCategoryNumber[index]) > 3 &&
+                parseInt(item.angularDeviationCategoryNumber[index]) < 8 &&
+                data.globalInformation.dragCoefficient === "Lower End Value"
+              ? "1.2"
+              : parseInt(item.angularDeviationCategoryNumber[index]) > 3 &&
+                parseInt(item.angularDeviationCategoryNumber[index]) < 8 &&
+                data.globalInformation.dragCoefficient === "Medium Value"
+              ? "1.25"
+              : parseInt(item.angularDeviationCategoryNumber[index]) > 3 &&
+                parseInt(item.angularDeviationCategoryNumber[index]) < 8 &&
+                data.globalInformation.dragCoefficient === "Upper End Value"
+              ? "1.3"
+              : parseInt(item.angularDeviationCategoryNumber[index]) === 8 &&
+                data.globalInformation.dragCoefficient === "Lower End Value"
+              ? "0.6"
+              : parseInt(item.angularDeviationCategoryNumber[index]) === 8 &&
+                data.globalInformation.dragCoefficient === "Medium Value"
+              ? "1.3"
+              : parseInt(item.angularDeviationCategoryNumber[index]) === 8 &&
+                data.globalInformation.dragCoefficient === "Upper End Value"
+              ? "2"
+              : "ERROR";
+        }
+        if (col === "addedMass") {
+          item[col][index] =
+            (item.volumeOfWaterDisplaced[index] *
+              item.ca[index] *
+              data.globalInformation["densityOfWater"]) /
+            1000;
+        }
+        if (col === "subseaTerminalVelocity") {
+          item[col][index] = Math.sqrt(
+            (2 *
+              (item.mass[index] * 1000 -
+                item.volumeOfWaterDisplaced[index] *
+                  data.globalInformation.densityOfWater) *
+              9.81) /
+              (data.globalInformation.densityOfWater *
+                item.cd[index] *
+                item.projectedArea)
+          );
+        }
+        if (col === "subseaImpactEnergy") {
+          item[col][index] =
+            0.5 *
+            (item.addedMass[index] + item.mass[index]) *
+            Math.pow(item.subseaTerminalVelocity[index], 2);
+        }
+        if (col === "DropInAirVelocity") {
+          item[col][index] = Math.sqrt(2 * 9.81 * 30);
+        }
+        if (col === "DepthImpactEnergy") {
+          item[col][index] =
+            0.5 * item.mass[index] * Math.pow(item.DropInAirVelocity[index], 2);
+        }
+        console.log(item);
+        setImpactEnergy(item);
+      })
+    );
+  });
 
   return (
     <>
@@ -119,114 +262,77 @@ function ImpactEnergy(props) {
               </tr>
             </thead>
             <tbody>
-              {[...Array(props.numberOfItem)].map((page, i) => (
+              {[
+                ...Array(
+                  parseInt(data?.globalInformation.numberOfLiftManifest)
+                ).keys(),
+              ].map((_, i) => (
                 <tr>
                   <th scope="row">{i + 1}</th>
                   <td>
-                    <label>{liftManifest.liftPerYear[i]}</label>
+                    <label>{impactEnergy.liftPerYear[i]}</label>
                   </td>
                   <td>
-                    <label>{liftManifest.description[i]}</label>
+                    <label>{impactEnergy.description[i]}</label>
                   </td>
                   <td>
-                    <label>{liftManifest.mass[i]}</label>
+                    <label>{impactEnergy.mass[i]}</label>
                   </td>
                   <td>
-                    <label>{liftManifest.length[i]}</label>
+                    <label>{impactEnergy.length[i]}</label>
                   </td>
                   <td>
-                    <label>{liftManifest.depth[i]}</label>
+                    <label>{impactEnergy.depth[i]}</label>
                   </td>
                   <td>
-                    <label>{liftManifest.height[i]}</label>
-                  </td>
-
-                  <td>
-                    <label>
-                      {handleImpactCalculation("DNVGL Shape Description", i)}
-                    </label>
-                  </td>
-                  <td>
-                    <label>
-                      {handleImpactCalculation("Weight Category", i)}
-                    </label>
-                  </td>
-                  <td>
-                    <label>
-                      {handleImpactCalculation(
-                        "Angular Deviation Category Number",
-                        i
-                      )}
-                    </label>
-                  </td>
-                  <td>
-                    <label>
-                      {handleImpactCalculation("Angular Deviation (Deg)", i)}
-                    </label>
-                  </td>
-                  <td>
-                    <label>
-                      {handleImpactCalculation("Volume  of Object (m3)", i)}
-                    </label>
-                  </td>
-                  <td>
-                    <label>
-                      {handleImpactCalculation("Volume  of Object (m3)", i)}
-                    </label>
-                  </td>
-                  <td>
-                    <label>
-                      {handleImpactCalculation(
-                        "Volume of Water Displaced (m3)",
-                        i
-                      )}
-                    </label>
-                  </td>
-                  <td>
-                    <label>
-                      {handleImpactCalculation("Weight Category", i)}
-                    </label>
+                    <label>{impactEnergy.height[i]}</label>
                   </td>
 
                   <td>
-                    <label>{handleImpactCalculation("Ca", i)}</label>
+                    <label>{impactEnergy.dnslShapeDescription[i]}</label>
                   </td>
                   <td>
-                    <label>{handleImpactCalculation("Cd", i)}</label>
-                  </td>
-                  <td>
-                    <label>
-                      {handleImpactCalculation("Added Mass (Ma) (Te)", i)}
-                    </label>
+                    <label>{impactEnergy.weightCategory[i]}</label>
                   </td>
                   <td>
                     <label>
-                      {handleImpactCalculation(
-                        "Subsea Terminal Velocity (m/s)",
-                        i
-                      )}
+                      {impactEnergy.angularDeviationCategoryNumber[i]}
                     </label>
                   </td>
                   <td>
-                    <label>
-                      {handleImpactCalculation("Subsea Impact Energy (KJ)", i)}
-                    </label>
+                    <label>{impactEnergy.angularDeviation[i]}</label>
                   </td>
                   <td>
-                    <label>
-                      {handleImpactCalculation(
-                        "30m drop in air velocity (m/s)",
-                        i
-                      )}
-                    </label>
+                    <label>{impactEnergy.volumeOfObject[i]}</label>
                   </td>
                   <td>
-                    <label>
-                      {handleImpactCalculation(
-                        "< 50m depth Impact Energy (KJ)",
-                        i
-                      )}
-                    </label>
+                    <label>{impactEnergy.projectedArea[i]}</label>
+                  </td>
+
+                  <td>
+                    <label>{impactEnergy.volumeOfWaterDisplaced[i]}</label>
+                  </td>
+
+                  <td>
+                    <label>{impactEnergy.ca[i]}</label>
+                  </td>
+                  <td>
+                    <label>{impactEnergy.cd[i]}</label>
+                  </td>
+                  <td>
+                    <label>{impactEnergy.addedMass[i]}</label>
+                  </td>
+                  <td>
+                    <label>{impactEnergy.subseaTerminalVelocity[i]}</label>
+                  </td>
+                  <td>
+                    <label>{impactEnergy.subseaImpactEnergy[i]}</label>
+                  </td>
+                  <td>
+                    <label>{impactEnergy.DropInAirVelocity[i]}</label>
+                  </td>
+                  <td>
+                    <label>{impactEnergy.DepthImpactEnergy[i]}</label>
                   </td>
                 </tr>
               ))}

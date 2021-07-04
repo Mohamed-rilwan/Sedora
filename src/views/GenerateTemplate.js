@@ -30,6 +30,7 @@ import {
   PaginationLink,
   Row,
 } from "reactstrap";
+import generateTemplate from "service/droppedObject.service";
 import GlobalInformation from "./User Input/GlobalInformation";
 import ImpactEnergy from "./User Input/ImpactEnergy";
 import ImpactProtection from "./User Input/ImpactProtection";
@@ -68,9 +69,6 @@ const sampleData = {
     depth: [],
     height: [],
   },
-  targetLayout: [],
-  ImpactType: [],
-  ImpactProtection: [],
 };
 
 const stepName = (step) => {
@@ -99,38 +97,74 @@ function GenerateTemplate() {
 
   const pagesCount = 6;
 
+  const disableShowImpactEnergy = (step, item) => {
+    console.log(step, item);
+    let emptyArray = true;
+    if (step === "liftManifest") {
+      for (let i = 0; i < data.globalInformation["numberOfLiftManifest"]; i++) {
+        item.depth[i] === undefined ||
+        item.depth[i] === "" ||
+        item.length[i] === undefined ||
+        item.length[i] === "" ||
+        item.height[i] === undefined ||
+        item.height[i] === "" ||
+        item.mass[i] === undefined ||
+        item.mass[i] === "" ||
+        item.description[i] === undefined ||
+        item.description[i] === "" ||
+        item.liftPerYear[i] === undefined ||
+        item.liftPerYear[i] === "" ||
+        data.globalInformation.massCoefficient === "" ||
+        data.globalInformation.massCoefficient === undefined ||
+        data.globalInformation.dragCoefficient === "" ||
+        data.globalInformation.dragCoefficient === undefined ||
+        data.globalInformation.densityOfWater === ""
+          ? (emptyArray = true)
+          : (emptyArray = false);
+      }
+    }
+    if (step === "globalInformation") {
+      console.log("reche", item);
+      for (let i = 0; i < data.globalInformation["numberOfLiftManifest"]; i++) {
+        data.liftManifest.depth[i] === undefined ||
+        data.liftManifest.depth[i] === "" ||
+        data.liftManifest.length[i] === undefined ||
+        data.liftManifest.length[i] === "" ||
+        data.liftManifest.height[i] === undefined ||
+        data.liftManifest.height[i] === "" ||
+        data.liftManifest.mass[i] === undefined ||
+        data.liftManifest.mass[i] === "" ||
+        data.liftManifest.description[i] === undefined ||
+        data.liftManifest.description[i] === "" ||
+        data.liftManifest.liftPerYear[i] === undefined ||
+        data.liftManifest.liftPerYear[i] === "" ||
+        item.massCoefficient === "" ||
+        item.massCoefficient === undefined ||
+        item.dragCoefficient === "" ||
+        item.dragCoefficient === undefined ||
+        item.densityOfWater === ""
+          ? (emptyArray = true)
+          : (emptyArray = false);
+      }
+    }
+    setShowImpactEnergy(!emptyArray);
+  };
+
   const handleGlobalData = (item) => {
     const info = { ...data };
     info.globalInformation = item;
+    disableShowImpactEnergy("globalInformation", item);
     setData(info);
   };
 
   const handleLiftManifestData = (item) => {
     const info = { ...data };
-    let emptyArray = false;
-    for (let i = 0; i < data.globalInformation["numberOfLiftManifest"]; i++) {
-      item.depth[i] === undefined ||
-      item.depth[i] === "" ||
-      item.length[i] === undefined ||
-      item.length[i] === "" ||
-      item.height[i] === undefined ||
-      item.height[i] === "" ||
-      item.mass[i] === undefined ||
-      item.mass[i] === "" ||
-      item.description[i] === undefined ||
-      item.description[i] === "" ||
-      item.liftPerYear[i] === undefined ||
-      item.liftPerYear[i] === "undefined"
-        ? (emptyArray = false)
-        : (emptyArray = true);
-    }
-    setShowImpactEnergy(emptyArray);
+    disableShowImpactEnergy("liftManifest", item);
     info.liftManifest = item;
     setData(info);
   };
 
   const handlePageClick = (e, index) => {
-    console.log(index);
     e.preventDefault();
     setCurrentPage(index);
   };
@@ -272,7 +306,7 @@ function GenerateTemplate() {
           className="btn-round"
           color="primary"
           type="submit"
-          disabled={!validInfo}
+          onClick={() => generateTemplate(data)}
         >
           Generate Template
         </Button>
