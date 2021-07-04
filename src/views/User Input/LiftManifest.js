@@ -30,7 +30,7 @@ function LiftManifest(props) {
   };
   return (
     <>
-      <Card>
+      <Card style={{ overflowX: "auto" }}>
         <CardHeader>
           <CardTitle tag="h5">Lift Manifest</CardTitle>
           <p className="card-category">Enter Manifest Items</p>
