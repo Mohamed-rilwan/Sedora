@@ -1,16 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 // reactstrap components
 import { Card, CardBody, CardHeader, CardTitle, Table } from "reactstrap";
-import { preProcessFile } from "typescript";
 
-// const data = {
-//   liftPerYear: [],
-//   description: [],
-//   mass: [],
-//   length: [],
-//   depth: [],
-//   height: [],
-// };
 const ValidateInputData = (data, numberOfItem) => {
   const item = data;
   [...Array(parseInt(numberOfItem)).keys()].map((_, index) =>
@@ -30,7 +21,6 @@ function LiftManifest(props) {
     ValidateInputData(props.data, props.numberOfItem)
   );
   var regexWithDecimal = /^-?\d+\.?\d*$/;
-  const regexOnlyNumber = new RegExp("[^0-9]", "g");
 
   const handleData = (event, index) => {
     console.log(event.target.value, regexWithDecimal.test(event.target.value));

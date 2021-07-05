@@ -109,13 +109,17 @@ function ImpactEnergy(props) {
         if (col === "projectedArea") {
           item[col][index] =
             item["angularDeviationCategoryNumber"][index] <= 3
-              ? item["length"][index] *
-                item.depth[index] *
-                Math.sin((45 * Math.PI) / 180)
-              : item.depth[index] * item.height[index];
+              ? parseFloat(
+                  item["length"][index] *
+                    item.depth[index] *
+                    Math.sin((45 * Math.PI) / 180)
+                ).toFixed(4)
+              : parseFloat((item.depth[index] * item.height[index]).toFixed(4));
         }
         if (col === "volumeOfWaterDisplaced") {
-          item[col][index] = (item.mass[index] * 1000) / 7810;
+          item[col][index] = parseFloat(
+            ((item.mass[index] * 1000) / 7810).toFixed(4)
+          );
         }
         if (col === "ca") {
           item[col][index] =
@@ -187,38 +191,48 @@ function ImpactEnergy(props) {
               : "ERROR";
         }
         if (col === "addedMass") {
-          item[col][index] =
+          item[col][index] = parseFloat(
             (item.volumeOfWaterDisplaced[index] *
               item.ca[index] *
               data.globalInformation["densityOfWater"]) /
-            1000;
+              1000
+          ).toFixed(4);
         }
         if (col === "subseaTerminalVelocity") {
-          item[col][index] = Math.sqrt(
-            (2 *
-              (item.mass[index] * 1000 -
-                item.volumeOfWaterDisplaced[index] *
-                  data.globalInformation.densityOfWater) *
-              9.81) /
-              (data.globalInformation.densityOfWater *
-                item.cd[index] *
-                item.projectedArea)
+          item[col][index] = parseFloat(
+            Math.sqrt(
+              (2 *
+                (item.mass[index] * 1000 -
+                  item.volumeOfWaterDisplaced[index] *
+                    data.globalInformation.densityOfWater) *
+                9.81) /
+                (data.globalInformation.densityOfWater *
+                  item.cd[index] *
+                  item.projectedArea)
+            ).toFixed(4)
           );
         }
         if (col === "subseaImpactEnergy") {
-          item[col][index] =
-            0.5 *
-            (item.addedMass[index] + item.mass[index]) *
-            Math.pow(item.subseaTerminalVelocity[index], 2);
+          item[col][index] = parseFloat(
+            (
+              0.5 *
+              (item.addedMass[index] + item.mass[index]) *
+              Math.pow(item.subseaTerminalVelocity[index], 2)
+            ).toFixed(4)
+          );
         }
         if (col === "DropInAirVelocity") {
-          item[col][index] = Math.sqrt(2 * 9.81 * 30);
+          item[col][index] = parseFloat(Math.sqrt(2 * 9.81 * 30).toFixed(4));
         }
         if (col === "DepthImpactEnergy") {
-          item[col][index] =
-            0.5 * item.mass[index] * Math.pow(item.DropInAirVelocity[index], 2);
+          item[col][index] = parseFloat(
+            (
+              0.5 *
+              item.mass[index] *
+              Math.pow(item.DropInAirVelocity[index], 2)
+            ).toFixed(4)
+          );
         }
-        console.log(item);
         setImpactEnergy(item);
       })
     );
