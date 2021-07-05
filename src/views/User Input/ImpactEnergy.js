@@ -80,7 +80,7 @@ function ImpactEnergy(props) {
               : item.dnslShapeDescription[index] === "Box/round shaped" &&
                 item.weightCategory[index] === ">>8"
               ? "7"
-              : "undefined";
+              : "8";
         }
         if (col === "angularDeviation") {
           item[col][index] =
@@ -124,6 +124,7 @@ function ImpactEnergy(props) {
         if (col === "ca") {
           item[col][index] =
             parseInt(item.angularDeviationCategoryNumber) < 4 &&
+            parseInt(item.angularDeviationCategoryNumber) > 0 &&
             data.globalInformation.massCoefficient === "Lower End Value"
               ? "0.1"
               : parseInt(item.angularDeviationCategoryNumber) < 3 &&

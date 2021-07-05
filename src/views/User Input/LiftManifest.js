@@ -26,6 +26,7 @@ function LiftManifest(props) {
     console.log(event.target.value, regexWithDecimal.test(event.target.value));
     if (
       regexWithDecimal.test(event.target.value) ||
+      event.target.value === "" ||
       event.target.name === "description"
     ) {
       const items = { ...liftManifest };

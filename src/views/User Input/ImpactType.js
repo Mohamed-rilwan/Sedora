@@ -59,8 +59,8 @@ function ImpactType(props) {
     <>
       <Card style={{ overflowX: "auto" }}>
         <CardHeader>
-          <CardTitle tag="h5">Impact Protection Layout</CardTitle>
-          <p className="card-category">Enter Impact at each depth</p>
+          <CardTitle tag="h5">Type of impact Expected</CardTitle>
+          <p className="card-category">Enter Impact Type at each Depth</p>
         </CardHeader>
         <CardBody>
           <div>
@@ -89,7 +89,7 @@ function ImpactType(props) {
                         >
                           <option></option>
                           <option>Fully shielded</option>
-                          <option> Perpendicular Impact</option>
+                          <option>Perpendicular Impact</option>
                         </Input>
                       </td>
                     ))}

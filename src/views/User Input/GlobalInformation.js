@@ -167,7 +167,6 @@ function GlobalInformation(props) {
                       value={globalInfo["probabilityOfWindDirection"]}
                       name="probabilityOfWindDirection"
                       id="exampleEmail"
-                      required
                       onChange={handleData}
                     />
                   </Col>
@@ -175,7 +174,7 @@ function GlobalInformation(props) {
                 <Row>
                   <Col>
                     <Label for="exampleEmail">
-                      Max distance from drop point
+                      Max Distance of interest from Drop Point
                       <span style={{ color: "red" }}>*</span>{" "}
                     </Label>
                     <InputGroup>
@@ -219,6 +218,44 @@ function GlobalInformation(props) {
                   <option>Steel Pipe-in-Pipe / Riser</option>
                 </Input>
                 <br />
+                <Row>
+                  <Col>
+                    <Label for="exampleSelect">
+                      Drag Coefficient of the object (Cd)
+                      <span style={{ color: "red" }}>*</span>{" "}
+                    </Label>
+                    <Input
+                      value={globalInfo["dragCoefficient"]}
+                      type="select"
+                      name="dragCoefficient"
+                      id="dragCoefficient"
+                      onChange={handleData}
+                    >
+                      <option></option>
+                      <option>Lower End Value</option>
+                      <option>Medium Value</option>
+                      <option>Upper End Value</option>
+                    </Input>
+                  </Col>
+                  <Col>
+                    <Label for="exampleSelect">
+                      Added Mass coefficient (Ca)
+                      <span style={{ color: "red" }}>*</span>{" "}
+                    </Label>
+                    <Input
+                      value={globalInfo["massCoefficient"]}
+                      type="select"
+                      name="massCoefficient"
+                      id="massCoefficient"
+                      onChange={handleData}
+                    >
+                      <option></option>
+                      <option>Lower End Value</option>
+                      <option>Medium Value</option>
+                      <option>Upper End Value</option>
+                    </Input>
+                  </Col>
+                </Row>
                 <hr />
                 <h6>Pipeline / Umbilical Input</h6>
                 <Row>
@@ -368,16 +405,28 @@ function GlobalInformation(props) {
                   <Col>
                     <Label for="exampleEmail">
                       Yield Stress of material
-                      <span style={{ color: "red" }}>*</span>{" "}
+                      {globalInfo.typeOfPipeline !== "Umbilical" && (
+                        <span style={{ color: "red" }}>*</span>
+                      )}
                     </Label>
                     <InputGroup>
                       <Input
+                        disabled={globalInfo.typeOfPipeline === "Umbilical"}
                         value={globalInfo["yieldStress"]}
                         name="yieldStress"
                         onChange={handleData}
                       />
                       <InputGroupAddon addonType="append">
-                        <InputGroupText>N/m2</InputGroupText>
+                        <InputGroupText
+                          style={{
+                            backgroundColor:
+                              globalInfo.typeOfPipeline === "Umbilical"
+                                ? "#E3E3E3"
+                                : null,
+                          }}
+                        >
+                          N/m2
+                        </InputGroupText>
                       </InputGroupAddon>
                     </InputGroup>
                   </Col>
@@ -401,46 +450,6 @@ function GlobalInformation(props) {
                         </InputGroup>
                       </>
                     )}
-                  </Col>
-                </Row>
-                <br />
-                <br />
-                <Row>
-                  <Col>
-                    <Label for="exampleSelect">
-                      Drag Coefficient of the object (Cd)
-                      <span style={{ color: "red" }}>*</span>{" "}
-                    </Label>
-                    <Input
-                      value={globalInfo["dragCoefficient"]}
-                      type="select"
-                      name="dragCoefficient"
-                      id="dragCoefficient"
-                      onChange={handleData}
-                    >
-                      <option></option>
-                      <option>Lower End Value</option>
-                      <option>Medium Value</option>
-                      <option>Upper End Value</option>
-                    </Input>
-                  </Col>
-                  <Col>
-                    <Label for="exampleSelect">
-                      Added Mass coefficient (Ca)
-                      <span style={{ color: "red" }}>*</span>{" "}
-                    </Label>
-                    <Input
-                      value={globalInfo["massCoefficient"]}
-                      type="select"
-                      name="massCoefficient"
-                      id="massCoefficient"
-                      onChange={handleData}
-                    >
-                      <option></option>
-                      <option>Lower End Value</option>
-                      <option>Medium Value</option>
-                      <option>Upper End Value</option>
-                    </Input>
                   </Col>
                 </Row>
               </FormGroup>

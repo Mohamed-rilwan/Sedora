@@ -22,10 +22,9 @@ import { Nav } from "reactstrap";
 // javascript plugin used to create scrollbars on windows
 import PerfectScrollbar from "perfect-scrollbar";
 
-import logo from "logo.svg";
+import logo from "../../assets/img/waves.png";
 
 var ps;
-
 function Sidebar(props) {
   const sidebar = React.useRef();
   // verifies if routeName is the one active (in browser input)
@@ -57,7 +56,7 @@ function Sidebar(props) {
             <img src={logo} alt="react-logo" />
           </div>
         </a>
-        <a className="simple-text logo-normal">Lift Manifest</a>
+        <a className="simple-text logo-normal">SEDORA</a>
       </div>
       <div className="sidebar-wrapper" ref={sidebar}>
         <Nav>
@@ -81,6 +80,22 @@ function Sidebar(props) {
             );
           })}
         </Nav>
+        <div
+          style={{
+            position: "absolute",
+            bottom: "0",
+            margin: "10%",
+            color: "#ffffff",
+            padding: "0",
+            fontSize: "1.2vh",
+          }}
+        >
+          <p>Copyright &copy; 2021</p>
+          <p>Innostar Limited (UK)</p>
+          <a className="simple-text logo-normal" href="https://innostar.co.uk">
+            Innostar.co.uk
+          </a>
+        </div>
       </div>
     </div>
   );

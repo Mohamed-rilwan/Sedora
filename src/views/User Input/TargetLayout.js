@@ -1,5 +1,15 @@
 import React, { useState } from "react";
-import { Card, CardBody, CardHeader, CardTitle, Table } from "reactstrap";
+import {
+  Button,
+  Card,
+  CardBody,
+  CardHeader,
+  CardTitle,
+  Table,
+  Tooltip,
+  UncontrolledTooltip,
+} from "reactstrap";
+import targetRep from "../../assets/img/target.png";
 
 const validateData = (props) => {
   console.log(props.data?.[0]?.[0]?.["value"]);
@@ -36,12 +46,16 @@ function TargetLayout(props) {
   console.log(props);
   const { depth, distance, data } = props;
 
+  const [tooltipOpen, setTooltipOpen] = useState(false);
+
+  const toggle = () => setTooltipOpen(!tooltipOpen);
+
   const [targetLayout, setTargetLayout] = useState(() => validateData(props));
   var regexWithDecimal = /^-?\d+\.?\d*$/;
 
   const handleData = (event, depth, distance, depIndex, distIndex) => {
     const items = [...targetLayout];
-    if (regexWithDecimal.test(event.target.value))
+    if (regexWithDecimal.test(event.target.value) || event.target.value === "")
       items[depIndex][distIndex] = {
         distance: distance,
         depth: depth,
@@ -57,13 +71,36 @@ function TargetLayout(props) {
       <Card style={{ overflowX: "auto" }}>
         <CardHeader>
           <CardTitle tag="h5">Target Layout</CardTitle>
-          <p className="card-category">Enter Target Layout</p>
+          <p className="card-category">
+            Enter the length of target within the ring.
+            <span style={{ padding: "0.5% 0 0 0.5%" }}>
+              <i
+                id={"TooltipExample"}
+                className={"nc-icon nc-alert-circle-i"}
+              />
+              <Tooltip
+                style={{
+                  backgroundColor: "#dddddd",
+                }}
+                placement="right"
+                isOpen={tooltipOpen}
+                target="TooltipExample"
+                toggle={toggle}
+              >
+                <img
+                  src={targetRep}
+                  style={{ width: "560vw", height: "50vh" }}
+                />
+              </Tooltip>
+            </span>
+          </p>
         </CardHeader>
         <CardBody>
           <div>
             <Table>
               <thead>
                 <th>Depth</th>
+
                 {distance.map((item, index) => (
                   <th>{item}</th>
                 ))}

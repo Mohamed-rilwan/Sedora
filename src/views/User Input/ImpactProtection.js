@@ -43,7 +43,10 @@ function ImpactProtection(props) {
 
   const handleData = (event, depth, distance, depIndex, distIndex) => {
     const items = [...impactProtection];
-    if (regexWithDecimal.test(event.target.value)) {
+    if (
+      regexWithDecimal.test(event.target.value) ||
+      event.target.value === ""
+    ) {
       items[depIndex][distIndex] = {
         distance: distance,
         depth: depth,
@@ -59,8 +62,10 @@ function ImpactProtection(props) {
     <>
       <Card style={{ overflowX: "auto" }}>
         <CardHeader>
-          <CardTitle tag="h5">Impact Protection Layout</CardTitle>
-          <p className="card-category">Enter Impact at each depth</p>
+          <CardTitle tag="h5">"Impact Protection Available (kJ)</CardTitle>
+          <p className="card-category">
+            Enter Impact Protection Available at each Depth
+          </p>
         </CardHeader>
         <CardBody>
           <div>

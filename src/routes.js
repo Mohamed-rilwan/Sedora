@@ -26,6 +26,7 @@ import UserPage from "views/User.js";
 import GenerateTemplate from "views/GenerateTemplate";
 import ExistingTemplate from "views/ExitingTemplate";
 import test from "views/test";
+import Test from "views/User Input/test";
 
 var routes = [
   {
@@ -42,42 +43,42 @@ var routes = [
     component: ExistingTemplate,
     layout: "/admin",
   },
-  {
-    path: "/test",
-    name: "test",
-    icon: "nc-icon nc-cloud-upload-94",
-    component: test,
-    layout: "/admin",
-  },
+  // {
+  //   path: "/test",
+  //   name: "test",
+  //   icon: "nc-icon nc-cloud-upload-94",
+  //   component: Test,
+  //   layout: "/admin",
+  // },
 
-  {
-    path: "/dashboard",
-    name: "Dashboard",
-    icon: "nc-icon nc-bank",
-    component: Dashboard,
-    layout: "/admin",
-  },
-  {
-    path: "/icons",
-    name: "Icons",
-    icon: "nc-icon nc-diamond",
-    component: Icons,
-    layout: "/admin",
-  },
-  {
-    path: "/maps",
-    name: "Maps",
-    icon: "nc-icon nc-pin-3",
-    component: Maps,
-    layout: "/admin",
-  },
-  {
-    path: "/notifications",
-    name: "Notifications",
-    icon: "nc-icon nc-bell-55",
-    component: Notifications,
-    layout: "/admin",
-  },
+  // {
+  //   path: "/dashboard",
+  //   name: "Dashboard",
+  //   icon: "nc-icon nc-bank",
+  //   component: Dashboard,
+  //   layout: "/admin",
+  // },
+  // {
+  //   path: "/icons",
+  //   name: "Icons",
+  //   icon: "nc-icon nc-diamond",
+  //   component: Icons,
+  //   layout: "/admin",
+  // },
+  // {
+  //   path: "/maps",
+  //   name: "Maps",
+  //   icon: "nc-icon nc-pin-3",
+  //   component: Maps,
+  //   layout: "/admin",
+  // },
+  // {
+  //   path: "/notifications",
+  //   name: "Notifications",
+  //   icon: "nc-icon nc-bell-55",
+  //   component: Notifications,
+  //   layout: "/admin",
+  // },
   {
     path: "/user-page",
     name: "Team",
@@ -85,19 +86,19 @@ var routes = [
     component: UserPage,
     layout: "/admin",
   },
-  {
-    path: "/tables",
-    name: "Table List",
-    icon: "nc-icon nc-tile-56",
-    component: TableList,
-    layout: "/admin",
-  },
-  {
-    path: "/typography",
-    name: "Typography",
-    icon: "nc-icon nc-caps-small",
-    component: Typography,
-    layout: "/admin",
-  },
+  // {
+  //   path: "/tables",
+  //   name: "Table List",
+  //   icon: "nc-icon nc-tile-56",
+  //   component: TableList,
+  //   layout: "/admin",
+  // },
+  // {
+  //   path: "/typography",
+  //   name: "Typography",
+  //   icon: "nc-icon nc-caps-small",
+  //   component: Typography,
+  //   layout: "/admin",
+  // },
 ];
 export default routes;
