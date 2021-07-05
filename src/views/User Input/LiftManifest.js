@@ -1,29 +1,46 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // reactstrap components
 import { Card, CardBody, CardHeader, CardTitle, Table } from "reactstrap";
+import { preProcessFile } from "typescript";
 
-const data = {
-  liftPerYear: [],
-  description: [],
-  mass: [],
-  length: [],
-  depth: [],
-  height: [],
+// const data = {
+//   liftPerYear: [],
+//   description: [],
+//   mass: [],
+//   length: [],
+//   depth: [],
+//   height: [],
+// };
+const ValidateInputData = (data, numberOfItem) => {
+  const item = data;
+  [...Array(parseInt(numberOfItem)).keys()].map((_, index) =>
+    Object.keys(data).forEach((col) => {
+      if (data[col][index] === undefined) {
+        console.log("yes");
+        item[col][index] = "";
+      }
+    })
+  );
+  return item;
 };
+
 function LiftManifest(props) {
-  const [liftManifest, setLiftManifest] = useState(props.data);
+  const { data } = props;
+  const [liftManifest, setLiftManifest] = useState(() =>
+    ValidateInputData(props.data, props.numberOfItem)
+  );
   var regexWithDecimal = /^-?\d+\.?\d*$/;
   const regexOnlyNumber = new RegExp("[^0-9]", "g");
 
   const handleData = (event, index) => {
+    console.log(event.target.value, regexWithDecimal.test(event.target.value));
     if (
       regexWithDecimal.test(event.target.value) ||
-      event.target.name === "description" ||
-      event.target.value === ""
+      event.target.name === "description"
     ) {
       const items = { ...liftManifest };
       items[event.target.name][index] = event.target.value;
-
+      console.log(items);
       setLiftManifest(items);
       props.handleData(items);
     }
@@ -50,53 +67,55 @@ function LiftManifest(props) {
                 </tr>
               </thead>
               <tbody>
-                {[...Array(props.numberOfItem)].map((page, i) => (
-                  <tr>
-                    <th scope="row">{i + 1}</th>
-                    <td>
-                      <input
-                        value={liftManifest.liftPerYear[i]}
-                        name="liftPerYear"
-                        onChange={(e) => handleData(e, i)}
-                      ></input>
-                    </td>
-                    <td>
-                      <input
-                        value={liftManifest.description[i]}
-                        name="description"
-                        onChange={(e) => handleData(e, i)}
-                      ></input>
-                    </td>
-                    <td>
-                      <input
-                        value={liftManifest["mass"][i]}
-                        name="mass"
-                        onChange={(e) => handleData(e, i)}
-                      ></input>
-                    </td>
-                    <td>
-                      <input
-                        value={liftManifest["length"][i]}
-                        name="length"
-                        onChange={(e) => handleData(e, i)}
-                      ></input>
-                    </td>
-                    <td>
-                      <input
-                        value={liftManifest["depth"][i]}
-                        name="depth"
-                        onChange={(e) => handleData(e, i)}
-                      ></input>
-                    </td>
-                    <td>
-                      <input
-                        value={liftManifest["height"][i]}
-                        name="height"
-                        onChange={(e) => handleData(e, i)}
-                      ></input>
-                    </td>
-                  </tr>
-                ))}
+                {[...Array(parseInt(props.numberOfItem)).keys()].map(
+                  (page, i) => (
+                    <tr>
+                      <th scope="row">{i + 1}</th>
+                      <td>
+                        <input
+                          value={props.data["liftPerYear"][i]}
+                          name="liftPerYear"
+                          onChange={(e) => handleData(e, i)}
+                        ></input>
+                      </td>
+                      <td>
+                        <input
+                          value={liftManifest.description[i]}
+                          name="description"
+                          onChange={(e) => handleData(e, i)}
+                        ></input>
+                      </td>
+                      <td>
+                        <input
+                          value={liftManifest["mass"][i]}
+                          name="mass"
+                          onChange={(e) => handleData(e, i)}
+                        ></input>
+                      </td>
+                      <td>
+                        <input
+                          value={liftManifest["length"][i]}
+                          name="length"
+                          onChange={(e) => handleData(e, i)}
+                        ></input>
+                      </td>
+                      <td>
+                        <input
+                          value={liftManifest["depth"][i]}
+                          name="depth"
+                          onChange={(e) => handleData(e, i)}
+                        ></input>
+                      </td>
+                      <td>
+                        <input
+                          value={liftManifest["height"][i]}
+                          name="height"
+                          onChange={(e) => handleData(e, i)}
+                        ></input>
+                      </td>
+                    </tr>
+                  )
+                )}
               </tbody>
             </Table>
           </div>
