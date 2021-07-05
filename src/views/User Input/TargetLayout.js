@@ -37,14 +37,16 @@ function TargetLayout(props) {
   const { depth, distance, data } = props;
 
   const [targetLayout, setTargetLayout] = useState(() => validateData(props));
+  var regexWithDecimal = /^-?\d+\.?\d*$/;
 
   const handleData = (event, depth, distance, depIndex, distIndex) => {
     const items = [...targetLayout];
-    items[depIndex][distIndex] = {
-      distance: distance,
-      depth: depth,
-      value: event.target.value,
-    };
+    if (regexWithDecimal.test(event.target.value))
+      items[depIndex][distIndex] = {
+        distance: distance,
+        depth: depth,
+        value: event.target.value,
+      };
 
     console.log(items[depIndex][distIndex]["value"]);
     setTargetLayout(items);

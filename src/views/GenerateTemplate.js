@@ -160,8 +160,11 @@ function GenerateTemplate() {
       item.maxWaterDepth !== data.globalInformation.maxWaterDepth ||
       item.maxDistanceFomDropPoint !==
         data.globalInformation.maxDistanceFomDropPoint
-    )
+    ) {
       info.targetLayout = sampleData.targetLayout;
+      info.impactProtection = sampleData.impactProtection;
+      info.impactType = sampleData.impactType;
+    }
     disableShowImpactEnergy("globalInformation", item);
     setData(info);
   };
@@ -208,6 +211,7 @@ function GenerateTemplate() {
         break;
     }
   };
+
   return (
     <>
       <div className="content">
@@ -337,6 +341,15 @@ function GenerateTemplate() {
           onClick={() => generateTemplate(data)}
         >
           Generate Template
+        </Button>
+
+        <Button
+          style={{ marginLeft: "2%" }}
+          className="btn-round"
+          color="primary"
+          type="submit"
+        >
+          Download Report
         </Button>
       </div>
     </>

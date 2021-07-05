@@ -39,14 +39,17 @@ function ImpactProtection(props) {
   const [impactProtection, setImpactProtection] = useState(() =>
     validateData(props)
   );
+  var regexWithDecimal = /^-?\d+\.?\d*$/;
 
   const handleData = (event, depth, distance, depIndex, distIndex) => {
     const items = [...impactProtection];
-    items[depIndex][distIndex] = {
-      distance: distance,
-      depth: depth,
-      value: event.target.value,
-    };
+    if (regexWithDecimal.test(event.target.value)) {
+      items[depIndex][distIndex] = {
+        distance: distance,
+        depth: depth,
+        value: event.target.value,
+      };
+    }
 
     console.log(items[depIndex][distIndex]["value"]);
     setImpactProtection(items);

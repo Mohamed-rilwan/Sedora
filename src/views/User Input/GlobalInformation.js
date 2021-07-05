@@ -93,7 +93,9 @@ function GlobalInformation(props) {
               <FormGroup>
                 <Row>
                   <Col>
-                    <Label for="exampleEmail">Max Water Depth</Label>
+                    <Label for="exampleEmail">
+                      Max Water Depth<span style={{ color: "red" }}>*</span>{" "}
+                    </Label>
                     <InputGroup>
                       <Input
                         value={globalInfo["maxWaterDepth"]}
@@ -109,7 +111,10 @@ function GlobalInformation(props) {
                     </InputGroup>
                   </Col>
                   <Col>
-                    <Label for="exampleEmail">Drop Frequency per lift</Label>
+                    <Label for="exampleEmail">
+                      Drop Frequency per lift
+                      <span style={{ color: "red" }}>*</span>{" "}
+                    </Label>
                     <InputGroup>
                       <Input
                         value={globalInfo["dropFrequency"]}
@@ -124,7 +129,9 @@ function GlobalInformation(props) {
                 </Row>
                 <Row>
                   <Col>
-                    <Label for="exampleEmail">Density of Water</Label>
+                    <Label for="exampleEmail">
+                      Density of Water<span style={{ color: "red" }}>*</span>{" "}
+                    </Label>
                     <InputGroup>
                       <Input
                         value={globalInfo["densityOfWater"]}
@@ -139,6 +146,7 @@ function GlobalInformation(props) {
                   <Col>
                     <Label for="exampleEmail">
                       Probability of drop over water
+                      <span style={{ color: "red" }}>*</span>{" "}
                     </Label>
                     <Input
                       value={globalInfo["probabilityOfDropOverWater"]}
@@ -153,11 +161,13 @@ function GlobalInformation(props) {
                   <Col>
                     <Label for="exampleEmail">
                       Probability of wind direction (FPSO)
+                      <span style={{ color: "red" }}>*</span>{" "}
                     </Label>
                     <Input
                       value={globalInfo["probabilityOfWindDirection"]}
                       name="probabilityOfWindDirection"
                       id="exampleEmail"
+                      required
                       onChange={handleData}
                     />
                   </Col>
@@ -166,6 +176,7 @@ function GlobalInformation(props) {
                   <Col>
                     <Label for="exampleEmail">
                       Max distance from drop point
+                      <span style={{ color: "red" }}>*</span>{" "}
                     </Label>
                     <InputGroup>
                       <Input
@@ -181,6 +192,7 @@ function GlobalInformation(props) {
                   <Col>
                     <Label for="exampleEmail">
                       Number of Item in Lift Manifest
+                      <span style={{ color: "red" }}>*</span>{" "}
                     </Label>
                     <Input
                       value={globalInfo["numberOfLiftManifest"]}
@@ -190,7 +202,10 @@ function GlobalInformation(props) {
                     />
                   </Col>
                 </Row>
-                <Label for="exampleSelect">Type of Pipeline / Riser</Label>
+                <Label for="exampleSelect">
+                  Type of Pipeline / Riser
+                  <span style={{ color: "red" }}>*</span>{" "}
+                </Label>
                 <Input
                   value={globalInfo["typeOfPipeline"]}
                   type="select"
@@ -208,7 +223,9 @@ function GlobalInformation(props) {
                 <h6>Pipeline / Umbilical Input</h6>
                 <Row>
                   <Col>
-                    <Label for="exampleEmail">Pipeline Size</Label>
+                    <Label for="exampleEmail">
+                      Pipeline Size<span style={{ color: "red" }}>*</span>{" "}
+                    </Label>
                     <InputGroup>
                       <Input
                         value={globalInfo["pipelineSize"]}
@@ -224,7 +241,9 @@ function GlobalInformation(props) {
                     {globalInfo["typeOfPipeline"] ===
                       "Steel Pipe-in-Pipe / Riser" && (
                       <>
-                        <Label for="exampleEmail">Inner Pipe size</Label>
+                        <Label for="exampleEmail">
+                          Inner Pipe size<span style={{ color: "red" }}>*</span>{" "}
+                        </Label>
                         <InputGroup>
                           <Input
                             value={globalInfo["innerPipeSize"]}
@@ -241,7 +260,10 @@ function GlobalInformation(props) {
                 </Row>
                 <Row>
                   <Col>
-                    <Label for="exampleEmail">OD of Pipeline / Umbilical</Label>
+                    <Label for="exampleEmail">
+                      OD of Pipeline / Umbilical
+                      <span style={{ color: "red" }}>*</span>{" "}
+                    </Label>
                     <InputGroup>
                       <Input
                         value={globalInfo["odOfPipeline"]}
@@ -257,7 +279,10 @@ function GlobalInformation(props) {
                     {globalInfo["typeOfPipeline"] ===
                       "Steel Pipe-in-Pipe / Riser" && (
                       <>
-                        <Label for="exampleEmail">OD of Innner Pipe</Label>
+                        <Label for="exampleEmail">
+                          OD of Innner Pipe
+                          <span style={{ color: "red" }}>*</span>{" "}
+                        </Label>
                         <InputGroup>
                           <Input
                             value={globalInfo["odOfInnerPipeline"]}
@@ -274,7 +299,9 @@ function GlobalInformation(props) {
                 </Row>
                 <Row>
                   <Col>
-                    <Label for="exampleEmail">Wall Thickness</Label>
+                    <Label for="exampleEmail">
+                      Wall Thickness<span style={{ color: "red" }}>*</span>{" "}
+                    </Label>
                     <InputGroup>
                       <Input
                         value={globalInfo["wallThickness"]}
@@ -292,6 +319,7 @@ function GlobalInformation(props) {
                       <>
                         <Label for="exampleEmail">
                           Wall thickness of Inner Pipe
+                          <span style={{ color: "red" }}>*</span>{" "}
                         </Label>
                         <InputGroup>
                           <Input
@@ -309,7 +337,10 @@ function GlobalInformation(props) {
                 </Row>
                 <Row>
                   <Col>
-                    <Label for="exampleEmail">Material of Construction</Label>
+                    <Label for="exampleEmail">
+                      Material of Construction
+                      <span style={{ color: "red" }}>*</span>{" "}
+                    </Label>
                     <Input
                       value={globalInfo["materialOfConstruction"]}
                       name="materialOfConstruction"
@@ -322,6 +353,7 @@ function GlobalInformation(props) {
                       <>
                         <Label for="exampleEmail">
                           Material of Inner Pipeline
+                          <span style={{ color: "red" }}>*</span>{" "}
                         </Label>
                         <Input
                           value={globalInfo["materialOfInnerPipeline"]}
@@ -334,7 +366,10 @@ function GlobalInformation(props) {
                 </Row>
                 <Row>
                   <Col>
-                    <Label for="exampleEmail">Yield Stress of material</Label>
+                    <Label for="exampleEmail">
+                      Yield Stress of material
+                      <span style={{ color: "red" }}>*</span>{" "}
+                    </Label>
                     <InputGroup>
                       <Input
                         value={globalInfo["yieldStress"]}
@@ -352,6 +387,7 @@ function GlobalInformation(props) {
                       <>
                         <Label for="exampleEmail">
                           Yield Stress of inner pipe material
+                          <span style={{ color: "red" }}>*</span>{" "}
                         </Label>
                         <InputGroup>
                           <Input
@@ -373,6 +409,7 @@ function GlobalInformation(props) {
                   <Col>
                     <Label for="exampleSelect">
                       Drag Coefficient of the object (Cd)
+                      <span style={{ color: "red" }}>*</span>{" "}
                     </Label>
                     <Input
                       value={globalInfo["dragCoefficient"]}
@@ -390,6 +427,7 @@ function GlobalInformation(props) {
                   <Col>
                     <Label for="exampleSelect">
                       Added Mass coefficient (Ca)
+                      <span style={{ color: "red" }}>*</span>{" "}
                     </Label>
                     <Input
                       value={globalInfo["massCoefficient"]}
