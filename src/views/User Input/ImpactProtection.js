@@ -1,29 +1,63 @@
 import React, { useState } from "react";
-// reactstrap components
-import {
-  Card,
-  CardBody,
-  CardHeader,
-  CardTitle,
-  Input,
-  Table,
-} from "reactstrap";
+import { Card, CardBody, CardHeader, CardTitle, Table } from "reactstrap";
 
+const validateData = (props) => {
+  console.log(props.data?.[0]?.[0]?.["value"]);
+  var item = Array.from({ length: props.depth.length }, () =>
+    Array.from({ length: props.distance.length }, () => {})
+  );
+  for (let dep = 0; dep < props.depth.length; dep++) {
+    for (let dist = 0; dist < props.distance.length; dist++) {
+      if (props.data === null || props.data === undefined) {
+        item[dep][dist] = {
+          depth: props.depth[dep],
+          distance: props.distance[dep],
+          value: {
+            depth: props.depth[dep],
+            distance: props.distance[dist],
+            value: "",
+          },
+        };
+      } else {
+        item[dep][dist] =
+          props.data?.[dep]?.[dist] === undefined
+            ? {
+                depth: props.depth[dep],
+                distance: props.distance[dist],
+                value: "",
+              }
+            : props.data[dep][dist];
+      }
+    }
+  }
+  return item;
+};
 function ImpactProtection(props) {
-  const [globalInfo, setGlobalInfo] = useState([]);
-  const { depth, distance } = props;
+  console.log(props);
+  const { depth, distance, data } = props;
 
-  const handleData = (event) => {
-    const items = { ...globalInfo };
-    items[event.target.name] = event.target.value;
-    setGlobalInfo(items);
+  const [impactProtection, setImpactProtection] = useState(() =>
+    validateData(props)
+  );
+
+  const handleData = (event, depth, distance, depIndex, distIndex) => {
+    const items = [...impactProtection];
+    items[depIndex][distIndex] = {
+      distance: distance,
+      depth: depth,
+      value: event.target.value,
+    };
+
+    console.log(items[depIndex][distIndex]["value"]);
+    setImpactProtection(items);
+    props.handleData(items, "impactProtection");
   };
   return (
     <>
-      <Card>
+      <Card style={{ overflowX: "auto" }}>
         <CardHeader>
-          <CardTitle tag="h5">Impact Protection</CardTitle>
-          <p className="card-category">Enter Impact Protection</p>
+          <CardTitle tag="h5">Impact Protection Layout</CardTitle>
+          <p className="card-category">Enter Impact at each depth</p>
         </CardHeader>
         <CardBody>
           <div>
@@ -35,12 +69,18 @@ function ImpactProtection(props) {
                 ))}
               </thead>
               <tbody>
-                {depth.map((depth, i) => (
+                {depth.map((dep, depIndex) => (
                   <tr>
-                    <th>{depth}</th>
-                    {distance.map((item, index) => (
+                    <th>{dep}</th>
+                    {distance.map((dist, distIndex) => (
                       <td>
-                        <Input style={{ width: "100%" }} />
+                        <input
+                          value={impactProtection[depIndex][distIndex]["value"]}
+                          onChange={(e) =>
+                            handleData(e, dep, dist, depIndex, distIndex)
+                          }
+                          style={{ width: "30vh" }}
+                        ></input>
                       </td>
                     ))}
                   </tr>

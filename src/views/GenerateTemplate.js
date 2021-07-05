@@ -69,6 +69,9 @@ const sampleData = {
     depth: [],
     height: [],
   },
+  targetLayout: [[]],
+  impactProtection: [[]],
+  impactType: [[]],
 };
 
 const stepName = (step) => {
@@ -153,6 +156,12 @@ function GenerateTemplate() {
   const handleGlobalData = (item) => {
     const info = { ...data };
     info.globalInformation = item;
+    if (
+      item.maxWaterDepth !== data.globalInformation.maxWaterDepth ||
+      item.maxDistanceFomDropPoint !==
+        data.globalInformation.maxDistanceFomDropPoint
+    )
+      info.targetLayout = sampleData.targetLayout;
     disableShowImpactEnergy("globalInformation", item);
     setData(info);
   };
@@ -161,6 +170,19 @@ function GenerateTemplate() {
     const info = { ...data };
     disableShowImpactEnergy("liftManifest", item);
     info.liftManifest = item;
+    setData(info);
+  };
+  const handleInputData = (item, step) => {
+    const info = { ...data };
+    info[step] = item;
+    console.log(info, item);
+    setData(info);
+  };
+
+  const handleImpactProtection = (item) => {
+    const info = { ...data };
+    info.impactProtection = item;
+    console.log(info, item);
     setData(info);
   };
 
@@ -248,32 +270,38 @@ function GenerateTemplate() {
             )}
             {currentPage === 2 && (
               <TargetLayout
+                data={data.targetLayout}
                 depth={impactProp(
                   parseInt(data.globalInformation["maxWaterDepth"])
                 )}
                 distance={impactProp(
                   parseInt(data.globalInformation["maxDistanceFomDropPoint"])
                 )}
+                handleData={handleInputData}
               />
             )}
             {currentPage === 3 && (
               <ImpactType
+                data={data.impactType}
                 depth={impactProp(
                   parseInt(data.globalInformation["maxWaterDepth"])
                 )}
                 distance={impactProp(
                   parseInt(data.globalInformation["maxDistanceFomDropPoint"])
                 )}
+                handleData={handleInputData}
               />
             )}
             {currentPage === 4 && (
               <ImpactProtection
+                data={data.impactProtection}
                 depth={impactProp(
                   parseInt(data.globalInformation["maxWaterDepth"])
                 )}
                 distance={impactProp(
                   parseInt(data.globalInformation["maxDistanceFomDropPoint"])
                 )}
+                handleData={handleInputData}
               />
             )}
             {currentPage === 5 && (

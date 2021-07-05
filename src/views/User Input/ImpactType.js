@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// reactstrap components
 import {
   Card,
   CardBody,
@@ -9,22 +8,59 @@ import {
   Table,
 } from "reactstrap";
 
+const validateData = (props) => {
+  console.log(props.data?.[0]?.[0]?.["value"]);
+  var item = Array.from({ length: props.depth.length }, () =>
+    Array.from({ length: props.distance.length }, () => {})
+  );
+  for (let dep = 0; dep < props.depth.length; dep++) {
+    for (let dist = 0; dist < props.distance.length; dist++) {
+      if (props.data === null || props.data === undefined) {
+        item[dep][dist] = {
+          depth: props.depth[dep],
+          distance: props.distance[dep],
+          value: {
+            depth: props.depth[dep],
+            distance: props.distance[dist],
+            value: "",
+          },
+        };
+      } else {
+        item[dep][dist] =
+          props.data?.[dep]?.[dist] === undefined
+            ? {
+                depth: props.depth[dep],
+                distance: props.distance[dist],
+                value: "",
+              }
+            : props.data[dep][dist];
+      }
+    }
+  }
+  return item;
+};
 function ImpactType(props) {
-  const [globalInfo, setGlobalInfo] = useState([]);
+  console.log(props);
+  const { depth, distance, data } = props;
+  const [impactType, setImpactType] = useState(() => validateData(props));
+  const handleData = (event, depth, distance, depIndex, distIndex) => {
+    const items = [...impactType];
+    items[depIndex][distIndex] = {
+      distance: distance,
+      depth: depth,
+      value: event.target.value,
+    };
 
-  const { depth, distance } = props;
-
-  const handleData = (event) => {
-    const items = { ...globalInfo };
-    items[event.target.name] = event.target.value;
-    setGlobalInfo(items);
+    console.log(items[depIndex][distIndex]["value"]);
+    setImpactType(items);
+    props.handleData(items, "impactType");
   };
   return (
     <>
-      <Card>
+      <Card style={{ overflowX: "auto" }}>
         <CardHeader>
-          <CardTitle tag="h5">Impact Type</CardTitle>
-          <p className="card-category">Enter Impact Type at each depth</p>
+          <CardTitle tag="h5">Impact Protection Layout</CardTitle>
+          <p className="card-category">Enter Impact at each depth</p>
         </CardHeader>
         <CardBody>
           <div>
@@ -36,16 +72,20 @@ function ImpactType(props) {
                 ))}
               </thead>
               <tbody>
-                {depth.map((depth, i) => (
+                {depth.map((dep, depIndex) => (
                   <tr>
-                    <th>{depth}</th>
-                    {distance.map((item, index) => (
+                    <th>{dep}</th>
+                    {distance.map((dist, distIndex) => (
                       <td>
                         <Input
                           type="select"
-                          name="TypeOfPipeline"
-                          id="typesOfPipe"
-                          onChange={handleData}
+                          name="impactType"
+                          id="impactType"
+                          value={impactType[depIndex][distIndex]["value"]}
+                          onChange={(e) =>
+                            handleData(e, dep, dist, depIndex, distIndex)
+                          }
+                          style={{ width: "30vh" }}
                         >
                           <option></option>
                           <option>Fully shielded</option>
