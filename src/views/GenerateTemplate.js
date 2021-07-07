@@ -156,15 +156,15 @@ function GenerateTemplate() {
   const handleGlobalData = (item) => {
     const info = { ...data };
     info.globalInformation = item;
-    if (
-      item.maxWaterDepth !== data.globalInformation.maxWaterDepth ||
-      item.maxDistanceFomDropPoint !==
-        data.globalInformation.maxDistanceFomDropPoint
-    ) {
-      info.targetLayout = sampleData.targetLayout;
-      info.impactProtection = sampleData.impactProtection;
-      info.impactType = sampleData.impactType;
-    }
+    // if (
+    //   item.maxWaterDepth !== data.globalInformation.maxWaterDepth ||
+    //   item.maxDistanceFomDropPoint !==
+    //     data.globalInformation.maxDistanceFomDropPoint
+    // ) {
+    //   info.targetLayout = sampleData.targetLayout;
+    //   info.impactProtection = sampleData.impactProtection;
+    //   info.impactType = sampleData.impactType;
+    // }
     disableShowImpactEnergy("globalInformation", item);
     setData(info);
   };

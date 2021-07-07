@@ -50,10 +50,7 @@ function ImpactEnergy(props) {
               ? ">8"
               : ">>8";
         }
-        console.log(
-          item.dnslShapeDescription[index],
-          item.weightCategory[index]
-        );
+
         if (col === "angularDeviationCategoryNumber") {
           item[col][index] =
             item.dnslShapeDescription[index] === "Flat Long shaped" &&
@@ -217,10 +214,12 @@ function ImpactEnergy(props) {
           item[col][index] = parseFloat(
             (
               0.5 *
-              (item.addedMass[index] + item.mass[index]) *
+              (parseFloat(item.addedMass[index]) +
+                parseFloat(item.mass[index])) *
               Math.pow(item.subseaTerminalVelocity[index], 2)
             ).toFixed(4)
           );
+          console.log("mass", item.addedMass[index] + item.mass[index]);
         }
         if (col === "DropInAirVelocity") {
           item[col][index] = parseFloat(Math.sqrt(2 * 9.81 * 30).toFixed(4));
