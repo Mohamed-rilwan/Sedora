@@ -1,0 +1,40 @@
+.App {
+    font-family: sans-serif;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  textarea {
+    width: 90%;
+    padding: 8px;
+  }
+  
+  table {
+    margin: 20px auto 0;
+    width: 90%;
+    border-collapse: collapse;
+  }
+  
+  table,
+  td {
+    border: 1px solid #d3d3d3;
+  }
+  
+  tr {
+    padding: 2px;
+  }
+  
+  td {
+    padding: 2px;
+    white-space: pre-line;
+  }
+  
+  .ignored {
+    background-color: #d3d3d3;
+    color: grey;
+  }
+  
+  th.ignored > div:before {
+    content: "-";
+  }
+  

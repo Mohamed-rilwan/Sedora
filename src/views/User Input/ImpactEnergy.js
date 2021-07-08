@@ -219,7 +219,6 @@ function ImpactEnergy(props) {
               Math.pow(item.subseaTerminalVelocity[index], 2)
             ).toFixed(4)
           );
-          console.log("mass", item.addedMass[index] + item.mass[index]);
         }
         if (col === "DropInAirVelocity") {
           item[col][index] = parseFloat(Math.sqrt(2 * 9.81 * 30).toFixed(4));
@@ -234,6 +233,7 @@ function ImpactEnergy(props) {
           );
         }
         setImpactEnergy(item);
+        props.handleData(item, "impactEnergy");
       })
     );
   });

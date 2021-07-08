@@ -1,3 +1,4 @@
+import parseClip from "components/PasteToTable/parseClip";
 import React, { useState } from "react";
 // reactstrap components
 import { Card, CardBody, CardHeader, CardTitle, Table } from "reactstrap";
@@ -7,7 +8,6 @@ const ValidateInputData = (data, numberOfItem) => {
   [...Array(parseInt(numberOfItem)).keys()].map((_, index) =>
     Object.keys(data).forEach((col) => {
       if (data[col][index] === undefined) {
-        console.log("yes");
         item[col][index] = "";
       }
     })
@@ -16,14 +16,20 @@ const ValidateInputData = (data, numberOfItem) => {
 };
 
 function LiftManifest(props) {
-  const { data } = props;
   const [liftManifest, setLiftManifest] = useState(() =>
     ValidateInputData(props.data, props.numberOfItem)
   );
   var regexWithDecimal = /^-?\d+\.?\d*$/;
 
+  const handleChange = ({ target: { value } }) => {
+    console.log(parseClip(value));
+    // setState({
+    //   rawStr: value,
+    //   data: parseClip(value),
+    // });
+  };
+
   const handleData = (event, index) => {
-    console.log(event.target.value, regexWithDecimal.test(event.target.value));
     if (
       regexWithDecimal.test(event.target.value) ||
       event.target.value === "" ||
@@ -31,7 +37,6 @@ function LiftManifest(props) {
     ) {
       const items = { ...liftManifest };
       items[event.target.name][index] = event.target.value;
-      console.log(items);
       setLiftManifest(items);
       props.handleData(items);
     }
@@ -42,6 +47,12 @@ function LiftManifest(props) {
         <CardHeader>
           <CardTitle tag="h5">Lift Manifest</CardTitle>
           <p className="card-category">Enter Manifest Items</p>
+          <textarea
+            placeholder="Paste your excel form data here..."
+            // onPaste={this.handlePaste}
+            onChange={handleChange}
+            // value={state.rawStr}
+          />
         </CardHeader>
         <CardBody>
           <div>

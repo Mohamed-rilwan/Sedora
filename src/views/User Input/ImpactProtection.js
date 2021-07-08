@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Card, CardBody, CardHeader, CardTitle, Table } from "reactstrap";
 
 const validateData = (props) => {
-  console.log(props.data?.[0]?.[0]?.["value"]);
   var item = Array.from({ length: props.depth.length }, () =>
     Array.from({ length: props.distance.length }, () => {})
   );
@@ -33,7 +32,6 @@ const validateData = (props) => {
   return item;
 };
 function ImpactProtection(props) {
-  console.log(props);
   const { depth, distance, data } = props;
 
   const [impactProtection, setImpactProtection] = useState(() =>
@@ -54,7 +52,6 @@ function ImpactProtection(props) {
       };
     }
 
-    console.log(items[depIndex][distIndex]["value"]);
     setImpactProtection(items);
     props.handleData(items, "impactProtection");
   };

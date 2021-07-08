@@ -30,13 +30,15 @@ import {
   PaginationLink,
   Row,
 } from "reactstrap";
-import generateTemplate from "service/droppedObject.service";
 import GlobalInformation from "./User Input/GlobalInformation";
 import ImpactEnergy from "./User Input/ImpactEnergy";
 import ImpactProtection from "./User Input/ImpactProtection";
 import ImpactType from "./User Input/ImpactType";
 import LiftManifest from "./User Input/LiftManifest";
 import TargetLayout from "./User Input/TargetLayout";
+import * as FileSaver from "file-saver";
+import * as XLSX from "xlsx";
+import GenerateReport from "./User Input/GenerateReport";
 
 const sampleData = {
   globalInformation: {
@@ -72,6 +74,7 @@ const sampleData = {
   targetLayout: [[]],
   impactProtection: [[]],
   impactType: [[]],
+  impactEnergy: [[]],
 };
 
 const stepName = (step) => {
@@ -100,8 +103,20 @@ function GenerateTemplate() {
 
   const pagesCount = 6;
 
+  const fileType =
+    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
+  const fileExtension = ".xlsx";
+
+  const exportToCSV = (apiData, fileName) => {
+    console.log(apiData);
+    const ws = XLSX.utils.json_to_sheet(apiData);
+    const wb = { Sheets: { data: ws }, SheetNames: ["data"] };
+    const excelBuffer = XLSX.write(wb, { bookType: "xlsx", type: "array" });
+    const data = new Blob([excelBuffer], { type: fileType });
+    FileSaver.saveAs(data, fileName + fileExtension);
+  };
+
   const disableShowImpactEnergy = (step, item) => {
-    console.log(step, item);
     let emptyArray = true;
     if (step === "liftManifest") {
       for (let i = 0; i < data.globalInformation["numberOfLiftManifest"]; i++) {
@@ -127,7 +142,6 @@ function GenerateTemplate() {
       }
     }
     if (step === "globalInformation") {
-      console.log("reche", item);
       for (let i = 0; i < data.globalInformation["numberOfLiftManifest"]; i++) {
         data.liftManifest.depth[i] === undefined ||
         data.liftManifest.depth[i] === "" ||
@@ -185,7 +199,6 @@ function GenerateTemplate() {
   const handleImpactProtection = (item) => {
     const info = { ...data };
     info.impactProtection = item;
-    console.log(info, item);
     setData(info);
   };
 
@@ -311,7 +324,7 @@ function GenerateTemplate() {
             {currentPage === 5 && (
               <ImpactEnergy
                 data={data ?? null}
-                handleData={handleLiftManifestData}
+                handleData={handleInputData}
                 numberOfItem={parseInt(
                   data.globalInformation["numberOfLiftManifest"]
                 )}
@@ -338,16 +351,17 @@ function GenerateTemplate() {
           className="btn-round"
           color="primary"
           type="submit"
-          onClick={() => generateTemplate(data)}
         >
           Generate Template
         </Button>
 
+        <GenerateReport />
         <Button
           style={{ marginLeft: "2%" }}
           className="btn-round"
           color="primary"
           type="submit"
+          onClick={(e) => exportToCSV(data.liftManifest, "file")}
         >
           Download Report
         </Button>

@@ -25,8 +25,6 @@ import Maps from "views/Map.js";
 import UserPage from "views/User.js";
 import GenerateTemplate from "views/GenerateTemplate";
 import ExistingTemplate from "views/ExitingTemplate";
-import test from "views/test";
-import Test from "views/User Input/test";
 
 var routes = [
   {

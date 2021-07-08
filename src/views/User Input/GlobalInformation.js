@@ -71,10 +71,8 @@ function GlobalInformation(props) {
         regexOnlyNumber.test(event.target.value))
         ? (items[event.target.name] = "")
         : (items[event.target.name] = event.target.value);
-      console.log(items);
       setGlobalInfo(items);
       props.handleData(items);
-      console.log(event.target.value, event.target.name);
     }
   };
   return (

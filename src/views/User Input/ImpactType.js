@@ -9,7 +9,6 @@ import {
 } from "reactstrap";
 
 const validateData = (props) => {
-  console.log(props.data?.[0]?.[0]?.["value"]);
   var item = Array.from({ length: props.depth.length }, () =>
     Array.from({ length: props.distance.length }, () => {})
   );
@@ -40,7 +39,6 @@ const validateData = (props) => {
   return item;
 };
 function ImpactType(props) {
-  console.log(props);
   const { depth, distance, data } = props;
   const [impactType, setImpactType] = useState(() => validateData(props));
   const handleData = (event, depth, distance, depIndex, distIndex) => {
@@ -51,7 +49,6 @@ function ImpactType(props) {
       value: event.target.value,
     };
 
-    console.log(items[depIndex][distIndex]["value"]);
     setImpactType(items);
     props.handleData(items, "impactType");
   };

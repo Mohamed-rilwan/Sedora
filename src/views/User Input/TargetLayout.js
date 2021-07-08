@@ -9,10 +9,9 @@ import {
   Tooltip,
   UncontrolledTooltip,
 } from "reactstrap";
-import targetRep from "../../assets/img/target.png";
+import targetRep from "../../assets/img/TargetLayout.png";
 
 const validateData = (props) => {
-  console.log(props.data?.[0]?.[0]?.["value"]);
   var item = Array.from({ length: props.depth.length }, () =>
     Array.from({ length: props.distance.length }, () => {})
   );
@@ -43,7 +42,6 @@ const validateData = (props) => {
   return item;
 };
 function TargetLayout(props) {
-  console.log(props);
   const { depth, distance, data } = props;
 
   const [tooltipOpen, setTooltipOpen] = useState(false);
@@ -62,7 +60,6 @@ function TargetLayout(props) {
         value: event.target.value,
       };
 
-    console.log(items[depIndex][distIndex]["value"]);
     setTargetLayout(items);
     props.handleData(items, "targetLayout");
   };
@@ -89,7 +86,8 @@ function TargetLayout(props) {
               >
                 <img
                   src={targetRep}
-                  style={{ width: "560vw", height: "50vh" }}
+                  style={{ width: "500vw", height: "500vh" }}
+                  alt="targetLayout"
                 />
               </Tooltip>
             </span>
