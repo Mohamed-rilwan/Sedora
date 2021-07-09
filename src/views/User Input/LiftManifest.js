@@ -36,6 +36,7 @@ const ValidateInputData = (data) => {
 };
 
 function LiftManifest(props) {
+  console.log(props);
   const { data } = props;
   const [modalOpen, setModalOpen] = useState(false);
   const [excelData, setExcelData] = useState([]);
@@ -59,11 +60,10 @@ function LiftManifest(props) {
     setLiftManifest(manifestData);
     setModalOpen(inValid);
     if (
-      parsedData.length !==
-      parseInt(data.globalInformation.numberOfLiftManifest)
+      parsedData.length > parseInt(data.globalInformation.numberOfLiftManifest)
     ) {
       const globalData = data.globalInformation;
-      globalData.numberOfItem = parsedData.length;
+      globalData.numberOfLiftManifest = parsedData.length;
       props.handleData(globalData, "globalInformation");
     }
   };
@@ -96,8 +96,13 @@ function LiftManifest(props) {
           <CardTitle tag="h5">Lift Manifest</CardTitle>
           <p className="card-category">Enter Manifest Items</p>
           <textarea
-            value={""}
-            placeholder="Paste your excel form data here..."
+            value=""
+            placeholder={
+              excelData.length > 0
+                ? "Data Entered from excel"
+                : "Paste your excel form data here..."
+            }
+            // placeholder="Paste your excel form data here..."
             onChange={handleExcelData}
           />
         </CardHeader>
