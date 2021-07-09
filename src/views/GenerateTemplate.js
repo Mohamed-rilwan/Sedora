@@ -193,6 +193,7 @@ function GenerateTemplate() {
     const info = { ...data };
     info[step] = item;
     console.log(info, item);
+    disableShowImpactEnergy(step, item);
     setData(info);
   };
 
@@ -273,13 +274,13 @@ function GenerateTemplate() {
             {currentPage === 0 && (
               <GlobalInformation
                 data={data.globalInformation ?? null}
-                handleData={handleGlobalData}
+                handleData={handleInputData}
               />
             )}
             {currentPage === 1 && (
               <LiftManifest
-                data={data.liftManifest ?? null}
-                handleData={handleLiftManifestData}
+                data={data ?? null}
+                handleData={handleInputData}
                 numberOfItem={parseInt(
                   data.globalInformation["numberOfLiftManifest"]
                 )}
@@ -355,7 +356,6 @@ function GenerateTemplate() {
           Generate Template
         </Button>
 
-        <GenerateReport />
         <Button
           style={{ marginLeft: "2%" }}
           className="btn-round"

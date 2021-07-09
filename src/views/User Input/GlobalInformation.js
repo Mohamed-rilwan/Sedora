@@ -72,7 +72,7 @@ function GlobalInformation(props) {
         ? (items[event.target.name] = "")
         : (items[event.target.name] = event.target.value);
       setGlobalInfo(items);
-      props.handleData(items);
+      props.handleData(items, "globalInformation");
     }
   };
   return (
