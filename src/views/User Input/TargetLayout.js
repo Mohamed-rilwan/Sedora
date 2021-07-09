@@ -1,3 +1,5 @@
+import { parse } from "@babel/core";
+import parseClip from "components/PasteToTable/parseClip";
 import React, { useState } from "react";
 import {
   Button,
@@ -5,6 +7,9 @@ import {
   CardBody,
   CardHeader,
   CardTitle,
+  Modal,
+  ModalBody,
+  ModalHeader,
   Table,
   Tooltip,
   UncontrolledTooltip,
@@ -39,17 +44,67 @@ const validateData = (props) => {
       }
     }
   }
+  console.log(item);
   return item;
 };
 function TargetLayout(props) {
   const { depth, distance, data } = props;
+  console.log(data);
 
   const [tooltipOpen, setTooltipOpen] = useState(false);
-
+  let invalidDistance = [];
+  let invalidDepth = [];
+  const [modalOpen, setModalOpen] = useState(false);
+  const [excelData, setExcelData] = useState([]);
   const toggle = () => setTooltipOpen(!tooltipOpen);
-
   const [targetLayout, setTargetLayout] = useState(() => validateData(props));
   var regexWithDecimal = /^-?\d+\.?\d*$/;
+
+  const handleExcelData = ({ target: { value } }) => {
+    const parsedData = parseClip(value);
+    setExcelData(parsedData);
+    const targetData = JSON.parse(JSON.stringify(targetLayout));
+    let inValid = false;
+    if (
+      parsedData.length !== depth.length + 1 ||
+      parsedData[0].length !== distance.length + 1
+    )
+      inValid = true;
+
+    if (!inValid) {
+      parsedData.forEach((manifest, rowIndex) => {
+        rowIndex === 0 && manifest.splice(0, 1);
+        manifest.forEach((item, columnIndex) => {
+          if (rowIndex === 0 && parseInt(item) !== distance[columnIndex]) {
+            invalidDistance.push(parseInt(item));
+            inValid = true;
+          }
+          if (
+            rowIndex > 0 &&
+            columnIndex === 0 &&
+            parseInt(item) !== depth[rowIndex - 1]
+          ) {
+            console.log("Reaf");
+            invalidDepth.push(parseInt(item));
+            inValid = true;
+          }
+          if (!inValid && columnIndex > 0 && rowIndex > 0) {
+            targetData[rowIndex - 1][columnIndex - 1] = {
+              distance: distance[columnIndex - 1],
+              depth: depth[rowIndex - 1],
+              value: isNaN(parseInt(item)) ? "" : parseInt(item),
+            };
+          }
+        });
+      });
+    }
+    if (!inValid) {
+      setTargetLayout(targetData);
+      props.handleData(targetData, "targetLayout");
+    }
+    console.log(targetData);
+    setModalOpen(inValid);
+  };
 
   const handleData = (event, depth, distance, depIndex, distIndex) => {
     const items = [...targetLayout];
@@ -65,6 +120,15 @@ function TargetLayout(props) {
   };
   return (
     <>
+      <Modal isOpen={modalOpen} toggle={() => setModalOpen(!modalOpen)}>
+        <ModalHeader toggle={() => setModalOpen(!modalOpen)}>
+          Invalid Data
+        </ModalHeader>
+        <ModalBody>
+          Invalid data added. Please check the rows and column for valid target
+          layout data. The data must also include header column.
+        </ModalBody>
+      </Modal>
       <Card style={{ overflowX: "auto" }}>
         <CardHeader>
           <CardTitle tag="h5">Target Layout</CardTitle>
@@ -92,6 +156,15 @@ function TargetLayout(props) {
               </Tooltip>
             </span>
           </p>
+          <textarea
+            value=""
+            placeholder={
+              excelData.length > 0
+                ? "Data Entered from excel"
+                : "Paste your excel form data here..."
+            }
+            onChange={handleExcelData}
+          />
         </CardHeader>
         <CardBody>
           <div>
@@ -110,7 +183,7 @@ function TargetLayout(props) {
                     {distance.map((dist, distIndex) => (
                       <td>
                         <input
-                          value={targetLayout[depIndex][distIndex]["value"]}
+                          value={targetLayout[depIndex][distIndex].value}
                           onChange={(e) =>
                             handleData(e, dep, dist, depIndex, distIndex)
                           }

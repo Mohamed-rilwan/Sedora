@@ -40,6 +40,737 @@ import * as FileSaver from "file-saver";
 import * as XLSX from "xlsx";
 import GenerateReport from "./User Input/GenerateReport";
 
+const sampletagert = [
+  [
+    {
+      depth: 10,
+      distance: 10,
+      value: "Fully shielded",
+    },
+    {
+      depth: 10,
+      distance: 20,
+      value: "9+5",
+    },
+    {
+      depth: 10,
+      distance: 30,
+      value: "8",
+    },
+    {
+      depth: 10,
+      distance: 40,
+      value: "",
+    },
+    {
+      depth: 10,
+      distance: 50,
+      value: "",
+    },
+    {
+      depth: 10,
+      distance: 60,
+      value: "",
+    },
+    {
+      depth: 10,
+      distance: 70,
+      value: "",
+    },
+    {
+      depth: 10,
+      distance: 80,
+      value: "",
+    },
+    {
+      depth: 10,
+      distance: 90,
+      value: "",
+    },
+    {
+      depth: 10,
+      distance: 100,
+      value: "",
+    },
+  ],
+  [
+    {
+      depth: 20,
+      distance: 10,
+      value: "",
+    },
+    {
+      depth: 20,
+      distance: 20,
+      value: "",
+    },
+    {
+      depth: 20,
+      distance: 30,
+      value: "",
+    },
+    {
+      depth: 20,
+      distance: 40,
+      value: "",
+    },
+    {
+      depth: 20,
+      distance: 50,
+      value: "",
+    },
+    {
+      depth: 20,
+      distance: 60,
+      value: "",
+    },
+    {
+      depth: 20,
+      distance: 70,
+      value: "",
+    },
+    {
+      depth: 20,
+      distance: 80,
+      value: "",
+    },
+    {
+      depth: 20,
+      distance: 90,
+      value: "",
+    },
+    {
+      depth: 20,
+      distance: 100,
+      value: "",
+    },
+  ],
+  [
+    {
+      depth: 30,
+      distance: 10,
+      value: "",
+    },
+    {
+      depth: 30,
+      distance: 20,
+      value: "",
+    },
+    {
+      depth: 30,
+      distance: 30,
+      value: "",
+    },
+    {
+      depth: 30,
+      distance: 40,
+      value: "",
+    },
+    {
+      depth: 30,
+      distance: 50,
+      value: "",
+    },
+    {
+      depth: 30,
+      distance: 60,
+      value: "",
+    },
+    {
+      depth: 30,
+      distance: 70,
+      value: "",
+    },
+    {
+      depth: 30,
+      distance: 80,
+      value: "",
+    },
+    {
+      depth: 30,
+      distance: 90,
+      value: "",
+    },
+    {
+      depth: 30,
+      distance: 100,
+      value: "",
+    },
+  ],
+  [
+    {
+      depth: 40,
+      distance: 10,
+      value: "",
+    },
+    {
+      depth: 40,
+      distance: 20,
+      value: "",
+    },
+    {
+      depth: 40,
+      distance: 30,
+      value: "",
+    },
+    {
+      depth: 40,
+      distance: 40,
+      value: "",
+    },
+    {
+      depth: 40,
+      distance: 50,
+      value: "",
+    },
+    {
+      depth: 40,
+      distance: 60,
+      value: "",
+    },
+    {
+      depth: 40,
+      distance: 70,
+      value: "",
+    },
+    {
+      depth: 40,
+      distance: 80,
+      value: "",
+    },
+    {
+      depth: 40,
+      distance: 90,
+      value: "",
+    },
+    {
+      depth: 40,
+      distance: 100,
+      value: "",
+    },
+  ],
+  [
+    {
+      depth: 50,
+      distance: 10,
+      value: "",
+    },
+    {
+      depth: 50,
+      distance: 20,
+      value: "",
+    },
+    {
+      depth: 50,
+      distance: 30,
+      value: "",
+    },
+    {
+      depth: 50,
+      distance: 40,
+      value: "",
+    },
+    {
+      depth: 50,
+      distance: 50,
+      value: "",
+    },
+    {
+      depth: 50,
+      distance: 60,
+      value: "",
+    },
+    {
+      depth: 50,
+      distance: 70,
+      value: "",
+    },
+    {
+      depth: 50,
+      distance: 80,
+      value: "",
+    },
+    {
+      depth: 50,
+      distance: 90,
+      value: "",
+    },
+    {
+      depth: 50,
+      distance: 100,
+      value: "",
+    },
+  ],
+  [
+    {
+      depth: 60,
+      distance: 10,
+      value: "",
+    },
+    {
+      depth: 60,
+      distance: 20,
+      value: "",
+    },
+    {
+      depth: 60,
+      distance: 30,
+      value: "",
+    },
+    {
+      depth: 60,
+      distance: 40,
+      value: "",
+    },
+    {
+      depth: 60,
+      distance: 50,
+      value: "",
+    },
+    {
+      depth: 60,
+      distance: 60,
+      value: "",
+    },
+    {
+      depth: 60,
+      distance: 70,
+      value: "",
+    },
+    {
+      depth: 60,
+      distance: 80,
+      value: "",
+    },
+    {
+      depth: 60,
+      distance: 90,
+      value: "",
+    },
+    {
+      depth: 60,
+      distance: 100,
+      value: "",
+    },
+  ],
+  [
+    {
+      depth: 70,
+      distance: 10,
+      value: "",
+    },
+    {
+      depth: 70,
+      distance: 20,
+      value: "",
+    },
+    {
+      depth: 70,
+      distance: 30,
+      value: "",
+    },
+    {
+      depth: 70,
+      distance: 40,
+      value: "",
+    },
+    {
+      depth: 70,
+      distance: 50,
+      value: "",
+    },
+    {
+      depth: 70,
+      distance: 60,
+      value: "",
+    },
+    {
+      depth: 70,
+      distance: 70,
+      value: "",
+    },
+    {
+      depth: 70,
+      distance: 80,
+      value: "",
+    },
+    {
+      depth: 70,
+      distance: 90,
+      value: "",
+    },
+    {
+      depth: 70,
+      distance: 100,
+      value: "",
+    },
+  ],
+  [
+    {
+      depth: 80,
+      distance: 10,
+      value: "",
+    },
+    {
+      depth: 80,
+      distance: 20,
+      value: "",
+    },
+    {
+      depth: 80,
+      distance: 30,
+      value: "",
+    },
+    {
+      depth: 80,
+      distance: 40,
+      value: "",
+    },
+    {
+      depth: 80,
+      distance: 50,
+      value: "",
+    },
+    {
+      depth: 80,
+      distance: 60,
+      value: "",
+    },
+    {
+      depth: 80,
+      distance: 70,
+      value: "",
+    },
+    {
+      depth: 80,
+      distance: 80,
+      value: "",
+    },
+    {
+      depth: 80,
+      distance: 90,
+      value: "",
+    },
+    {
+      depth: 80,
+      distance: 100,
+      value: "",
+    },
+  ],
+  [
+    {
+      depth: 90,
+      distance: 10,
+      value: "",
+    },
+    {
+      depth: 90,
+      distance: 20,
+      value: "",
+    },
+    {
+      depth: 90,
+      distance: 30,
+      value: "",
+    },
+    {
+      depth: 90,
+      distance: 40,
+      value: "",
+    },
+    {
+      depth: 90,
+      distance: 50,
+      value: "",
+    },
+    {
+      depth: 90,
+      distance: 60,
+      value: "",
+    },
+    {
+      depth: 90,
+      distance: 70,
+      value: "",
+    },
+    {
+      depth: 90,
+      distance: 80,
+      value: "",
+    },
+    {
+      depth: 90,
+      distance: 90,
+      value: "",
+    },
+    {
+      depth: 90,
+      distance: 100,
+      value: "",
+    },
+  ],
+  [
+    {
+      depth: 100,
+      distance: 10,
+      value: "",
+    },
+    {
+      depth: 100,
+      distance: 20,
+      value: "",
+    },
+    {
+      depth: 100,
+      distance: 30,
+      value: "",
+    },
+    {
+      depth: 100,
+      distance: 40,
+      value: "",
+    },
+    {
+      depth: 100,
+      distance: 50,
+      value: "",
+    },
+    {
+      depth: 100,
+      distance: 60,
+      value: "",
+    },
+    {
+      depth: 100,
+      distance: 70,
+      value: "",
+    },
+    {
+      depth: 100,
+      distance: 80,
+      value: "",
+    },
+    {
+      depth: 100,
+      distance: 90,
+      value: "",
+    },
+    {
+      depth: 100,
+      distance: 100,
+      value: "",
+    },
+  ],
+  [
+    {
+      depth: 110,
+      distance: 10,
+      value: "",
+    },
+    {
+      depth: 110,
+      distance: 20,
+      value: "",
+    },
+    {
+      depth: 110,
+      distance: 30,
+      value: "",
+    },
+    {
+      depth: 110,
+      distance: 40,
+      value: "",
+    },
+    {
+      depth: 110,
+      distance: 50,
+      value: "",
+    },
+    {
+      depth: 110,
+      distance: 60,
+      value: "",
+    },
+    {
+      depth: 110,
+      distance: 70,
+      value: "",
+    },
+    {
+      depth: 110,
+      distance: 80,
+      value: "",
+    },
+    {
+      depth: 110,
+      distance: 90,
+      value: "",
+    },
+    {
+      depth: 110,
+      distance: 100,
+      value: "",
+    },
+  ],
+  [
+    {
+      depth: 120,
+      distance: 10,
+      value: "",
+    },
+    {
+      depth: 120,
+      distance: 20,
+      value: "",
+    },
+    {
+      depth: 120,
+      distance: 30,
+      value: "",
+    },
+    {
+      depth: 120,
+      distance: 40,
+      value: "",
+    },
+    {
+      depth: 120,
+      distance: 50,
+      value: "",
+    },
+    {
+      depth: 120,
+      distance: 60,
+      value: "",
+    },
+    {
+      depth: 120,
+      distance: 70,
+      value: "",
+    },
+    {
+      depth: 120,
+      distance: 80,
+      value: "",
+    },
+    {
+      depth: 120,
+      distance: 90,
+      value: "",
+    },
+    {
+      depth: 120,
+      distance: 100,
+      value: "",
+    },
+  ],
+  [
+    {
+      depth: 130,
+      distance: 10,
+      value: "",
+    },
+    {
+      depth: 130,
+      distance: 20,
+      value: "",
+    },
+    {
+      depth: 130,
+      distance: 30,
+      value: "",
+    },
+    {
+      depth: 130,
+      distance: 40,
+      value: "",
+    },
+    {
+      depth: 130,
+      distance: 50,
+      value: "",
+    },
+    {
+      depth: 130,
+      distance: 60,
+      value: "",
+    },
+    {
+      depth: 130,
+      distance: 70,
+      value: "",
+    },
+    {
+      depth: 130,
+      distance: 80,
+      value: "",
+    },
+    {
+      depth: 130,
+      distance: 90,
+      value: "",
+    },
+    {
+      depth: 130,
+      distance: 100,
+      value: "",
+    },
+  ],
+  [
+    {
+      depth: 136,
+      distance: 10,
+      value: "",
+    },
+    {
+      depth: 136,
+      distance: 20,
+      value: "",
+    },
+    {
+      depth: 136,
+      distance: 30,
+      value: "",
+    },
+    {
+      depth: 136,
+      distance: 40,
+      value: "",
+    },
+    {
+      depth: 136,
+      distance: 50,
+      value: "",
+    },
+    {
+      depth: 136,
+      distance: 60,
+      value: "",
+    },
+    {
+      depth: 136,
+      distance: 70,
+      value: "",
+    },
+    {
+      depth: 136,
+      distance: 80,
+      value: "",
+    },
+    {
+      depth: 136,
+      distance: 90,
+      value: "",
+    },
+    {
+      depth: 136,
+      distance: 100,
+      value: "",
+    },
+  ],
+];
+
 const sampleData = {
   globalInformation: {
     maxWaterDepth: "",
@@ -71,9 +802,9 @@ const sampleData = {
     depth: [],
     height: [],
   },
-  targetLayout: [[]],
+  targetLayout: sampletagert,
   impactProtection: [[]],
-  impactType: [[]],
+  impactType: sampletagert,
   impactEnergy: [[]],
 };
 
@@ -108,7 +839,6 @@ function GenerateTemplate() {
   const fileExtension = ".xlsx";
 
   const exportToCSV = (apiData, fileName) => {
-    console.log(apiData);
     const ws = XLSX.utils.json_to_sheet(apiData);
     const wb = { Sheets: { data: ws }, SheetNames: ["data"] };
     const excelBuffer = XLSX.write(wb, { bookType: "xlsx", type: "array" });
@@ -192,7 +922,6 @@ function GenerateTemplate() {
   const handleInputData = (item, step) => {
     const info = { ...data };
     info[step] = item;
-    console.log(info, item);
     disableShowImpactEnergy(step, item);
     setData(info);
   };
@@ -288,7 +1017,7 @@ function GenerateTemplate() {
             )}
             {currentPage === 2 && (
               <TargetLayout
-                data={data.targetLayout}
+                data={data.targetLayout ?? [[]]}
                 depth={impactProp(
                   parseInt(data.globalInformation["maxWaterDepth"])
                 )}

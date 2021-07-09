@@ -1,5 +1,4 @@
 import parseClip from "components/PasteToTable/parseClip";
-import { invalid } from "moment";
 import React, { useState } from "react";
 // reactstrap components
 import {
@@ -58,6 +57,7 @@ function LiftManifest(props) {
     });
     console.log(manifestData);
     setLiftManifest(manifestData);
+    props.handleData(manifestData, "liftManifest");
     setModalOpen(inValid);
     if (
       parsedData.length > parseInt(data.globalInformation.numberOfLiftManifest)
