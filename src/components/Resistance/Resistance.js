@@ -1,6 +1,6 @@
-export default function Resistance(globalData, materialType) {
+export default function Resistance(globalData, typeOfPipeline) {
   const capacities = [];
-  if (materialType.toLowerCase() === "steel") {
+  if (typeOfPipeline === "Steel Pipeline / Riser") {
     capacities["minorDamage"] = {
       dentDiameter: [0, 5],
       impactCapacity: [0, energyRequiredSteel(globalData, 5)],
@@ -51,8 +51,8 @@ export default function Resistance(globalData, materialType) {
       r2: 0.25,
     };
     capacities["rupture"] = {
-      dentDiameter: [, ">>20"],
-      impactCapacity: [, energyRequiredSteel(globalData, 20)],
+      dentDiameter: ["", ">>20"],
+      impactCapacity: ["", energyRequiredSteel(globalData, 20)],
       d1: 0.0,
       d2: 0.1,
       d3: 0.9,
@@ -63,9 +63,9 @@ export default function Resistance(globalData, materialType) {
     return capacities;
   }
 
-  if (materialType.toLowerCase() === "flexible") {
+  if (typeOfPipeline === "Flexible Pipeline / Riser") {
     capacities["minorDamage"] = {
-      base: [, 2.5],
+      base: ["", 2.5],
       impactCapacity: [0.0, energyRequiredFlexile(globalData, 2.5)],
       d1: 1.0,
       d2: 0.0,
@@ -101,7 +101,7 @@ export default function Resistance(globalData, materialType) {
       r2: 0.0,
     };
     capacities["rupture"] = {
-      base: [, 20.0],
+      base: ["", 20.0],
       impactCapacity: [0.0, energyRequiredFlexile(globalData, 20.0)],
       d1: 0.0,
       d2: 0.0,
@@ -113,7 +113,7 @@ export default function Resistance(globalData, materialType) {
     return capacities;
   }
 
-  if (materialType.toLowerCase() === "umbilical") {
+  if (typeOfPipeline === "Umbilical") {
     capacities["minorDamage"] = {
       impactCapacity: [0, 2.5],
       d1: 1.0,
@@ -142,7 +142,7 @@ export default function Resistance(globalData, materialType) {
       r2: 0.0,
     };
     capacities["lossOfFunction2"] = {
-      impactCapacity: [, 10],
+      impactCapacity: ["", 10],
       d1: 0.0,
       d2: 0.0,
       d3: 1.0,
@@ -151,13 +151,75 @@ export default function Resistance(globalData, materialType) {
       r2: 0.0,
     };
     capacities["lossOfFunction2"] = {
-      impactCapacity: [, ">10"],
+      impactCapacity: ["", ">10"],
       d1: 0.0,
       d2: 0.0,
       d3: 1.0,
       r0: 0.0,
       r1: 0.0,
       r2: 0.0,
+    };
+    return capacities;
+  }
+  if (typeOfPipeline === "Steel Pipe-in-Pipe / Riser") {
+    capacities["minorDamage"] = {
+      dentDiameter: [0, 5],
+      impactCapacity: [0, energyRequiredPip(globalData, 5)],
+      d1: 1.0,
+      d2: 0.0,
+      d3: 0.0,
+      r0: 1,
+      r1: 0,
+      r2: 0,
+    };
+    capacities["majorDamageLeakageAnticipated"] = {
+      dentDiameter: [5, 10],
+      impactCapacity: [
+        energyRequiredPip(globalData, 5),
+        energyRequiredPip(globalData, 10),
+      ],
+      d1: 0.1,
+      d2: 0.8,
+      d3: 0.1,
+      r0: 0.9,
+      r1: 0.1,
+      r2: 0,
+    };
+    capacities["majorDamageLeakageAndRupture1"] = {
+      dentDiameter: [10, 15],
+      impactCapacity: [
+        energyRequiredPip(globalData, 10),
+        energyRequiredPip(globalData, 15),
+      ],
+      d1: 0.0,
+      d2: 0.75,
+      d3: 0.25,
+      r0: 0.75,
+      r1: 0.2,
+      r2: 0.05,
+    };
+    capacities["majorDamageLeakageAndRupture2"] = {
+      dentDiameter: [15, 20],
+      impactCapacity: [
+        energyRequiredPip(globalData, 15),
+        energyRequiredPip(globalData, 20),
+      ],
+      d1: 0.0,
+      d2: 0.25,
+      d3: 0.75,
+      r0: 0.25,
+      r1: 0.5,
+      r2: 0.25,
+    };
+    capacities["rupture"] = {
+      dentDiameter: ["", ">>20"],
+      impactCapacity: ["", energyRequiredPip(globalData, 20)],
+      d1: 0.0,
+      d2: 0.1,
+      d3: 0.9,
+      r0: 0.1,
+      r1: 0.2,
+      r2: 0.7,
     };
     return capacities;
   }
@@ -180,4 +242,37 @@ const energyRequiredFlexile = (globalData, base) => {
     : globalData.pipelineSize > 10
     ? 1.25 * base
     : base;
+};
+
+const energyRequiredPip = (globalData, dentPercentage) => {
+  const innerDent = globalData.odOfInnerPipeline * dentPercentage;
+  const innerEnergy =
+    (16 *
+      Math.sqrt((2 * Math.PI) / 9) *
+      (0.25 *
+        globalData?.yieldStressOfInnerPipe *
+        Math.pow(globalData.wallThicknessOfInnerPipe, 2)) *
+      Math.sqrt(
+        globalData.odOfInnerPipeline / globalData.wallThicknessOfInnerPipe
+      ) *
+      Math.pow(dentPercentage, 3 / 2)) /
+    1000;
+
+  const outerDent =
+    ((globalData.odOfPipeline - globalData.odOfInnerPipeline) / 2 + innerDent) /
+    globalData.odOfPipeline;
+
+  const outerEnergy =
+    (16 *
+      Math.sqrt((2 * Math.PI) / 9) *
+      (0.25 *
+        globalData?.yieldStressOfInnerPipe *
+        Math.pow(globalData.wallThicknessOfInnerPipe, 2)) *
+      Math.sqrt(
+        globalData.odOfInnerPipeline / globalData.wallThicknessOfInnerPipe
+      ) *
+      Math.pow(outerDent, 3 / 2)) /
+    1000;
+
+  return innerEnergy + outerEnergy;
 };

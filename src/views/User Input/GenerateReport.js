@@ -1,7 +1,7 @@
-import React from "react";
 import * as FileSaver from "file-saver";
+import React from "react";
+import { Button, Card, CardBody, CardHeader, CardTitle } from "reactstrap";
 import * as XLSX from "xlsx";
-import { Card, CardBody, CardHeader, CardTitle } from "reactstrap";
 import PasteFromExcel from "../../components/PasteToTable/index";
 const GenerateReport = ({ apiData, fileName }) => {
   const fileType =
@@ -23,6 +23,7 @@ const GenerateReport = ({ apiData, fileName }) => {
         <p className="card-category">
           Enter Impact Protection Available at each Depth
         </p>
+        <Button onClick={exportToCSV}>Export</Button>
       </CardHeader>
       <CardBody>
         <PasteFromExcel />
