@@ -5,37 +5,8 @@
   }
   
   textarea {
-    width: 90%;
+    width: 80%;
     padding: 8px;
-  }
-  
-  table {
-    margin: 20px auto 0;
-    width: 90%;
-    border-collapse: collapse;
-  }
-  
-  table,
-  td {
-    border: 1px solid #d3d3d3;
-  }
-  
-  tr {
-    padding: 2px;
-  }
-  
-  td {
-    padding: 2px;
-    white-space: pre-line;
-  }
-  
-  .ignored {
-    background-color: #d3d3d3;
-    color: grey;
-  }
-  
-  th.ignored > div:before {
-    content: "-";
   }
 
   .liftmanifestInput{
@@ -43,5 +14,10 @@
       height: 10vh;
       display: flex;
       margin:auto;
+  }
+
+  .clearButton{
+    margin:'3%';
+    display:auto;
   }
   

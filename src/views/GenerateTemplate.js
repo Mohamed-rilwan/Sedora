@@ -1084,7 +1084,6 @@ function GenerateTemplate() {
         >
           Generate Template
         </Button>
-
         <Button
           style={{ marginLeft: "2%" }}
           className="btn-round"

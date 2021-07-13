@@ -192,7 +192,7 @@ function ImpactEnergy(props) {
           item[col][index] = parseFloat(
             (item.volumeOfWaterDisplaced[index] *
               item.ca[index] *
-              data.globalInformation["densityOfWater"]) /
+              parseFloat(data.globalInformation["densityOfWater"])) /
               1000
           ).toFixed(4);
         }
@@ -202,9 +202,9 @@ function ImpactEnergy(props) {
               (2 *
                 (item.mass[index] * 1000 -
                   item.volumeOfWaterDisplaced[index] *
-                    data.globalInformation.densityOfWater) *
+                    parseFloat(data.globalInformation.densityOfWater)) *
                 9.81) /
-                (data.globalInformation.densityOfWater *
+                (parseFloat(data.globalInformation.densityOfWater) *
                   item.cd[index] *
                   item.projectedArea)
             ).toFixed(4)

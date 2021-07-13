@@ -2,7 +2,6 @@ import React, { Component, useState } from "react";
 import ReactDOM from "react-dom";
 import Table from "./Table";
 import parseClip from "./parseClip";
-import "./style.css";
 
 const PasteFromExcel = () => {
   const [state, setState] = useState({
