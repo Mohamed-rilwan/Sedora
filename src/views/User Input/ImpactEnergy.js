@@ -119,36 +119,39 @@ function ImpactEnergy(props) {
           );
         }
         if (col === "ca") {
+          console.log(
+            data.globalInformation.massCoefficient,
+            parseInt(item.angularDeviationCategoryNumber[index])
+          );
           item[col][index] =
-            parseInt(item.angularDeviationCategoryNumber) < 4 &&
-            parseInt(item.angularDeviationCategoryNumber) > 0 &&
+            parseInt(item.angularDeviationCategoryNumber[index]) <= 3 &&
             data.globalInformation.massCoefficient === "Lower End Value"
               ? "0.1"
-              : parseInt(item.angularDeviationCategoryNumber) < 3 &&
+              : parseInt(item.angularDeviationCategoryNumber[index]) <= 3 &&
                 data.globalInformation.massCoefficient === "Medium Value"
               ? "0.55"
-              : parseInt(item.angularDeviationCategoryNumber) < 3 &&
+              : parseInt(item.angularDeviationCategoryNumber[index]) <= 3 &&
                 data.globalInformation.massCoefficient === "Upper End Value"
               ? "1"
-              : parseInt(item.angularDeviationCategoryNumber) > 3 &&
-                parseInt(item.angularDeviationCategoryNumber) < 8 &&
+              : parseInt(item.angularDeviationCategoryNumber[index]) > 3 &&
+                parseInt(item.angularDeviationCategoryNumber[index]) < 8 &&
                 data.globalInformation.massCoefficient === "Lower End Value"
               ? "0.6"
-              : parseInt(item.angularDeviationCategoryNumber) > 3 &&
-                parseInt(item.angularDeviationCategoryNumber) < 8 &&
+              : parseInt(item.angularDeviationCategoryNumber[index]) > 3 &&
+                parseInt(item.angularDeviationCategoryNumber[index]) < 8 &&
                 data.globalInformation.massCoefficient === "Medium Value"
               ? "1.05"
-              : parseInt(item.angularDeviationCategoryNumber) > 3 &&
-                parseInt(item.angularDeviationCategoryNumber) < 8 &&
+              : parseInt(item.angularDeviationCategoryNumber[index]) > 3 &&
+                parseInt(item.angularDeviationCategoryNumber[index]) < 8 &&
                 data.globalInformation.massCoefficient === "Upper End Value"
               ? "1.5"
-              : parseInt(item.angularDeviationCategoryNumber) === 8 &&
+              : parseInt(item.angularDeviationCategoryNumber[index]) === 8 &&
                 data.globalInformation.massCoefficient === "Lower End Value"
               ? "1"
-              : parseInt(item.angularDeviationCategoryNumber) === 8 &&
+              : parseInt(item.angularDeviationCategoryNumber[index]) === 8 &&
                 data.globalInformation.massCoefficient === "Medium Value"
               ? "1.5"
-              : parseInt(item.angularDeviationCategoryNumber) === 8 &&
+              : parseInt(item.angularDeviationCategoryNumber[index]) === 8 &&
                 data.globalInformation.massCoefficient === "Upper End Value"
               ? "2"
               : "ERROR";
@@ -159,10 +162,10 @@ function ImpactEnergy(props) {
             parseInt(item.angularDeviationCategoryNumber[index]) < 4 &&
             data.globalInformation.dragCoefficient === "Lower End Value"
               ? "0.7"
-              : parseInt(item.angularDeviationCategoryNumber[index]) < 3 &&
+              : parseInt(item.angularDeviationCategoryNumber[index]) < 4 &&
                 data.globalInformation.dragCoefficient === "Medium Value"
               ? "1.1"
-              : parseInt(item.angularDeviationCategoryNumber[index]) < 3 &&
+              : parseInt(item.angularDeviationCategoryNumber[index]) < 4 &&
                 data.globalInformation.dragCoefficient === "Upper End Value"
               ? "1.5"
               : parseInt(item.angularDeviationCategoryNumber[index]) > 3 &&
@@ -206,7 +209,7 @@ function ImpactEnergy(props) {
                 9.81) /
                 (parseFloat(data.globalInformation.densityOfWater) *
                   item.cd[index] *
-                  item.projectedArea)
+                  item.projectedArea[index])
             ).toFixed(4)
           );
         }

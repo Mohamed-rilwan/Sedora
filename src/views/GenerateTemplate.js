@@ -821,9 +821,12 @@ const impactProp = (value) => {
   let impact = Array.from({ length: value > 10 ? value / 10 : 1 }, (_, i) =>
     value > 10 ? (i + 1) * 10 : value
   );
-  return value % 10 !== 0 && value > 10
-    ? [...impact, impact[impact.length - 1] + (value % 10)]
-    : impact;
+  console.log(
+    "ddee",
+    impact,
+    value % 10 !== 0 && value > 10 ? [...impact, value % 10] : impact
+  );
+  return value % 10 !== 0 && value > 10 ? [...impact, value % 10] : impact;
 };
 
 function GenerateTemplate() {
