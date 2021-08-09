@@ -16,7 +16,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 // reactstrap components
 import {
   Button,
@@ -39,8 +39,9 @@ import TargetLayout from "./User Input/TargetLayout";
 import * as FileSaver from "file-saver";
 import * as XLSX from "xlsx";
 import GenerateReport from "./User Input/GenerateReport";
+import { GlobalContext } from "components/context/GlobalContext";
 
-const sampletagert = [
+export const sampletagert = [
   [
     {
       depth: 10,
@@ -771,7 +772,7 @@ const sampletagert = [
   ],
 ];
 
-const sampleData = {
+export const sampleData = {
   globalInformation: {
     maxWaterDepth: "",
     dropFrequency: "",
@@ -802,9 +803,9 @@ const sampleData = {
     depth: [],
     height: [],
   },
-  targetLayout: [[]],
+  targetLayout: sampletagert,
   impactProtection: [[]],
-  impactType: [[]],
+  impactType: sampletagert,
   impactEnergy: [[]],
 };
 
@@ -818,27 +819,22 @@ const stepName = (step) => {
 };
 
 const impactProp = (value) => {
-  console.log(value);
   let impact = Array.from({ length: value > 10 ? value / 10 : 1 }, (_, i) =>
     value > 10 ? (i + 1) * 10 : value
   );
   console.log(
     "ddee",
     impact,
-    value % 10 !== 0 && value > 10
-      ? [...impact, (value % 10) + impact[impact.length - 1]]
-      : impact
+    value % 10 !== 0 && value > 10 ? [...impact, value % 10] : impact
   );
-  return value % 10 !== 0 && value > 10
-    ? [...impact, (value % 10) + impact[impact.length - 1]]
-    : impact;
+  return value % 10 !== 0 && value > 10 ? [...impact, value % 10] : impact;
 };
 
 function GenerateTemplate() {
+  const { data, setData } = useContext(GlobalContext);
   const [currentPage, setCurrentPage] = useState(0);
-  const [validInfo, setValidInfo] = useState(false);
   const [showImpactEnergy, setShowImpactEnergy] = useState(false);
-  const [data, setData] = useState(sampleData);
+  // const [data, setData] = useState(sampleData);
 
   const pagesCount = 6;
 

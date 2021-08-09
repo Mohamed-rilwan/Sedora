@@ -25,6 +25,7 @@ import Maps from "views/Map.js";
 import UserPage from "views/User.js";
 import GenerateTemplate from "views/GenerateTemplate";
 import ExistingTemplate from "views/ExitingTemplate";
+import CalculateResistance from "views/Resistance/CalculateResistance";
 
 var routes = [
   {
@@ -35,7 +36,14 @@ var routes = [
     layout: "/admin",
   },
   {
-    path: "/exiting",
+    path: "/resistance",
+    name: "Resistance",
+    icon: "nc-icon nc-cloud-upload-94",
+    component: CalculateResistance,
+    layout: "/admin",
+  },
+  {
+    path: "/existing",
     name: "Calcaulate",
     icon: "nc-icon nc-cloud-upload-94",
     component: ExistingTemplate,

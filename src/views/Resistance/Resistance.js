@@ -226,11 +226,17 @@ export default function Resistance(globalData, typeOfPipeline) {
 }
 
 const energyRequiredSteel = (globalData, dentPercentage) => {
+  console.log(globalData);
   return (
     (16 *
       Math.sqrt((2 * Math.PI) / 9) *
-      (0.25 * globalData?.yieldStress * Math.pow(globalData.wallThickness, 2)) *
-      Math.sqrt(globalData.odOfPipeline / globalData.wallThickness) *
+      (0.25 *
+        parseFloat(globalData?.yieldStress) *
+        Math.pow(parseFloat(globalData.wallThickness), 2)) *
+      Math.sqrt(
+        parseFloat(globalData.odOfPipeline) /
+          parseFloat(globalData.wallThickness)
+      ) *
       Math.pow(dentPercentage, 3 / 2)) /
     1000
   );
