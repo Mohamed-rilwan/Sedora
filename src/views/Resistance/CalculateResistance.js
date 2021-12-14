@@ -16,25 +16,18 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
+import { GlobalContext } from "components/context/GlobalContext";
 import React, { useContext, useState } from "react";
 // reactstrap components
 import {
   Button,
-  Card,
-  CardBody,
-  CardFooter,
-  CardTitle,
   Col,
   Pagination,
   PaginationItem,
   PaginationLink,
   Row,
 } from "reactstrap";
-
-import * as FileSaver from "file-saver";
-import * as XLSX from "xlsx";
 import SteelPipe from "./SteelPipe";
-import { GlobalContext } from "components/context/GlobalContext";
 
 const stepName = (step) => {
   if (step === 0) return "Resistance (St.Pipeline)";
