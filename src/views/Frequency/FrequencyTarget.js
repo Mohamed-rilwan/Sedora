@@ -282,6 +282,431 @@ function FrequencyTarget(props) {
                 {distance.map((item, index) => (
                   <th>{item}</th>
                 ))}
+                <th>Terminal Energy</th>
+              </thead>
+              <tbody>
+                {depth.map((dep, depIndex) => (
+                  <tr>
+                    <th>{dep}</th>
+                    {distance.map((dist, distIndex) => (
+                      <td>
+                        <span> {targetLayout[depIndex][distIndex].value}</span>
+                      </td>
+                    ))}
+
+                    <td>{`ADD TERMINAL ENERGY`}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </div>
+        </CardBody>
+      </Card>
+
+      <Card style={{ overflowX: "auto" }}>
+        <CardHeader>
+          <p className="card-category">TABLE- D: IMPACT Energy</p>
+        </CardHeader>
+        <CardBody>
+          <div>
+            <Table>
+              <thead>
+                <th>Depth</th>
+                {distance.map((item, index) => (
+                  <th>{item}</th>
+                ))}
+              </thead>
+              <tbody>
+                {depth.map((dep, depIndex) => (
+                  <tr>
+                    <th>{dep}</th>
+                    {distance.map((dist, distIndex) => (
+                      <td>
+                        <span> {targetLayout[depIndex][distIndex].value}</span>
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </div>
+        </CardBody>
+      </Card>
+
+      <Card style={{ overflowX: "auto" }}>
+        <CardHeader>
+          <p className="card-category">
+            TABLE- E: RESIDUAL Energy available to damage pipeline
+          </p>
+        </CardHeader>
+        <CardBody>
+          <div>
+            <Table>
+              <thead>
+                <th>Depth</th>
+                {distance.map((item, index) => (
+                  <th>{item}</th>
+                ))}
+              </thead>
+              <tbody>
+                {depth.map((dep, depIndex) => (
+                  <tr>
+                    <th>{dep}</th>
+                    {distance.map((dist, distIndex) => (
+                      <td>
+                        <span> {targetLayout[depIndex][distIndex].value}</span>
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </div>
+        </CardBody>
+      </Card>
+
+      <Card style={{ overflowX: "auto" }}>
+        <CardHeader>
+          <p className="card-category">TABLE- F: D1 Damage Probability</p>
+        </CardHeader>
+        <CardBody>
+          <div>
+            <Table>
+              <thead>
+                <th>Depth</th>
+                {distance.map((item, index) => (
+                  <th>{item}</th>
+                ))}
+              </thead>
+              <tbody>
+                {depth.map((dep, depIndex) => (
+                  <tr>
+                    <th>{dep}</th>
+                    {distance.map((dist, distIndex) => (
+                      <td>
+                        <span> {targetLayout[depIndex][distIndex].value}</span>
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </div>
+        </CardBody>
+      </Card>
+
+      <Card style={{ overflowX: "auto" }}>
+        <CardHeader>
+          <p className="card-category">D1 Damage Frequency</p>
+        </CardHeader>
+        <CardBody>
+          <div>
+            <Table>
+              <thead>
+                <th>Depth</th>
+                {distance.map((item, index) => (
+                  <th>{item}</th>
+                ))}
+              </thead>
+              <tbody>
+                {depth.map((dep, depIndex) => (
+                  <tr>
+                    <th>{dep}</th>
+                    {distance.map((dist, distIndex) => (
+                      <td>
+                        <span> {targetLayout[depIndex][distIndex].value}</span>
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </div>
+        </CardBody>
+      </Card>
+
+      <Card style={{ overflowX: "auto" }}>
+        <CardHeader>
+          <p className="card-category">TABLE- G: D2 Damage Probability</p>
+        </CardHeader>
+        <CardBody>
+          <div>
+            <Table>
+              <thead>
+                <th>Depth</th>
+                {distance.map((item, index) => (
+                  <th>{item}</th>
+                ))}
+              </thead>
+              <tbody>
+                {depth.map((dep, depIndex) => (
+                  <tr>
+                    <th>{dep}</th>
+                    {distance.map((dist, distIndex) => (
+                      <td>
+                        <span> {targetLayout[depIndex][distIndex].value}</span>
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </div>
+        </CardBody>
+      </Card>
+
+      <Card style={{ overflowX: "auto" }}>
+        <CardHeader>
+          <p className="card-category">D2 Damage Frequency</p>
+        </CardHeader>
+        <CardBody>
+          <div>
+            <Table>
+              <thead>
+                <th>Depth</th>
+                {distance.map((item, index) => (
+                  <th>{item}</th>
+                ))}
+              </thead>
+              <tbody>
+                {depth.map((dep, depIndex) => (
+                  <tr>
+                    <th>{dep}</th>
+                    {distance.map((dist, distIndex) => (
+                      <td>
+                        <span> {targetLayout[depIndex][distIndex].value}</span>
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </div>
+        </CardBody>
+      </Card>
+
+      <Card style={{ overflowX: "auto" }}>
+        <CardHeader>
+          <p className="card-category">TABLE- H: D3 Damage Probability</p>
+        </CardHeader>
+        <CardBody>
+          <div>
+            <Table>
+              <thead>
+                <th>Depth</th>
+                {distance.map((item, index) => (
+                  <th>{item}</th>
+                ))}
+              </thead>
+              <tbody>
+                {depth.map((dep, depIndex) => (
+                  <tr>
+                    <th>{dep}</th>
+                    {distance.map((dist, distIndex) => (
+                      <td>
+                        <span> {targetLayout[depIndex][distIndex].value}</span>
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </div>
+        </CardBody>
+      </Card>
+
+      <Card style={{ overflowX: "auto" }}>
+        <CardHeader>
+          <p className="card-category">D3 Damage Frequency</p>
+        </CardHeader>
+        <CardBody>
+          <div>
+            <Table>
+              <thead>
+                <th>Depth</th>
+                {distance.map((item, index) => (
+                  <th>{item}</th>
+                ))}
+              </thead>
+              <tbody>
+                {depth.map((dep, depIndex) => (
+                  <tr>
+                    <th>{dep}</th>
+                    {distance.map((dist, distIndex) => (
+                      <td>
+                        <span> {targetLayout[depIndex][distIndex].value}</span>
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </div>
+        </CardBody>
+      </Card>
+
+      <Card style={{ overflowX: "auto" }}>
+        <CardHeader>
+          <p className="card-category">TABLE- I: R0 Release Probability</p>
+        </CardHeader>
+        <CardBody>
+          <div>
+            <Table>
+              <thead>
+                <th>Depth</th>
+                {distance.map((item, index) => (
+                  <th>{item}</th>
+                ))}
+              </thead>
+              <tbody>
+                {depth.map((dep, depIndex) => (
+                  <tr>
+                    <th>{dep}</th>
+                    {distance.map((dist, distIndex) => (
+                      <td>
+                        <span> {targetLayout[depIndex][distIndex].value}</span>
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </div>
+        </CardBody>
+      </Card>
+
+      <Card style={{ overflowX: "auto" }}>
+        <CardHeader>
+          <p className="card-category">No (R0) Release Frequency</p>
+        </CardHeader>
+        <CardBody>
+          <div>
+            <Table>
+              <thead>
+                <th>Depth</th>
+                {distance.map((item, index) => (
+                  <th>{item}</th>
+                ))}
+              </thead>
+              <tbody>
+                {depth.map((dep, depIndex) => (
+                  <tr>
+                    <th>{dep}</th>
+                    {distance.map((dist, distIndex) => (
+                      <td>
+                        <span> {targetLayout[depIndex][distIndex].value}</span>
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </div>
+        </CardBody>
+      </Card>
+
+      <Card style={{ overflowX: "auto" }}>
+        <CardHeader>
+          <p className="card-category">TABLE- J: R1 Release Probability</p>
+        </CardHeader>
+        <CardBody>
+          <div>
+            <Table>
+              <thead>
+                <th>Depth</th>
+                {distance.map((item, index) => (
+                  <th>{item}</th>
+                ))}
+              </thead>
+              <tbody>
+                {depth.map((dep, depIndex) => (
+                  <tr>
+                    <th>{dep}</th>
+                    {distance.map((dist, distIndex) => (
+                      <td>
+                        <span> {targetLayout[depIndex][distIndex].value}</span>
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </div>
+        </CardBody>
+      </Card>
+
+      <Card style={{ overflowX: "auto" }}>
+        <CardHeader>
+          <p className="card-category">Small (R1) Release Frequency</p>
+        </CardHeader>
+        <CardBody>
+          <div>
+            <Table>
+              <thead>
+                <th>Depth</th>
+                {distance.map((item, index) => (
+                  <th>{item}</th>
+                ))}
+              </thead>
+              <tbody>
+                {depth.map((dep, depIndex) => (
+                  <tr>
+                    <th>{dep}</th>
+                    {distance.map((dist, distIndex) => (
+                      <td>
+                        <span> {targetLayout[depIndex][distIndex].value}</span>
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </div>
+        </CardBody>
+      </Card>
+
+      <Card style={{ overflowX: "auto" }}>
+        <CardHeader>
+          <p className="card-category">TABLE- K: R2 Release Probability</p>
+        </CardHeader>
+        <CardBody>
+          <div>
+            <Table>
+              <thead>
+                <th>Depth</th>
+                {distance.map((item, index) => (
+                  <th>{item}</th>
+                ))}
+              </thead>
+              <tbody>
+                {depth.map((dep, depIndex) => (
+                  <tr>
+                    <th>{dep}</th>
+                    {distance.map((dist, distIndex) => (
+                      <td>
+                        <span> {targetLayout[depIndex][distIndex].value}</span>
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </div>
+        </CardBody>
+      </Card>
+
+      <Card style={{ overflowX: "auto" }}>
+        <CardHeader>
+          <p className="card-category">Major (R2) Release Frequency</p>
+        </CardHeader>
+        <CardBody>
+          <div>
+            <Table>
+              <thead>
+                <th>Depth</th>
+                {distance.map((item, index) => (
+                  <th>{item}</th>
+                ))}
               </thead>
               <tbody>
                 {depth.map((dep, depIndex) => (
