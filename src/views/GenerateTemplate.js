@@ -803,9 +803,9 @@ export const sampleData = {
     depth: [],
     height: [],
   },
-  targetLayout: sampletagert,
+  targetLayout: [[]],
   impactProtection: [[]],
-  impactType: sampletagert,
+  impactType: [[]],
   impactEnergy: [[]],
 };
 
@@ -819,15 +819,11 @@ const stepName = (step) => {
 };
 
 const impactProp = (value) => {
+  const initialValue = value;
   let impact = Array.from({ length: value > 10 ? value / 10 : 1 }, (_, i) =>
     value > 10 ? (i + 1) * 10 : value
   );
-  console.log(
-    "ddee",
-    impact,
-    value % 10 !== 0 && value > 10 ? [...impact, value % 10] : impact
-  );
-  return value % 10 !== 0 && value > 10 ? [...impact, value % 10] : impact;
+  return value % 10 !== 0 && value > 10 ? [...impact, value] : impact;
 };
 
 function GenerateTemplate() {
@@ -1023,10 +1019,10 @@ function GenerateTemplate() {
               <TargetLayout
                 data={data.targetLayout ?? [[]]}
                 depth={impactProp(
-                  parseInt(data.globalInformation["maxWaterDepth"])
+                  parseFloat(data.globalInformation["maxWaterDepth"])
                 )}
                 distance={impactProp(
-                  parseInt(data.globalInformation["maxDistanceFomDropPoint"])
+                  parseFloat(data.globalInformation["maxDistanceFomDropPoint"])
                 )}
                 handleData={handleInputData}
               />

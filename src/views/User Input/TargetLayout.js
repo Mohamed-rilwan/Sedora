@@ -62,6 +62,7 @@ function TargetLayout(props) {
 
   const handleExcelData = ({ target: { value } }) => {
     const parsedData = parseClip(value);
+
     setExcelData(parsedData);
     const targetData = JSON.parse(JSON.stringify(targetLayout));
     let inValid = false;
@@ -73,26 +74,27 @@ function TargetLayout(props) {
 
     if (!inValid) {
       parsedData.forEach((manifest, rowIndex) => {
+        debugger;
         rowIndex === 0 && manifest.splice(0, 1);
         manifest.forEach((item, columnIndex) => {
-          if (rowIndex === 0 && parseInt(item) !== distance[columnIndex]) {
-            invalidDistance.push(parseInt(item));
+          if (rowIndex === 0 && parseFloat(item) !== distance[columnIndex]) {
+            invalidDistance.push(parseFloat(item));
             inValid = true;
           }
           if (
             rowIndex > 0 &&
             columnIndex === 0 &&
-            parseInt(item) !== depth[rowIndex - 1]
+            parseFloat(item) !== depth[rowIndex - 1]
           ) {
             console.log("Reaf");
-            invalidDepth.push(parseInt(item));
+            invalidDepth.push(parseFloat(item));
             inValid = true;
           }
           if (!inValid && columnIndex > 0 && rowIndex > 0) {
             targetData[rowIndex - 1][columnIndex - 1] = {
               distance: distance[columnIndex - 1],
               depth: depth[rowIndex - 1],
-              value: isNaN(parseInt(item)) ? "" : parseInt(item),
+              value: isNaN(parseFloat(item)) ? "" : parseFloat(item),
             };
           }
         });
@@ -161,7 +163,7 @@ function TargetLayout(props) {
             placeholder={
               excelData.length > 0
                 ? "Data Entered from excel"
-                : "Paste your excel form data here..."
+                : "Paste your excel form data here... [Include x-axis and y axis values]"
             }
             onChange={handleExcelData}
           />
