@@ -119,10 +119,6 @@ function ImpactEnergy(props) {
           );
         }
         if (col === "ca") {
-          console.log(
-            data.globalInformation.massCoefficient,
-            parseInt(item.angularDeviationCategoryNumber[index])
-          );
           item[col][index] =
             parseInt(item.angularDeviationCategoryNumber[index]) <= 3 &&
             data.globalInformation.massCoefficient === "Lower End Value"

@@ -20,7 +20,6 @@ const UmbilicalDamageDescription = [
 
 function UmbilicalPipe(props) {
   const { data, setData } = useContext(GlobalContext);
-  console.log(Resistance(data, "Umbilical"));
 
   return (
     <>

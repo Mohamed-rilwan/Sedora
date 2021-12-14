@@ -20,7 +20,6 @@ const flexibleDamageDescription = [
 
 function FlexiblePipe(props) {
   const { data, setData } = useContext(GlobalContext);
-  console.log(Resistance(data, "Flexible Pipeline / Riser"));
 
   return (
     <>

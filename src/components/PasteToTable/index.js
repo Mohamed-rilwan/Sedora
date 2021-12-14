@@ -26,7 +26,6 @@ const PasteFromExcel = () => {
   // };
 
   const handleChange = ({ target: { value } }) => {
-    console.log(parseClip(value));
     setState({
       rawStr: value,
       data: parseClip(value),

@@ -16,6 +16,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
+import { impactProp } from "components/Common/helpers";
 import { GlobalContext } from "components/context/GlobalContext";
 import React, { useContext, useState } from "react";
 // reactstrap components
@@ -27,10 +28,8 @@ import {
   PaginationLink,
   Row,
 } from "reactstrap";
-import FlexiblePipe from "./FlexiblePipe";
-import PipeInPipe from "./PipeInPipe";
-import SteelPipe from "./SteelPipe";
-import UmbilicalPipe from "./UmbilicalPipe";
+import TargetLayout from "views/User Input/TargetLayout";
+import FrequencyTarget from "./FrequencyTarget";
 
 const stepName = (step) => {
   if (step === 0) return "Resistance (St.Pipeline)";
@@ -39,14 +38,15 @@ const stepName = (step) => {
   if (step === 3) return "Resistance (PIP)";
 };
 
-function CalculateResistance() {
+function FrequencyPerItem() {
   const { data, setData } = useContext(GlobalContext);
+
   const [currentPage, setCurrentPage] = useState(0);
   const [validInfo, setValidInfo] = useState(false);
   const [showImpactEnergy, setShowImpactEnergy] = useState(false);
   // const [data, setData] = useState();
 
-  const pagesCount = 4;
+  const pagesCount = data.globalInformation["numberOfLiftManifest"];
 
   const disableShowImpactEnergy = (step, item) => {
     let emptyArray = true;
@@ -172,31 +172,58 @@ function CalculateResistance() {
           size="md"
           aria-label="Page navigation example"
         >
-          <PaginationItem
-            disabled={currentPage === 0 || disableNavigation(currentPage - 1)}
-          ></PaginationItem>
-          {[...Array(pagesCount)].map((page, i) => (
-            <PaginationItem
-              disabled={disableNavigation(i)}
-              active={i === currentPage}
-              key={i}
-            >
+          <PaginationItem disabled={currentPage === 0}>
+            <PaginationLink
+              previous
+              href="#"
+              onClick={() =>
+                setCurrentPage(currentPage > 1 ? currentPage - 1 : 0)
+              }
+            />
+          </PaginationItem>
+          {[
+            ...Array(
+              parseInt(data.globalInformation["numberOfLiftManifest"]) || 0
+            ),
+          ].map((page, i) => (
+            <PaginationItem active={i === currentPage} key={i}>
               <PaginationLink onClick={(e) => handlePageClick(e, i)} href="#">
-                {stepName(i)}
+                {i + 1}
               </PaginationLink>
             </PaginationItem>
           ))}
-          <PaginationItem
-            disabled={currentPage === 5 || disableNavigation(currentPage + 1)}
-          ></PaginationItem>
+          <PaginationItem>
+            <PaginationLink
+              next
+              href="#"
+              disabled={
+                currentPage ===
+                parseInt(data.globalInformation["numberOfLiftManifest"]) - 1
+              }
+              onClick={() =>
+                setCurrentPage(
+                  currentPage <
+                    parseInt(data.globalInformation["numberOfLiftManifest"])
+                    ? currentPage + 1
+                    : parseInt(data.globalInformation["numberOfLiftManifest"])
+                )
+              }
+            />
+          </PaginationItem>
         </Pagination>
 
         <Row>
           <Col md="12">
-            {currentPage === 0 && <SteelPipe />}
-            {currentPage === 1 && <FlexiblePipe />}
-            {currentPage === 2 && <UmbilicalPipe />}
-            {currentPage === 3 && <PipeInPipe />}
+            <FrequencyTarget
+              data={data.targetLayout ?? [[]]}
+              rowId={currentPage}
+              depth={impactProp(
+                parseFloat(data.globalInformation["maxWaterDepth"])
+              )}
+              distance={impactProp(
+                parseFloat(data.globalInformation["maxDistanceFomDropPoint"])
+              )}
+            />
           </Col>
         </Row>
 
@@ -234,4 +261,4 @@ function CalculateResistance() {
   );
 }
 
-export default CalculateResistance;
+export default FrequencyPerItem;

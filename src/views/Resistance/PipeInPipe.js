@@ -23,7 +23,6 @@ const pipDamageDescription = [
 
 function PipeInPipe(props) {
   const { data, setData } = useContext(GlobalContext);
-  console.log(Resistance(data, "Steel Pipe-in-Pipe / Riser"));
 
   return (
     <>

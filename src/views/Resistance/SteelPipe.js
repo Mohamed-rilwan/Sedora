@@ -23,7 +23,6 @@ const steelDamageDescription = [
 
 function SteelPipe(props) {
   const { data, setData } = useContext(GlobalContext);
-  console.log(Resistance(data, "Steel Pipeline / Riser"));
 
   return (
     <>

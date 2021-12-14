@@ -44,12 +44,10 @@ const validateData = (props) => {
       }
     }
   }
-  console.log(item);
   return item;
 };
 function TargetLayout(props) {
-  const { depth, distance, data } = props;
-  console.log(data);
+  const { depth, distance, data, isReadOnly = false } = props;
 
   const [tooltipOpen, setTooltipOpen] = useState(false);
   let invalidDistance = [];
@@ -85,7 +83,6 @@ function TargetLayout(props) {
             columnIndex === 0 &&
             parseFloat(item) !== depth[rowIndex - 1]
           ) {
-            console.log("Reaf");
             invalidDepth.push(parseFloat(item));
             inValid = true;
           }
@@ -103,7 +100,6 @@ function TargetLayout(props) {
       setTargetLayout(targetData);
       props.handleData(targetData, "targetLayout");
     }
-    console.log(targetData);
     setModalOpen(inValid);
   };
 
@@ -131,42 +127,44 @@ function TargetLayout(props) {
         </ModalBody>
       </Modal>
       <Card style={{ overflowX: "auto" }}>
-        <CardHeader>
-          <CardTitle tag="h5">Target Layout</CardTitle>
-          <p className="card-category">
-            Enter the length of target within the ring.
-            <span style={{ padding: "0.5% 0 0 0.5%" }}>
-              <i
-                id={"TooltipExample"}
-                className={"nc-icon nc-alert-circle-i"}
-              />
-              <Tooltip
-                style={{
-                  backgroundColor: "#dddddd",
-                }}
-                placement="right"
-                isOpen={tooltipOpen}
-                target="TooltipExample"
-                toggle={toggle}
-              >
-                <img
-                  src={targetRep}
-                  style={{ width: "500vw", height: "500vh" }}
-                  alt="targetLayout"
+        {!isReadOnly && (
+          <CardHeader>
+            <CardTitle tag="h5">Target Layout</CardTitle>
+            <p className="card-category">
+              Enter the length of target within the ring.
+              <span style={{ padding: "0.5% 0 0 0.5%" }}>
+                <i
+                  id={"TooltipExample"}
+                  className={"nc-icon nc-alert-circle-i"}
                 />
-              </Tooltip>
-            </span>
-          </p>
-          <textarea
-            value=""
-            placeholder={
-              excelData.length > 0
-                ? "Data Entered from excel"
-                : "Paste your excel form data here... [Include x-axis and y axis values]"
-            }
-            onChange={handleExcelData}
-          />
-        </CardHeader>
+                <Tooltip
+                  style={{
+                    backgroundColor: "#dddddd",
+                  }}
+                  placement="right"
+                  isOpen={tooltipOpen}
+                  target="TooltipExample"
+                  toggle={toggle}
+                >
+                  <img
+                    src={targetRep}
+                    style={{ width: "500vw", height: "500vh" }}
+                    alt="targetLayout"
+                  />
+                </Tooltip>
+              </span>
+            </p>
+            <textarea
+              value=""
+              placeholder={
+                excelData.length > 0
+                  ? "Data Entered from excel"
+                  : "Paste your excel form data here... [Include x-axis and y axis values]"
+              }
+              onChange={handleExcelData}
+            />
+          </CardHeader>
+        )}
         <CardBody>
           <div>
             <Table>

@@ -40,6 +40,7 @@ import * as FileSaver from "file-saver";
 import * as XLSX from "xlsx";
 import GenerateReport from "./User Input/GenerateReport";
 import { GlobalContext } from "components/context/GlobalContext";
+import { impactProp } from "components/Common/helpers";
 
 export const sampletagert = [
   [
@@ -818,13 +819,13 @@ const stepName = (step) => {
   if (step === 5) return "Calculated Impact Energy";
 };
 
-const impactProp = (value) => {
-  const initialValue = value;
-  let impact = Array.from({ length: value > 10 ? value / 10 : 1 }, (_, i) =>
-    value > 10 ? (i + 1) * 10 : value
-  );
-  return value % 10 !== 0 && value > 10 ? [...impact, value] : impact;
-};
+// const impactProp = (value) => {
+//   const initialValue = value;
+//   let impact = Array.from({ length: value > 10 ? value / 10 : 1 }, (_, i) =>
+//     value > 10 ? (i + 1) * 10 : value
+//   );
+//   return value % 10 !== 0 && value > 10 ? [...impact, value] : impact;
+// };
 
 function GenerateTemplate() {
   const { data, setData } = useContext(GlobalContext);
@@ -847,6 +848,7 @@ function GenerateTemplate() {
   };
 
   const disableShowImpactEnergy = (step, item) => {
+    debugger;
     let emptyArray = true;
     if (step === "liftManifest") {
       for (let i = 0; i < data.globalInformation["numberOfLiftManifest"]; i++) {
@@ -893,6 +895,8 @@ function GenerateTemplate() {
           ? (emptyArray = true)
           : (emptyArray = false);
       }
+    } else {
+      emptyArray = true;
     }
     setShowImpactEnergy(!emptyArray);
   };
@@ -1053,8 +1057,8 @@ function GenerateTemplate() {
             )}
             {currentPage === 5 && (
               <ImpactEnergy
-                data={data ?? null}
                 handleData={handleInputData}
+                data={data ?? null}
                 numberOfItem={parseInt(
                   data.globalInformation["numberOfLiftManifest"]
                 )}

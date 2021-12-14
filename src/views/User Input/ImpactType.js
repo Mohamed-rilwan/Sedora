@@ -44,7 +44,6 @@ const validateData = (props) => {
 };
 function ImpactType(props) {
   const { depth, distance, data } = props;
-  console.log(data);
   const [impactType, setImpactType] = useState(() => validateData(props));
   let invalidDistance = [];
   let invalidDepth = [];
@@ -53,7 +52,6 @@ function ImpactType(props) {
 
   const handleExcelData = ({ target: { value } }) => {
     const parsedData = parseClip(value);
-    console.log(parsedData);
     setExcelData(parsedData);
     const impactData = JSON.parse(JSON.stringify(impactType));
     let inValid = false;
@@ -90,7 +88,6 @@ function ImpactType(props) {
       });
     }
     if (!inValid) {
-      console.log(impactData);
       setImpactType(impactData);
       props.handleData(impactData, "impactType");
     }

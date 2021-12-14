@@ -26,6 +26,7 @@ import UserPage from "views/User.js";
 import GenerateTemplate from "views/GenerateTemplate";
 import ExistingTemplate from "views/ExitingTemplate";
 import CalculateResistance from "views/Resistance/CalculateResistance";
+import FrequencyPerItem from "views/Frequency/FrequencyPerItem";
 
 var routes = [
   {
@@ -40,6 +41,13 @@ var routes = [
     name: "Resistance",
     icon: "nc-icon nc-cloud-upload-94",
     component: CalculateResistance,
+    layout: "/admin",
+  },
+  {
+    path: "/frequency",
+    name: "Frequency Per Item",
+    icon: "nc-icon nc-cloud-upload-94",
+    component: FrequencyPerItem,
     layout: "/admin",
   },
   {

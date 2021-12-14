@@ -38,7 +38,6 @@ const ValidateInputData = (liftManifest, numberOfLiftManifest) => {
 };
 
 const ClearData = (liftManifest, index) => {
-  console.log("before", liftManifest);
   const item = liftManifest;
   if (index === undefined || index === null) {
     [...Array(parseInt(liftManifest.liftPerYear.length)).keys()].map(
@@ -47,7 +46,6 @@ const ClearData = (liftManifest, index) => {
           item[col][index] = "";
         })
     );
-    console.log("after", item);
   } else {
     Object.keys(liftManifest).forEach((col) => {
       item[col][index] = "";
@@ -57,7 +55,6 @@ const ClearData = (liftManifest, index) => {
 };
 
 function LiftManifest(props) {
-  console.log(props);
   const { data } = props;
   const [modalOpen, setModalOpen] = useState(false);
   const [excelData, setExcelData] = useState([]);
@@ -80,7 +77,6 @@ function LiftManifest(props) {
         manifestData[Object.keys(manifestData)[rowIndex]][columnIndex] = item;
       });
     });
-    console.log(manifestData);
     setLiftManifest(manifestData);
     props.handleData(manifestData, "liftManifest");
     setModalOpen(inValid);

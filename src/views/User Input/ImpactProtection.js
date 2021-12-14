@@ -43,12 +43,10 @@ const validateData = (props) => {
       }
     }
   }
-  console.log(item);
   return item;
 };
 function ImpactProtection(props) {
   const { depth, distance, data } = props;
-  console.log(data);
 
   const [tooltipOpen, setTooltipOpen] = useState(false);
   let invalidDistance = [];
@@ -85,7 +83,6 @@ function ImpactProtection(props) {
             columnIndex === 0 &&
             parseInt(item) !== depth[rowIndex - 1]
           ) {
-            console.log("Reaf");
             invalidDepth.push(parseInt(item));
             inValid = true;
           }
@@ -103,7 +100,6 @@ function ImpactProtection(props) {
       setImpactProtection(impactData);
       props.handleData(impactData, "impactProtection");
     }
-    console.log(impactData);
     setModalOpen(inValid);
   };
 
