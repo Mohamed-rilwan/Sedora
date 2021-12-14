@@ -142,13 +142,24 @@ function CalculateResistance() {
 
   const disableNavigation = (step) => {
     switch (step) {
+      case 0:
+        return (
+          data.globalInformation["typeOfPipeline"] !== "Steel Pipeline / Riser"
+        );
       case 1:
-      // return !data.globalInformation["numberOfLiftManifest"];
+        return (
+          data.globalInformation["typeOfPipeline"] !==
+          "Flexible Pipeline / Riser"
+        );
       case 2:
+        return data.globalInformation["typeOfPipeline"] !== "Umbilical";
       case 3:
-      case 4:
+        return (
+          data.globalInformation["typeOfPipeline"] !==
+          "Steel Pipe-in-Pipe / Riser"
+        );
 
-      case 5:
+      case 4:
       default:
         break;
     }
@@ -164,15 +175,7 @@ function CalculateResistance() {
         >
           <PaginationItem
             disabled={currentPage === 0 || disableNavigation(currentPage - 1)}
-          >
-            <PaginationLink
-              previous
-              href="#"
-              onClick={() =>
-                setCurrentPage(currentPage > 1 ? currentPage - 1 : 0)
-              }
-            />
-          </PaginationItem>
+          ></PaginationItem>
           {[...Array(pagesCount)].map((page, i) => (
             <PaginationItem
               disabled={disableNavigation(i)}
@@ -186,15 +189,7 @@ function CalculateResistance() {
           ))}
           <PaginationItem
             disabled={currentPage === 5 || disableNavigation(currentPage + 1)}
-          >
-            <PaginationLink
-              next
-              href="#"
-              onClick={() =>
-                setCurrentPage(currentPage < 6 ? currentPage + 1 : 5)
-              }
-            />
-          </PaginationItem>
+          ></PaginationItem>
         </Pagination>
 
         <Row>

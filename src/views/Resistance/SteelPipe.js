@@ -20,25 +20,6 @@ const steelDamageDescription = [
   },
   { key: "rupture", name: "Rupture" },
 ];
-const flexibleDamageDescription = [
-  "Minor Damage – no ingress of seawater",
-  "Damage needing repair – possible leakage",
-  "Damage needing repair – leakage or rupture",
-  "Rupture",
-];
-const umbilicalDamageDescription = [
-  "Minor Damage – no ingress of seawater",
-  "Damage needing repair – possible loss of function",
-  "Damage needing repair – possible loss of function",
-  "loss of function",
-];
-const pipDamageDescription = [
-  "Minor Damage",
-  "Major Damage- Leakage Anticipated",
-  "Major Damage- Leakage & Rupture Anticipated",
-  "Major Damage- Leakage & Rupture Anticipated",
-  "Rupture",
-];
 
 function SteelPipe(props) {
   const { data, setData } = useContext(GlobalContext);
