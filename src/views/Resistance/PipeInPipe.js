@@ -4,45 +4,26 @@ import React, { useContext, useState } from "react";
 import { Card, CardBody, CardHeader, CardTitle, Table } from "reactstrap";
 import Resistance from "./Resistance";
 
-const steelDamageDescription = [
+const pipDamageDescription = [
   { key: "minorDamage", name: "Minor Damage" },
   {
     key: "majorDamageLeakageAnticipated",
     name: "Major Damage- Leakage Anticipated",
   },
   {
-    key: "majorDamageLeakageAnticipated1",
+    key: "majorDamageLeakageAndRupture1",
     name: "Major Damage- Leakage & Rupture Anticipated",
   },
   {
-    key: "majorDamageLeakageAnticipated2",
+    key: "majorDamageLeakageAndRupture2",
     name: "Major Damage- Leakage & Rupture Anticipated",
   },
   { key: "rupture", name: "Rupture" },
 ];
-const flexibleDamageDescription = [
-  "Minor Damage – no ingress of seawater",
-  "Damage needing repair – possible leakage",
-  "Damage needing repair – leakage or rupture",
-  "Rupture",
-];
-const umbilicalDamageDescription = [
-  "Minor Damage – no ingress of seawater",
-  "Damage needing repair – possible loss of function",
-  "Damage needing repair – possible loss of function",
-  "loss of function",
-];
-const pipDamageDescription = [
-  "Minor Damage",
-  "Major Damage- Leakage Anticipated",
-  "Major Damage- Leakage & Rupture Anticipated",
-  "Major Damage- Leakage & Rupture Anticipated",
-  "Rupture",
-];
 
-function SteelPipe(props) {
+function PipeInPipe(props) {
   const { data, setData } = useContext(GlobalContext);
-  console.log(Resistance(data, "Steel Pipeline / Riser"));
+  console.log(Resistance(data, "Steel Pipe-in-Pipe / Riser"));
 
   return (
     <>
@@ -54,12 +35,12 @@ function SteelPipe(props) {
           <Table>
             <thead>
               <tr>
-                <th>Steel Pipeline Capacities</th>
+                <th>Pipe-in-Pipe Capacities</th>
               </tr>
               <tr>
                 <th>Damage Description</th>
-                <th>Dent/Diameter</th>
-                <th>Impact Capacity (kJ)</th>
+                <th>Inner Dent/Diameter</th>
+                <th>PIP Impact Capacity (kJ)</th>
                 <th>"D1" Prob</th>
                 <th>"D2" Prob</th>
                 <th>"D3" Prob</th>
@@ -69,24 +50,24 @@ function SteelPipe(props) {
               </tr>
             </thead>
             <tbody>
-              {[...Array(parseInt(steelDamageDescription.length)).keys()].map(
+              {[...Array(parseInt(pipDamageDescription.length)).keys()].map(
                 (_, i) => (
                   <tr>
-                    <th scope="row">{steelDamageDescription[i].name}</th>
+                    <th scope="row">{pipDamageDescription[i].name}</th>
                     <td>
                       <label>
                         <tr>
                           <td style={{ borderTop: "0" }}>
                             {
-                              Resistance(data, "Steel Pipeline / Riser")[
-                                steelDamageDescription[i].key
+                              Resistance(data, "Steel Pipe-in-Pipe / Riser")[
+                                pipDamageDescription[i].key
                               ].dentDiameter[0]
                             }
                           </td>
                           <td style={{ borderTop: "0" }}>
                             {
-                              Resistance(data, "Steel Pipeline / Riser")[
-                                steelDamageDescription[i].key
+                              Resistance(data, "Steel Pipe-in-Pipe / Riser")[
+                                pipDamageDescription[i].key
                               ].dentDiameter[1]
                             }
                           </td>
@@ -98,15 +79,15 @@ function SteelPipe(props) {
                         <tr>
                           <td style={{ borderTop: "0" }}>
                             {
-                              Resistance(data, "Steel Pipeline / Riser")[
-                                steelDamageDescription[i].key
+                              Resistance(data, "Steel Pipe-in-Pipe / Riser")[
+                                pipDamageDescription[i].key
                               ].impactCapacity[0]
                             }
                           </td>
                           <td style={{ borderTop: "0" }}>
                             {
-                              Resistance(data, "Steel Pipeline / Riser")[
-                                steelDamageDescription[i].key
+                              Resistance(data, "Steel Pipe-in-Pipe / Riser")[
+                                pipDamageDescription[i].key
                               ].impactCapacity[1]
                             }
                           </td>
@@ -115,43 +96,43 @@ function SteelPipe(props) {
                     </td>
                     <td>
                       <label>
-                        {Resistance(data, "Steel Pipeline / Riser")[
-                          steelDamageDescription[i].key
+                        {Resistance(data, "Steel Pipe-in-Pipe / Riser")[
+                          pipDamageDescription[i].key
                         ].d1.toString()}
                       </label>
                     </td>
                     <td>
                       <label>
-                        {Resistance(data, "Steel Pipeline / Riser")[
-                          steelDamageDescription[i].key
+                        {Resistance(data, "Steel Pipe-in-Pipe / Riser")[
+                          pipDamageDescription[i].key
                         ].d2.toString()}
                       </label>
                     </td>
                     <td>
                       <label>
-                        {Resistance(data, "Steel Pipeline / Riser")[
-                          steelDamageDescription[i].key
+                        {Resistance(data, "Steel Pipe-in-Pipe / Riser")[
+                          pipDamageDescription[i].key
                         ].d3.toString()}
                       </label>
                     </td>
                     <td>
                       <label>
-                        {Resistance(data, "Steel Pipeline / Riser")[
-                          steelDamageDescription[i].key
+                        {Resistance(data, "Steel Pipe-in-Pipe / Riser")[
+                          pipDamageDescription[i].key
                         ].r0.toString()}
                       </label>
                     </td>
                     <td>
                       <label>
-                        {Resistance(data, "Steel Pipeline / Riser")[
-                          steelDamageDescription[i].key
+                        {Resistance(data, "Steel Pipe-in-Pipe / Riser")[
+                          pipDamageDescription[i].key
                         ].r1.toString()}
                       </label>
                     </td>
                     <td>
                       <label>
-                        {Resistance(data, "Steel Pipeline / Riser")[
-                          steelDamageDescription[i].key
+                        {Resistance(data, "Steel Pipe-in-Pipe / Riser")[
+                          pipDamageDescription[i].key
                         ].r2.toString()}
                       </label>
                     </td>
@@ -166,4 +147,4 @@ function SteelPipe(props) {
   );
 }
 
-export default SteelPipe;
+export default PipeInPipe;

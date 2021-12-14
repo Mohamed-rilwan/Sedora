@@ -65,10 +65,9 @@ export default function Resistance(globalData, typeOfPipeline) {
     };
     return capacities;
   }
-
   if (typeOfPipeline === "Flexible Pipeline / Riser") {
     capacities["minorDamage"] = {
-      base: ["", 2.5],
+      dentDiameter: ["", 2.5],
       impactCapacity: [
         0.0,
         energyRequiredFlexile(globalData.globalInformation, 2.5),
@@ -81,7 +80,7 @@ export default function Resistance(globalData, typeOfPipeline) {
       r2: 0.0,
     };
     capacities["damageNeedingRepairPossibleLeakage"] = {
-      base: [2.5, 10.0],
+      dentDiameter: [2.5, 10.0],
       impactCapacity: [
         energyRequiredFlexile(globalData.globalInformation, 2.5),
         energyRequiredFlexile(globalData.globalInformation, 10.0),
@@ -94,7 +93,7 @@ export default function Resistance(globalData, typeOfPipeline) {
       r2: 0.0,
     };
     capacities["damageNeedingRepairRupture"] = {
-      base: [10.0, 20.0],
+      dentDiameter: [10.0, 20.0],
       impactCapacity: [
         energyRequiredFlexile(globalData.globalInformation, 10.0),
         energyRequiredFlexile(globalData.globalInformation, 20.0),
@@ -107,7 +106,7 @@ export default function Resistance(globalData, typeOfPipeline) {
       r2: 0.0,
     };
     capacities["rupture"] = {
-      base: ["", 20.0],
+      dentDiameter: ["", 20.0],
       impactCapacity: [
         0.0,
         energyRequiredFlexile(globalData.globalInformation, 20.0),
@@ -263,34 +262,55 @@ const energyRequiredFlexile = (globalData, base) => {
 };
 
 const energyRequiredPip = (globalData, dentPercentage) => {
-  const innerDent = globalData.odOfInnerPipeline * dentPercentage;
+  debugger;
+  const innerDent = (globalData.odOfInnerPipeline * dentPercentage) / 100;
+  const a =
+    (16 *
+      Math.sqrt((2 * Math.PI) / 9) *
+      (0.25 *
+        parseFloat(globalData.yieldStressOfInnerPipe) *
+        Math.pow(parseFloat(globalData.wallThicknessOfInnerPipe), 2)) *
+      Math.sqrt(
+        parseFloat(globalData.odOfInnerPipeline) /
+          parseFloat(globalData.wallThicknessOfInnerPipe)
+      ) *
+      parseFloat(globalData.odOfInnerPipeline) *
+      Math.pow(dentPercentage / 100, 1.5)) /
+    1000;
+
   const innerEnergy =
     (16 *
       Math.sqrt((2 * Math.PI) / 9) *
       (0.25 *
-        globalData?.yieldStressOfInnerPipe *
-        Math.pow(globalData.wallThicknessOfInnerPipe, 2)) *
+        parseFloat(globalData.yieldStressOfInnerPipe) *
+        Math.pow(parseFloat(globalData.wallThicknessOfInnerPipe), 2)) *
       Math.sqrt(
-        globalData.odOfInnerPipeline / globalData.wallThicknessOfInnerPipe
+        parseFloat(globalData.odOfInnerPipeline) /
+          parseFloat(globalData.wallThicknessOfInnerPipe)
       ) *
-      Math.pow(dentPercentage, 3 / 2)) /
+      parseFloat(globalData.odOfInnerPipeline) *
+      Math.pow(dentPercentage / 100, 1.5)) /
     1000;
 
-  const outerDent =
-    ((globalData.odOfPipeline - globalData.odOfInnerPipeline) / 2 + innerDent) /
-    globalData.odOfPipeline;
+  const outerDent = Math.floor(
+    (((globalData.odOfPipeline - globalData.odOfInnerPipeline) / 2 +
+      innerDent) /
+      globalData.odOfPipeline) *
+      100
+  );
 
   const outerEnergy =
     (16 *
       Math.sqrt((2 * Math.PI) / 9) *
       (0.25 *
-        globalData?.yieldStressOfInnerPipe *
-        Math.pow(globalData.wallThicknessOfInnerPipe, 2)) *
+        parseFloat(globalData.yieldStress) *
+        Math.pow(parseFloat(globalData.wallThickness), 2)) *
       Math.sqrt(
-        globalData.odOfInnerPipeline / globalData.wallThicknessOfInnerPipe
+        parseFloat(globalData.odOfPipeline) /
+          parseFloat(globalData.wallThickness)
       ) *
-      Math.pow(outerDent, 3 / 2)) /
+      parseFloat(globalData.odOfPipeline) *
+      Math.pow(outerDent / 100, 1.5)) /
     1000;
-
-  return innerEnergy + outerEnergy;
+  return Math.round((innerEnergy + outerEnergy) * 100) / 100;
 };

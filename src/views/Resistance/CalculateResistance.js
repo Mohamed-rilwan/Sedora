@@ -27,7 +27,10 @@ import {
   PaginationLink,
   Row,
 } from "reactstrap";
+import FlexiblePipe from "./FlexiblePipe";
+import PipeInPipe from "./PipeInPipe";
 import SteelPipe from "./SteelPipe";
+import UmbilicalPipe from "./UmbilicalPipe";
 
 const stepName = (step) => {
   if (step === 0) return "Resistance (St.Pipeline)";
@@ -197,6 +200,9 @@ function CalculateResistance() {
         <Row>
           <Col md="12">
             {currentPage === 0 && <SteelPipe />}
+            {currentPage === 1 && <FlexiblePipe />}
+            {currentPage === 2 && <UmbilicalPipe />}
+            {currentPage === 3 && <PipeInPipe />}
             {/* {currentPage === 1 && (
             //   <LiftManifest
             //     data={data ?? null}

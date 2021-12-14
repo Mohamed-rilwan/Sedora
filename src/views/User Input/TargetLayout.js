@@ -74,7 +74,6 @@ function TargetLayout(props) {
 
     if (!inValid) {
       parsedData.forEach((manifest, rowIndex) => {
-        debugger;
         rowIndex === 0 && manifest.splice(0, 1);
         manifest.forEach((item, columnIndex) => {
           if (rowIndex === 0 && parseFloat(item) !== distance[columnIndex]) {
