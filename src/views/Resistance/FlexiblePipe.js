@@ -25,14 +25,11 @@ function FlexiblePipe(props) {
     <>
       <Card style={{ overflowX: "auto" }}>
         <CardHeader>
-          <CardTitle tag="h5">Impact Energy</CardTitle>
+          <CardTitle tag="h5">Flexible Pipeline Capacities</CardTitle>
         </CardHeader>
         <CardBody>
           <Table>
             <thead>
-              <tr>
-                <th>Flexible Pipeline Capacities</th>
-              </tr>
               <tr>
                 <th>Damage Description</th>
                 <th>Dent/Diameter</th>

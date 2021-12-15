@@ -25,14 +25,11 @@ function UmbilicalPipe(props) {
     <>
       <Card style={{ overflowX: "auto" }}>
         <CardHeader>
-          <CardTitle tag="h5">Impact Energy</CardTitle>
+          <CardTitle tag="h5">Umbilical Pipeline Capacities</CardTitle>
         </CardHeader>
         <CardBody>
           <Table>
             <thead>
-              <tr>
-                <th>Umbilical Pipeline Capacities</th>
-              </tr>
               <tr>
                 <th>Damage Description</th>
                 <th>Impact Capacity (kJ)</th>

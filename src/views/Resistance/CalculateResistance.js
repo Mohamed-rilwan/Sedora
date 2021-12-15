@@ -39,9 +39,25 @@ const stepName = (step) => {
   if (step === 3) return "Resistance (PIP)";
 };
 
+const getCurrentStep = (step) => {
+  switch (step) {
+    case "Steel Pipeline / Riser":
+      return 0;
+    case "Flexible Pipeline / Riser":
+      return 1;
+    case "Umbilical":
+      return 2;
+    case "Steel Pipe-in-Pipe / Riser":
+      return 3;
+    default: return;
+  }
+};
+
 function CalculateResistance() {
   const { data, setData } = useContext(GlobalContext);
-  const [currentPage, setCurrentPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(
+    getCurrentStep(data.globalInformation["typeOfPipeline"])
+  );
   const [validInfo, setValidInfo] = useState(false);
   const [showImpactEnergy, setShowImpactEnergy] = useState(false);
   // const [data, setData] = useState();

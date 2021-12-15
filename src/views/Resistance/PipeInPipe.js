@@ -28,14 +28,11 @@ function PipeInPipe(props) {
     <>
       <Card style={{ overflowX: "auto" }}>
         <CardHeader>
-          <CardTitle tag="h5">Impact Energy</CardTitle>
+          <CardTitle tag="h5">Pipe-in-Pipe Capacities</CardTitle>
         </CardHeader>
         <CardBody>
           <Table>
             <thead>
-              <tr>
-                <th>Pipe-in-Pipe Capacities</th>
-              </tr>
               <tr>
                 <th>Damage Description</th>
                 <th>Inner Dent/Diameter</th>

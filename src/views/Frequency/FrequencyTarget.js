@@ -1,9 +1,7 @@
-import { parse } from "@babel/core";
 import { GlobalContext } from "components/context/GlobalContext";
 import parseClip from "components/PasteToTable/parseClip";
 import React, { useContext, useState } from "react";
 import {
-  Button,
   Card,
   CardBody,
   CardHeader,
@@ -12,10 +10,7 @@ import {
   ModalBody,
   ModalHeader,
   Table,
-  Tooltip,
-  UncontrolledTooltip,
 } from "reactstrap";
-import targetRep from "../../assets/img/TargetLayout.png";
 
 const validateData = (props) => {
   var item = Array.from({ length: props.depth.length }, () =>
@@ -63,7 +58,6 @@ function FrequencyTarget(props) {
 
   const handleExcelData = ({ target: { value } }) => {
     const parsedData = parseClip(value);
-
     setExcelData(parsedData);
     const targetData = JSON.parse(JSON.stringify(targetLayout));
     let inValid = false;
@@ -158,7 +152,7 @@ function FrequencyTarget(props) {
                     <td>
                       {dep *
                         Math.tanh(
-                          (data.impactEnergy.angularDeviation[rowId] *
+                          (data?.impactEnergy?.angularDeviation?.[rowId] *
                             Math.PI) /
                             180
                         )}
