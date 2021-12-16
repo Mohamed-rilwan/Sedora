@@ -848,8 +848,7 @@ function GenerateTemplate() {
   };
 
   const disableShowImpactEnergy = (step, item) => {
-    debugger;
-    let emptyArray = true;
+    let emptyArray = false;
     if (step === "liftManifest") {
       for (let i = 0; i < data.globalInformation["numberOfLiftManifest"]; i++) {
         item.depth[i] === undefined ||
@@ -872,8 +871,7 @@ function GenerateTemplate() {
           ? (emptyArray = true)
           : (emptyArray = false);
       }
-    }
-    if (step === "globalInformation") {
+    } else if (step === "globalInformation") {
       for (let i = 0; i < data.globalInformation["numberOfLiftManifest"]; i++) {
         data.liftManifest.depth[i] === undefined ||
         data.liftManifest.depth[i] === "" ||
@@ -895,8 +893,6 @@ function GenerateTemplate() {
           ? (emptyArray = true)
           : (emptyArray = false);
       }
-    } else {
-      emptyArray = true;
     }
     setShowImpactEnergy(!emptyArray);
   };

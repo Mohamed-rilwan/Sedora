@@ -1,6 +1,7 @@
 import { GlobalContext } from "components/context/GlobalContext";
 import parseClip from "components/PasteToTable/parseClip";
 import React, { useContext, useState } from "react";
+import NormalDistribution from "normal-distribution";
 import {
   Card,
   CardBody,
@@ -100,6 +101,23 @@ function FrequencyTarget(props) {
     setModalOpen(inValid);
   };
 
+  function round(num) {
+    var m = Number((Math.abs(num) * 100).toPrecision(15));
+    return (Math.round(m) / 100) * Math.sign(num);
+  }
+
+  const handleNormalDistributionData = (distance, depth) => {
+    debugger;
+
+    const lateralDeviation =
+      depth *
+      Math.tanh(
+        (data?.impactEnergy?.angularDeviation?.[rowId] * Math.PI) / 180
+      );
+    const normDist = new NormalDistribution(0, lateralDeviation);
+    return normDist.probabilityBetween(distance, -distance);
+  };
+
   const handleData = (event, depth, distance, depIndex, distIndex) => {
     const items = [...targetLayout];
     if (regexWithDecimal.test(event.target.value) || event.target.value === "")
@@ -186,7 +204,13 @@ function FrequencyTarget(props) {
                     <th>{dep}</th>
                     {distance.map((dist, distIndex) => (
                       <td>
-                        <span> {targetLayout[depIndex][distIndex].value}</span>
+                        <span>
+                          {handleNormalDistributionData(
+                            dist,
+                            dep,
+                            distIndex
+                          ).toExponential(2)}
+                        </span>
                       </td>
                     ))}
                   </tr>
@@ -218,7 +242,20 @@ function FrequencyTarget(props) {
                     <th>{dep}</th>
                     {distance.map((dist, distIndex) => (
                       <td>
-                        <span> {targetLayout[depIndex][distIndex].value}</span>
+                        <span>
+                          {/* {distIndex === 0
+                            ? handleNormalDistributionData(
+                                dist,
+                                dep
+                              ).toExponential(2)
+                            : (
+                                handleNormalDistributionData(dist, dep) -
+                                handleNormalDistributionData(
+                                  distance[distIndex - 1],
+                                  dep
+                                )
+                              ).toExponential(15)} */}
+                        </span>
                       </td>
                     ))}
                   </tr>
