@@ -164,6 +164,15 @@ function FrequencyPerItem() {
     }
   };
 
+  const chunks = (arrLength, chunkSize) => {
+    debugger;
+    var a = Array.from({ length: arrLength }, (_, index) => index + 1);
+    var arrays = [],
+      size = chunkSize;
+    while (a.length > 0) arrays.push(a.splice(0, size));
+    return arrays;
+  };
+
   return (
     <>
       <div className="content">
@@ -176,22 +185,27 @@ function FrequencyPerItem() {
             <PaginationLink
               previous
               href="#"
-              onClick={() =>
-                setCurrentPage(currentPage > 1 ? currentPage - 1 : 0)
-              }
+              onClick={() => setCurrentPage(currentPage ? currentPage : 0)}
             />
           </PaginationItem>
-          {[
-            ...Array(
-              parseInt(data.globalInformation["numberOfLiftManifest"]) || 0
-            ),
-          ].map((page, i) => (
-            <PaginationItem active={i === currentPage} key={i}>
-              <PaginationLink onClick={(e) => handlePageClick(e, i)} href="#">
-                {i + 1}
-              </PaginationLink>
+          {chunks(
+            parseInt(data.globalInformation["numberOfLiftManifest"]) || 0,
+            10
+          ).map((pages, index) => (
+            <PaginationItem active={pages === currentPage} key={pages}>
+              <li style={{ display: "contents" }}>
+                {pages.map((page, i) => (
+                  <PaginationLink
+                    onClick={(e) => handlePageClick(e, page)}
+                    href="#"
+                  >
+                    {page}
+                  </PaginationLink>
+                ))}
+              </li>
             </PaginationItem>
           ))}
+
           <PaginationItem>
             <PaginationLink
               next
