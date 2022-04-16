@@ -262,7 +262,6 @@ const energyRequiredFlexile = (globalData, base) => {
 };
 
 const energyRequiredPip = (globalData, dentPercentage) => {
-  debugger;
   const innerDent = (globalData.odOfInnerPipeline * dentPercentage) / 100;
   const a =
     (16 *

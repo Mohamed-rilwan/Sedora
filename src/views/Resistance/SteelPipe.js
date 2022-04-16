@@ -1,25 +1,9 @@
 import { GlobalContext } from "components/context/GlobalContext";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 // reactstrap components
 import { Card, CardBody, CardHeader, CardTitle, Table } from "reactstrap";
+import { steelDamageDescription } from "./Helper";
 import Resistance from "./Resistance";
-
-const steelDamageDescription = [
-  { key: "minorDamage", name: "Minor Damage" },
-  {
-    key: "majorDamageLeakageAnticipated",
-    name: "Major Damage- Leakage Anticipated",
-  },
-  {
-    key: "majorDamageLeakageAnticipated1",
-    name: "Major Damage- Leakage & Rupture Anticipated",
-  },
-  {
-    key: "majorDamageLeakageAnticipated2",
-    name: "Major Damage- Leakage & Rupture Anticipated",
-  },
-  { key: "rupture", name: "Rupture" },
-];
 
 function SteelPipe(props) {
   const { data, setData } = useContext(GlobalContext);

@@ -2,21 +2,8 @@ import { GlobalContext } from "components/context/GlobalContext";
 import React, { useContext, useState } from "react";
 // reactstrap components
 import { Card, CardBody, CardHeader, CardTitle, Table } from "reactstrap";
+import { flexibleDamageDescription } from "./Helper";
 import Resistance from "./Resistance";
-
-const flexibleDamageDescription = [
-  { key: "minorDamage", name: "Minor Damage – no ingress of seawater" },
-  {
-    key: "damageNeedingRepairPossibleLeakage",
-    name: "Damage needing repair – possible leakage",
-  },
-  {
-    key: "damageNeedingRepairRupture",
-    name: "Damage needing repair – leakage or rupture",
-  },
-
-  { key: "rupture", name: "Rupture" },
-];
 
 function FlexiblePipe(props) {
   const { data, setData } = useContext(GlobalContext);

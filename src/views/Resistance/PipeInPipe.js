@@ -2,24 +2,8 @@ import { GlobalContext } from "components/context/GlobalContext";
 import React, { useContext, useState } from "react";
 // reactstrap components
 import { Card, CardBody, CardHeader, CardTitle, Table } from "reactstrap";
+import { pipDamageDescription } from "./Helper";
 import Resistance from "./Resistance";
-
-const pipDamageDescription = [
-  { key: "minorDamage", name: "Minor Damage" },
-  {
-    key: "majorDamageLeakageAnticipated",
-    name: "Major Damage- Leakage Anticipated",
-  },
-  {
-    key: "majorDamageLeakageAndRupture1",
-    name: "Major Damage- Leakage & Rupture Anticipated",
-  },
-  {
-    key: "majorDamageLeakageAndRupture2",
-    name: "Major Damage- Leakage & Rupture Anticipated",
-  },
-  { key: "rupture", name: "Rupture" },
-];
 
 function PipeInPipe(props) {
   const { data, setData } = useContext(GlobalContext);

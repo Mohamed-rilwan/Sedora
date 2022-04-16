@@ -41,6 +41,12 @@ import * as XLSX from "xlsx";
 import GenerateReport from "./User Input/GenerateReport";
 import { GlobalContext } from "components/context/GlobalContext";
 import { impactProp } from "components/Common/helpers";
+import {
+  steelDamageDescription,
+  flexibleDamageDescription,
+  pipDamageDescription,
+  UmbilicalDamageDescription,
+} from "./Resistance/Helper";
 
 export const sampletagert = [
   [
@@ -924,6 +930,24 @@ function GenerateTemplate() {
     const info = { ...data };
     info[step] = item;
     disableShowImpactEnergy(step, item);
+    if (item.typeOfPipeline !== "") {
+      switch (item.typeOfPipeline) {
+        case "Steel Pipeline / Riser":
+          info.damageDescription = steelDamageDescription;
+          break;
+        case "Flexible Pipeline / Riser":
+          info.damageDescription = flexibleDamageDescription;
+          break;
+        case "Umbilical":
+          info.damageDescription = UmbilicalDamageDescription;
+          break;
+        case "Steel Pipe-in-Pipe / Riser":
+          info.damageDescription = pipDamageDescription;
+          break;
+        default:
+          break;
+      }
+    }
     setData(info);
   };
 

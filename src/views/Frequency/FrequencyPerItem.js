@@ -165,7 +165,6 @@ function FrequencyPerItem() {
   };
 
   const chunks = (arrLength, chunkSize) => {
-    debugger;
     var a = Array.from({ length: arrLength }, (_, index) => index + 1);
     var arrays = [],
       size = chunkSize;

@@ -15,11 +15,23 @@ import {
 } from "reactstrap";
 import GlobalInformation from "views/User Input/GlobalInformation";
 import {
+  D1DamageFrequency,
+  D1DamageProbability,
+  D2DamageFrequency,
+  D2DamageProbability,
+  D3DamageFrequency,
+  D3DamageProbability,
   handleNormalDistributionData,
   ImpactEnergy,
   impactEnergy,
   probabilityOfFallingWithinRing,
   probabilityOfHittingWithinRing,
+  R0ReleaseFrequency,
+  R0ReleaseProbability,
+  R1ReleaseFrequency,
+  R1ReleaseProbability,
+  R2ReleaseFrequency,
+  R2ReleaseProbability,
   ResidualEnergy,
   TerminalEnergy,
 } from "./Helper";
@@ -123,9 +135,6 @@ function FrequencyTarget(props) {
   };
 
   const cdfNormaldistribution = (distance, depth) => {
-    if (depth > 10) {
-      debugger;
-    }
     const lateralDeviation =
       depth *
       Math.tan((data?.impactEnergy?.angularDeviation?.[rowId] * Math.PI) / 180);
@@ -138,7 +147,7 @@ function FrequencyTarget(props) {
     const nd =
       (1 / (ld * Math.sqrt(2 * Math.PI))) *
       Math.exp((-0.5 * Math.pow(distance, 2)) / Math.pow(ld, 2));
-    debugger;
+
     return nd.toExponential(2);
   };
 
@@ -509,7 +518,15 @@ function FrequencyTarget(props) {
                     <th>{dep}</th>
                     {distance.map((dist, distIndex) => (
                       <td>
-                        <span> {targetLayout[depIndex][distIndex].value}</span>
+                        <span>
+                          {D1DamageProbability(
+                            data,
+                            rowId,
+                            dep,
+                            depIndex,
+                            distIndex
+                          )}
+                        </span>
                       </td>
                     ))}
                   </tr>
@@ -539,7 +556,16 @@ function FrequencyTarget(props) {
                     <th>{dep}</th>
                     {distance.map((dist, distIndex) => (
                       <td>
-                        <span> {targetLayout[depIndex][distIndex].value}</span>
+                        <span>
+                          {" "}
+                          {D1DamageFrequency(
+                            data,
+                            rowId,
+                            dep,
+                            depIndex,
+                            distIndex
+                          )}
+                        </span>
                       </td>
                     ))}
                   </tr>
@@ -569,7 +595,16 @@ function FrequencyTarget(props) {
                     <th>{dep}</th>
                     {distance.map((dist, distIndex) => (
                       <td>
-                        <span> {targetLayout[depIndex][distIndex].value}</span>
+                        <span>
+                          {" "}
+                          {D2DamageProbability(
+                            data,
+                            rowId,
+                            dep,
+                            depIndex,
+                            distIndex
+                          )}
+                        </span>
                       </td>
                     ))}
                   </tr>
@@ -599,7 +634,16 @@ function FrequencyTarget(props) {
                     <th>{dep}</th>
                     {distance.map((dist, distIndex) => (
                       <td>
-                        <span> {targetLayout[depIndex][distIndex].value}</span>
+                        <span>
+                          {" "}
+                          {D2DamageFrequency(
+                            data,
+                            rowId,
+                            dep,
+                            depIndex,
+                            distIndex
+                          )}
+                        </span>
                       </td>
                     ))}
                   </tr>
@@ -629,7 +673,16 @@ function FrequencyTarget(props) {
                     <th>{dep}</th>
                     {distance.map((dist, distIndex) => (
                       <td>
-                        <span> {targetLayout[depIndex][distIndex].value}</span>
+                        <span>
+                          {" "}
+                          {D3DamageProbability(
+                            data,
+                            rowId,
+                            dep,
+                            depIndex,
+                            distIndex
+                          )}
+                        </span>
                       </td>
                     ))}
                   </tr>
@@ -659,7 +712,18 @@ function FrequencyTarget(props) {
                     <th>{dep}</th>
                     {distance.map((dist, distIndex) => (
                       <td>
-                        <span> {targetLayout[depIndex][distIndex].value}</span>
+                        <span>
+                          {" "}
+                          {D3DamageFrequency(
+                            data,
+                            rowId,
+                            dep,
+                            dist,
+                            depIndex,
+                            distIndex,
+                            distance
+                          )}
+                        </span>
                       </td>
                     ))}
                   </tr>
@@ -689,7 +753,16 @@ function FrequencyTarget(props) {
                     <th>{dep}</th>
                     {distance.map((dist, distIndex) => (
                       <td>
-                        <span> {targetLayout[depIndex][distIndex].value}</span>
+                        <span>
+                          {" "}
+                          {R0ReleaseProbability(
+                            data,
+                            rowId,
+                            dep,
+                            depIndex,
+                            distIndex
+                          )}
+                        </span>
                       </td>
                     ))}
                   </tr>
@@ -719,7 +792,30 @@ function FrequencyTarget(props) {
                     <th>{dep}</th>
                     {distance.map((dist, distIndex) => (
                       <td>
-                        <span> {targetLayout[depIndex][distIndex].value}</span>
+                        <span>
+                          {" "}
+                          {isNaN(
+                            R0ReleaseFrequency(
+                              data,
+                              rowId,
+                              distance,
+                              dep,
+                              dist,
+                              depIndex,
+                              distIndex
+                            )
+                          )
+                            ? ""
+                            : R0ReleaseFrequency(
+                                data,
+                                rowId,
+                                distance,
+                                dep,
+                                dist,
+                                depIndex,
+                                distIndex
+                              ).toExponential(2)}
+                        </span>
                       </td>
                     ))}
                   </tr>
@@ -749,7 +845,16 @@ function FrequencyTarget(props) {
                     <th>{dep}</th>
                     {distance.map((dist, distIndex) => (
                       <td>
-                        <span> {targetLayout[depIndex][distIndex].value}</span>
+                        <span>
+                          {" "}
+                          {R1ReleaseProbability(
+                            data,
+                            rowId,
+                            dep,
+                            depIndex,
+                            distIndex
+                          )}
+                        </span>
                       </td>
                     ))}
                   </tr>
@@ -779,7 +884,30 @@ function FrequencyTarget(props) {
                     <th>{dep}</th>
                     {distance.map((dist, distIndex) => (
                       <td>
-                        <span> {targetLayout[depIndex][distIndex].value}</span>
+                        <span>
+                          {" "}
+                          {isNaN(
+                            R1ReleaseFrequency(
+                              data,
+                              rowId,
+                              distance,
+                              dep,
+                              dist,
+                              depIndex,
+                              distIndex
+                            )
+                          )
+                            ? ""
+                            : R1ReleaseFrequency(
+                                data,
+                                rowId,
+                                distance,
+                                dep,
+                                dist,
+                                depIndex,
+                                distIndex
+                              ).toExponential(2)}
+                        </span>
                       </td>
                     ))}
                   </tr>
@@ -809,7 +937,16 @@ function FrequencyTarget(props) {
                     <th>{dep}</th>
                     {distance.map((dist, distIndex) => (
                       <td>
-                        <span> {targetLayout[depIndex][distIndex].value}</span>
+                        <span>
+                          {" "}
+                          {R2ReleaseProbability(
+                            data,
+                            rowId,
+                            dep,
+                            depIndex,
+                            distIndex
+                          )}
+                        </span>
                       </td>
                     ))}
                   </tr>
@@ -839,7 +976,30 @@ function FrequencyTarget(props) {
                     <th>{dep}</th>
                     {distance.map((dist, distIndex) => (
                       <td>
-                        <span> {targetLayout[depIndex][distIndex].value}</span>
+                        <span>
+                          {" "}
+                          {isNaN(
+                            R2ReleaseFrequency(
+                              data,
+                              rowId,
+                              distance,
+                              dep,
+                              dist,
+                              depIndex,
+                              distIndex
+                            )
+                          )
+                            ? ""
+                            : R2ReleaseFrequency(
+                                data,
+                                rowId,
+                                distance,
+                                dep,
+                                dist,
+                                depIndex,
+                                distIndex
+                              ).toExponential(2)}
+                        </span>
                       </td>
                     ))}
                   </tr>

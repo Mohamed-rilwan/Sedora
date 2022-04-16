@@ -2,21 +2,8 @@ import { GlobalContext } from "components/context/GlobalContext";
 import React, { useContext, useState } from "react";
 // reactstrap components
 import { Card, CardBody, CardHeader, CardTitle, Table } from "reactstrap";
+import { UmbilicalDamageDescription } from "./Helper";
 import Resistance from "./Resistance";
-
-const UmbilicalDamageDescription = [
-  { key: "minorDamage", name: "Minor Damage – no ingress of seawater" },
-  {
-    key: "damageNeedingRepair1",
-    name: "Damage needing repair – possible loss of function",
-  },
-  {
-    key: "damageNeedingRepair2",
-    name: "Damage needing repair – possible loss of function",
-  },
-
-  { key: "lossOfFunction2", name: "loss of function" },
-];
 
 function UmbilicalPipe(props) {
   const { data, setData } = useContext(GlobalContext);
