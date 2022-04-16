@@ -37,6 +37,7 @@
   "eslintConfig": {
     "extends": "react-app"
   },
+  "dev": "docker-compose -f docker-compose.dev.yml up",
   "browserslist": [
     ">0.2%",
     "not dead",

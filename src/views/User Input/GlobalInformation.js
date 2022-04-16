@@ -210,6 +210,7 @@ function GlobalInformation(props) {
                   id="typesOfPipe"
                   onChange={handleData}
                 >
+                  <option></option>
                   <option>Steel Pipeline / Riser</option>
                   <option>Flexible Pipeline / Riser</option>
                   <option>Umbilical</option>

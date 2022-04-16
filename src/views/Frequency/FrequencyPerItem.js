@@ -177,7 +177,7 @@ function FrequencyPerItem() {
     <>
       <div className="content">
         <Pagination
-          style={{ marginLeft: "25%" }}
+          style={{ marginLeft: "12%" }}
           size="md"
           aria-label="Page navigation example"
         >
@@ -190,7 +190,7 @@ function FrequencyPerItem() {
           </PaginationItem>
           {chunks(
             parseInt(data.globalInformation["numberOfLiftManifest"]) || 0,
-            10
+            2
           ).map((pages, index) => (
             <PaginationItem active={pages === currentPage} key={pages}>
               <li style={{ display: "contents" }}>

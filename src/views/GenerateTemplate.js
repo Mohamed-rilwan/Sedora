@@ -16,7 +16,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 // reactstrap components
 import {
   Button,
@@ -830,9 +830,10 @@ const stepName = (step) => {
 function GenerateTemplate() {
   const { data, setData } = useContext(GlobalContext);
   const [currentPage, setCurrentPage] = useState(0);
-  const [showImpactEnergy, setShowImpactEnergy] = useState(false);
+  const [showImpactEnergy, setShowImpactEnergy] = useState(
+    data.impactEnergy.length > 1
+  );
   // const [data, setData] = useState(sampleData);
-
   const pagesCount = 6;
 
   const fileType =
