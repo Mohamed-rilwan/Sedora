@@ -58,3 +58,17 @@ export const ProbabilityOfHittingTheTarget = (
   distIndex,
   rowId
 ) => probabilityOfHittingWithinRing(data, distance, depIndex, distIndex, rowId);
+
+export const TerminalEnergy = (data, rowId, dep) =>
+  dep <= 50
+    ? data.impactEnergy.DepthImpactEnergy[rowId]
+    : data.impactEnergy.subseaImpactEnergy[rowId];
+
+//TABLE- D: IMPACT Energy
+export const ImpactEnergy = (data, rowId, dep, depIndex, distIndex) =>
+  data.impactType[depIndex][distIndex].value === "Fully shielded"
+    ? 0
+    : data.impactType[depIndex][distIndex].value ===
+      "Default - Perpendicular Impact"
+    ? TerminalEnergy(data, rowId, dep)
+    : "";

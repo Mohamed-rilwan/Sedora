@@ -16,8 +16,11 @@ import {
 import GlobalInformation from "views/User Input/GlobalInformation";
 import {
   handleNormalDistributionData,
+  ImpactEnergy,
+  impactEnergy,
   probabilityOfFallingWithinRing,
   probabilityOfHittingWithinRing,
+  TerminalEnergy,
 } from "./Helper";
 
 const validateData = (props) => {
@@ -395,7 +398,9 @@ function FrequencyTarget(props) {
                       </td>
                     ))}
 
-                    <td>{`ADD TERMINAL ENERGY`}</td>
+                    <td>
+                      <span>{TerminalEnergy(data, rowId, dep)}</span>
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -423,7 +428,9 @@ function FrequencyTarget(props) {
                     <th>{dep}</th>
                     {distance.map((dist, distIndex) => (
                       <td>
-                        <span> {targetLayout[depIndex][distIndex].value}</span>
+                        <span>
+                          {ImpactEnergy(data, rowId, dep, depIndex, distIndex)}
+                        </span>
                       </td>
                     ))}
                   </tr>
