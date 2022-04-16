@@ -14,6 +14,11 @@ import {
   Table,
 } from "reactstrap";
 import GlobalInformation from "views/User Input/GlobalInformation";
+import {
+  handleNormalDistributionData,
+  probabilityOfFallingWithinRing,
+  probabilityOfHittingWithinRing,
+} from "./Helper";
 
 const validateData = (props) => {
   var item = Array.from({ length: props.depth.length }, () =>
@@ -104,11 +109,6 @@ function FrequencyTarget(props) {
     setModalOpen(inValid);
   };
 
-  function round(num) {
-    var m = Number((Math.abs(num) * 100).toPrecision(15));
-    return (Math.round(m) / 100) * Math.sign(num);
-  }
-
   const calculateLateralDeviation = (depth) => {
     const lateralDeviation =
       depth *
@@ -136,17 +136,6 @@ function FrequencyTarget(props) {
       Math.exp((-0.5 * Math.pow(distance, 2)) / Math.pow(ld, 2));
     debugger;
     return nd.toExponential(2);
-  };
-
-  const handleNormalDistributionData = (distance, depth) => {
-    const lateralDeviation =
-      depth *
-      Math.tan((data?.impactEnergy?.angularDeviation?.[rowId] * Math.PI) / 180);
-    const normDist = new NormalDistribution(0, lateralDeviation);
-    const positiveNd = normDist.cdf(distance);
-    const negativeNd = normDist.cdf(-distance);
-    const normalDistribution = round(positiveNd - negativeNd);
-    return normDist.probabilityBetween(distance, -distance);
   };
 
   const handleData = (event, depth, distance, depIndex, distIndex) => {
@@ -229,7 +218,12 @@ function FrequencyTarget(props) {
                     {distance.map((dist, distIndex) => (
                       <td>
                         <span>
-                          {handleNormalDistributionData(dist, dep, distIndex)}
+                          {handleNormalDistributionData(
+                            data,
+                            rowId,
+                            dist,
+                            dep
+                          ).toExponential(2)}
                         </span>
                       </td>
                     ))}
@@ -263,15 +257,23 @@ function FrequencyTarget(props) {
                     {distance.map((dist, distIndex) => (
                       <td>
                         <span>
-                          {distIndex === 0
-                            ? handleNormalDistributionData(dist, dep)
-                            : (
-                                handleNormalDistributionData(dist, dep) -
-                                handleNormalDistributionData(
-                                  distance[distIndex - 1],
-                                  dep
-                                )
-                              ).toExponential()}
+                          {probabilityOfFallingWithinRing(
+                            data,
+                            rowId,
+                            distance,
+                            dist,
+                            dep,
+                            distIndex
+                          ) === 0
+                            ? ""
+                            : probabilityOfFallingWithinRing(
+                                data,
+                                rowId,
+                                distance,
+                                dist,
+                                dep,
+                                distIndex
+                              ).toExponential(2)}
                         </span>
                       </td>
                     ))}
@@ -306,34 +308,20 @@ function FrequencyTarget(props) {
                     {distance.map((dist, distIndex) => (
                       <td>
                         <span>
-                          {distIndex === 0
-                            ? (
-                                (data.targetLayout[depIndex][distIndex].value *
-                                  (parseFloat(data.liftManifest.depth[rowId]) +
-                                    parseFloat(
-                                      data.globalInformation.odOfPipeline
-                                    ))) /
-                                (Math.PI * Math.pow(distance[distIndex], 2))
-                              ).toExponential(2)
-                            : (data.targetLayout[depIndex][distIndex].value *
-                                (parseFloat(data.liftManifest.depth[rowId]) +
-                                  parseFloat(
-                                    data.globalInformation.odOfPipeline
-                                  ))) /
-                                (Math.PI *
-                                  (Math.pow(distance[distIndex], 2) -
-                                    Math.pow(distance[distIndex - 1], 2))) ===
-                              0
+                          {probabilityOfHittingWithinRing(
+                            data,
+                            distance,
+                            depIndex,
+                            distIndex,
+                            rowId
+                          ) === 0
                             ? ""
-                            : (
-                                (data.targetLayout[depIndex][distIndex].value *
-                                  (parseFloat(data.liftManifest.depth[rowId]) +
-                                    parseFloat(
-                                      data.globalInformation.odOfPipeline
-                                    ))) /
-                                (Math.PI *
-                                  (Math.pow(distance[distIndex], 2) -
-                                    Math.pow(distance[distIndex - 1], 2)))
+                            : probabilityOfHittingWithinRing(
+                                data,
+                                distance,
+                                depIndex,
+                                distIndex,
+                                rowId
                               ).toExponential(2)}
                         </span>
                       </td>
@@ -368,7 +356,42 @@ function FrequencyTarget(props) {
                     <th>{dep}</th>
                     {distance.map((dist, distIndex) => (
                       <td>
-                        <span> {targetLayout[depIndex][distIndex].value}</span>
+                        <span>
+                          {probabilityOfFallingWithinRing(
+                            data,
+                            rowId,
+                            distance,
+                            dist,
+                            dep,
+                            distIndex
+                          ) *
+                            probabilityOfHittingWithinRing(
+                              data,
+                              distance,
+                              depIndex,
+                              distIndex,
+                              rowId
+                            ) ===
+                          0
+                            ? ""
+                            : (
+                                probabilityOfFallingWithinRing(
+                                  data,
+                                  rowId,
+                                  distance,
+                                  dist,
+                                  dep,
+                                  distIndex
+                                ) *
+                                probabilityOfHittingWithinRing(
+                                  data,
+                                  distance,
+                                  depIndex,
+                                  distIndex,
+                                  rowId
+                                )
+                              ).toExponential(2)}
+                        </span>
                       </td>
                     ))}
 
