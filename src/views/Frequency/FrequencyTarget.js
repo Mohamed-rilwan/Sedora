@@ -20,6 +20,7 @@ import {
   impactEnergy,
   probabilityOfFallingWithinRing,
   probabilityOfHittingWithinRing,
+  ResidualEnergy,
   TerminalEnergy,
 } from "./Helper";
 
@@ -462,7 +463,23 @@ function FrequencyTarget(props) {
                     <th>{dep}</th>
                     {distance.map((dist, distIndex) => (
                       <td>
-                        <span> {targetLayout[depIndex][distIndex].value}</span>
+                        <span>
+                          {ResidualEnergy(
+                            data,
+                            rowId,
+                            dep,
+                            depIndex,
+                            distIndex
+                          ) === 0
+                            ? ""
+                            : ResidualEnergy(
+                                data,
+                                rowId,
+                                dep,
+                                depIndex,
+                                distIndex
+                              )}
+                        </span>
                       </td>
                     ))}
                   </tr>

@@ -72,3 +72,8 @@ export const ImpactEnergy = (data, rowId, dep, depIndex, distIndex) =>
       "Default - Perpendicular Impact"
     ? TerminalEnergy(data, rowId, dep)
     : "";
+
+//TABLE- E: RESIDUAL Energy available to damage pipeline
+export const ResidualEnergy = (data, rowId, dep, depIndex, distIndex) =>
+  ImpactEnergy(data, rowId, dep, depIndex, distIndex) -
+  data.impactProtection[depIndex][distIndex].value;
