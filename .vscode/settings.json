@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/f399b406-d588-4796-af6d-0be63570e47d/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/LiftManifest",
+    "appService.deploySubpath": "."
+}

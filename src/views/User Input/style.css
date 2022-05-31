@@ -1,0 +1,23 @@
+.App {
+    font-family: sans-serif;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  textarea {
+    width: 80%;
+    padding: 8px;
+  }
+
+  .liftmanifestInput{
+      width: 50vw;
+      height: 10vh;
+      display: flex;
+      margin:auto;
+  }
+
+  .clearButton{
+    margin:'3%';
+    display:auto;
+  }
+  

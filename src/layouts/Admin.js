@@ -26,7 +26,7 @@ import Footer from "components/Footer/Footer.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
 
 import routes from "routes.js";
-
+import GlobalContextProvider from "components/context/GlobalContext";
 var ps;
 
 function Dashboard(props) {
@@ -57,29 +57,31 @@ function Dashboard(props) {
     setBackgroundColor(color);
   };
   return (
-    <div className="wrapper">
-      <Sidebar
-        {...props}
-        routes={routes}
-        bgColor={backgroundColor}
-        activeColor={activeColor}
-      />
-      <div className="main-panel" ref={mainPanel}>
-        <DemoNavbar {...props} />
-        <Switch>
-          {routes.map((prop, key) => {
-            return (
-              <Route
-                path={prop.layout + prop.path}
-                component={prop.component}
-                key={key}
-              />
-            );
-          })}
-        </Switch>
-        <Footer fluid />
+    <GlobalContextProvider>
+      <div className="wrapper">
+        <Sidebar
+          {...props}
+          routes={routes}
+          bgColor={backgroundColor}
+          activeColor={activeColor}
+        />
+        <div className="main-panel" ref={mainPanel}>
+          <DemoNavbar {...props} />
+          <Switch>
+            {routes.map((prop, key) => {
+              return (
+                <Route
+                  path={prop.layout + prop.path}
+                  component={prop.component}
+                  key={key}
+                />
+              );
+            })}
+          </Switch>
+          <Footer fluid />
+        </div>
       </div>
-    </div>
+    </GlobalContextProvider>
   );
 }
 
