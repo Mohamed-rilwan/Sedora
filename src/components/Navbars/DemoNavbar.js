@@ -56,7 +56,7 @@ function Header(props) {
     setDropdownOpen(!dropdownOpen);
   };
   const getBrand = () => {
-    let brandName = "Default Brand";
+    let brandName = "Sedora";
     routes.map((prop, key) => {
       if (window.location.href.indexOf(prop.layout + prop.path) !== -1) {
         brandName = prop.name;

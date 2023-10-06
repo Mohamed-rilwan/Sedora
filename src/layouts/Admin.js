@@ -59,6 +59,7 @@ function Dashboard(props) {
   return (
     <GlobalContextProvider>
       <div className="wrapper">
+        
         <Sidebar
           {...props}
           routes={routes}
