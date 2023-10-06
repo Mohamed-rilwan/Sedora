@@ -15,7 +15,9 @@ ReactDOM.render(
   <BrowserRouter>
     <ErrorBoundary>
       <Switch>
-        <Route path="/" render={(props) => <AdminLayout {...props} />} />
+        <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
+        <Redirect to="/admin/home" />
+
       </Switch>
     </ErrorBoundary>
 
