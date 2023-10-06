@@ -37,11 +37,11 @@ _You will also have the following message: found 80 vulnerabilities (1 low, 79 m
 
 ## [1.2.0] 2020-06-12
 ### Bug fixing
-- https://github.com/creativetimofficial/paper-dashboard-react/issues/15
-- https://github.com/creativetimofficial/paper-dashboard-react/issues/13
-- https://github.com/creativetimofficial/paper-dashboard-react/issues/12
-- https://github.com/creativetimofficial/paper-dashboard-react/issues/9 (could not reproduce the issue, so we've left the perfect-scrollbar initialization as is, if there are layout problems, please delete the bits of code specified here: https://github.com/creativetimofficial/paper-dashboard-react/issues/9#issuecomment-593385860)
-- https://github.com/creativetimofficial/paper-dashboard-react/issues/8
+- https://github.com/creativetimofficial/sedora/issues/15
+- https://github.com/creativetimofficial/sedora/issues/13
+- https://github.com/creativetimofficial/sedora/issues/12
+- https://github.com/creativetimofficial/sedora/issues/9 (could not reproduce the issue, so we've left the perfect-scrollbar initialization as is, if there are layout problems, please delete the bits of code specified here: https://github.com/creativetimofficial/sedora/issues/9#issuecomment-593385860)
+- https://github.com/creativetimofficial/sedora/issues/8
 - Other Paper React products issues solved here as well
   - https://github.com/creativetimofficial/ct-paper-kit-pro-react/issues/2
   - https://github.com/creativetimofficial/paper-kit-react/issues/2

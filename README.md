@@ -1,10 +1,10 @@
-# [Paper Dashboard React](https://demos.creative-tim.com/paper-dashboard-react/#/dashboard) [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social&logo=twitter)](https://twitter.com/intent/tweet?url=https%3A%2F%2Fdemos.creative-tim.com%2Fpaper-dashboard-react%2F%23%2Fdashboard&text=Paper%20Dashboard%20React%20by%20Creative%20Tim%20%7C%20Free%20React%20Admin%20Template&original_referer=https%3A%2F%2Fdemos.creative-tim.com%2Fpaper-dashboard-react%2F&via=creativetim&hashtags=react%2Ccreativetim%2Cpaper%2Cdashboard%2Cbootstrap%2Creactstrap%2Creactjs)
+# [Paper Dashboard React](https://demos.creative-tim.com/sedora/#/dashboard) [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social&logo=twitter)](https://twitter.com/intent/tweet?url=https%3A%2F%2Fdemos.creative-tim.com%2Fsedora%2F%23%2Fdashboard&text=Paper%20Dashboard%20React%20by%20Creative%20Tim%20%7C%20Free%20React%20Admin%20Template&original_referer=https%3A%2F%2Fdemos.creative-tim.com%2Fsedora%2F&via=creativetim&hashtags=react%2Ccreativetim%2Cpaper%2Cdashboard%2Cbootstrap%2Creactstrap%2Creactjs)
 
 
 
-![version](https://img.shields.io/badge/version-1.3.0-blue.svg) ![license](https://img.shields.io/badge/license-MIT-blue.svg) [![GitHub issues open](https://img.shields.io/github/issues/creativetimofficial/paper-dashboard-react.svg?maxAge=2592000)]() [![GitHub issues closed](https://img.shields.io/github/issues-closed-raw/creativetimofficial/paper-dashboard-react.svg?maxAge=2592000)]()  [![Chat](https://img.shields.io/badge/chat-on%20discord-7289da.svg)](https://discord.gg/E4aHAQy)
+![version](https://img.shields.io/badge/version-1.3.0-blue.svg) ![license](https://img.shields.io/badge/license-MIT-blue.svg) [![GitHub issues open](https://img.shields.io/github/issues/creativetimofficial/sedora.svg?maxAge=2592000)]() [![GitHub issues closed](https://img.shields.io/github/issues-closed-raw/creativetimofficial/sedora.svg?maxAge=2592000)]()  [![Chat](https://img.shields.io/badge/chat-on%20discord-7289da.svg)](https://discord.gg/E4aHAQy)
 
-![Product Gif](./src/assets/github/paper-dashboard-react.gif)
+![Product Gif](./src/assets/github/sedora.gif)
 
 If you are a react developer or a react website owner that needs to work within a dashboard and want to have a pretty sight while doing so, Paper Dashboard React is for you. Paper Dashboard React is a Bootstrap Admin Panel which combines soft colours with beautiful typography and spacious cards and graphics. It is a powerful tool, but it is light and easy to use. It has enough features to allow you to get the job done, but it is not crowded to the point where you can't find the files for a specific plugin.
 
@@ -34,34 +34,34 @@ Paper Dashboard React is built using the same design language as [Paper Dashboar
 ## Versions
 
 [<img src="https://s3.amazonaws.com/creativetim_bucket/github/html.png" width="60" height="60" />](https://www.creative-tim.com/product/paper-dashboard-2)
-[<img src="https://s3.amazonaws.com/creativetim_bucket/github/react.svg" width="60" height="60" />](https://www.creative-tim.com/product/paper-dashboard-react)
+[<img src="https://s3.amazonaws.com/creativetim_bucket/github/react.svg" width="60" height="60" />](https://www.creative-tim.com/product/sedora)
 
 
 | HTML | React |
 | --- | --- |
-| [![Paper Dashboard 2 HTML](https://s3.amazonaws.com/creativetim_bucket/products/86/thumb/opt_pd2_thumbnail.jpg)](https://www.creative-tim.com/product/paper-dashboard-2) | [![Paper Dashboard React](https://s3.amazonaws.com/creativetim_bucket/products/98/thumb/opt_pd_react_thumbnail.jpg)](https://www.creative-tim.com/product/paper-dashboard-react) |
+| [![Paper Dashboard 2 HTML](https://s3.amazonaws.com/creativetim_bucket/products/86/thumb/opt_pd2_thumbnail.jpg)](https://www.creative-tim.com/product/paper-dashboard-2) | [![Paper Dashboard React](https://s3.amazonaws.com/creativetim_bucket/products/98/thumb/opt_pd_react_thumbnail.jpg)](https://www.creative-tim.com/product/sedora) |
 
 ## Demo
 
 | Dashboard | User Profile | Tables | Maps | Notification |
 | --- | --- | --- | --- | --- |
-| [![Start page](./src/assets/github/paper-dashboard-react-dashboard-page.png)](https://demos.creative-tim.com/paper-dashboard-react/#/dashboard) | [![User profile page](./src/assets/github/paper-dashboard-react-user-page.png)](https://demos.creative-tim.com/paper-dashboard-react/#/user-page) | [![Tables page ](./src/assets/github/paper-dashboard-react-table-page.png)](https://demos.creative-tim.com/paper-dashboard-react/#/table-list) | [![Maps Page](./src/assets/github/paper-dashboard-react-maps-page.png)](https://demos.creative-tim.com/paper-dashboard-react/#/maps) | [![Notification page](./src/assets/github/paper-dashboard-react-notifications-page.png)](https://demos.creative-tim.com/paper-dashboard-react/#/notifications)
+| [![Start page](./src/assets/github/sedora-dashboard-page.png)](https://demos.creative-tim.com/sedora/#/dashboard) | [![User profile page](./src/assets/github/sedora-user-page.png)](https://demos.creative-tim.com/sedora/#/user-page) | [![Tables page ](./src/assets/github/sedora-table-page.png)](https://demos.creative-tim.com/sedora/#/table-list) | [![Maps Page](./src/assets/github/sedora-maps-page.png)](https://demos.creative-tim.com/sedora/#/maps) | [![Notification page](./src/assets/github/sedora-notifications-page.png)](https://demos.creative-tim.com/sedora/#/notifications)
 
-[View More](https://demos.creative-tim.com/paper-dashboard-react/#/dashboard).
+[View More](https://demos.creative-tim.com/sedora/#/dashboard).
 
 
 ## Quick start
 
 Quick start options:
 
-- `npm i paper-dashboard-react`
-- Clone the repo: `git clone https://github.com/creativetimofficial/paper-dashboard-react.git`.
-- [Download from Github](https://github.com/creativetimofficial/paper-dashboard-react/archive/main.zip).
-- [Download from Creative Tim](https://www.creative-tim.com/product/paper-dashboard-react).
+- `npm i sedora`
+- Clone the repo: `git clone https://github.com/creativetimofficial/sedora.git`.
+- [Download from Github](https://github.com/creativetimofficial/sedora/archive/main.zip).
+- [Download from Creative Tim](https://www.creative-tim.com/product/sedora).
 
 
 ## Documentation
-The documentation for the Paper Dashboard React is hosted at our [website](https://demos.creative-tim.com/paper-dashboard-react/#/documentation/tutorial).
+The documentation for the Paper Dashboard React is hosted at our [website](https://demos.creative-tim.com/sedora/#/documentation/tutorial).
 
 
 ## File Structure
@@ -139,12 +139,12 @@ At present, we officially aim to support the last two versions of the following 
 
 
 ## Resources
-- Demo: https://demos.creative-tim.com/paper-dashboard-react/#/dashboard
-- Download Page: https://www.creative-tim.com/product/paper-dashboard-react
-- Documentation: https://demos.creative-tim.com/paper-dashboard-react/#/documentation/tutorial
+- Demo: https://demos.creative-tim.com/sedora/#/dashboard
+- Download Page: https://www.creative-tim.com/product/sedora
+- Documentation: https://demos.creative-tim.com/sedora/#/documentation/tutorial
 - License Agreement: https://www.creative-tim.com/license
 - Support: https://www.creative-tim.com/contact-us
-- Issues: [Github Issues Page](https://github.com/creativetimofficial/paper-dashboard-react/issues)
+- Issues: [Github Issues Page](https://github.com/creativetimofficial/sedora/issues)
 
 ## Reporting Issues
 We use GitHub Issues as the official bug tracker for the Paper Dashboard React. Here are some advices for our users that want to report an issue:
@@ -160,7 +160,7 @@ If you have questions or need help integrating the product please [contact us](h
 ## Licensing
 
 - Copyright 2021 Creative Tim (https://www.creative-tim.com)
-- Licensed under MIT (https://github.com/creativetimofficial/paper-dashboard-react/blob/main/LICENSE.md)
+- Licensed under MIT (https://github.com/creativetimofficial/sedora/blob/main/LICENSE.md)
 
 ## Useful Links
 

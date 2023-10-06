@@ -4,10 +4,10 @@
 // * Paper Dashboard React - v1.3.0
 // =========================================================
 
-// * Product Page: https://www.creative-tim.com/product/paper-dashboard-react
+// * Product Page: https://www.creative-tim.com/product/sedora
 // * Copyright 2021 Creative Tim (https://www.creative-tim.com)
 
-// * Licensed under MIT (https://github.com/creativetimofficial/paper-dashboard-react/blob/main/LICENSE.md)
+// * Licensed under MIT (https://github.com/creativetimofficial/sedora/blob/main/LICENSE.md)
 
 // * Coded by Creative Tim
 
@@ -125,7 +125,7 @@
 //           </li>
 //           <li className="button-container">
 //             <Button
-//               href="https://www.creative-tim.com/product/paper-dashboard-react?ref=pdr-fixed-plugin"
+//               href="https://www.creative-tim.com/product/sedora?ref=pdr-fixed-plugin"
 //               color="primary"
 //               block
 //               className="btn-round"
@@ -135,7 +135,7 @@
 //           </li>
 //           <li className="button-container">
 //             <Button
-//               href="https://www.creative-tim.com/product/paper-dashboard-react/#/documentation/tutorial?ref=pdr-fixed-plugin"
+//               href="https://www.creative-tim.com/product/sedora/#/documentation/tutorial?ref=pdr-fixed-plugin"
 //               color="default"
 //               block
 //               className="btn-round"
