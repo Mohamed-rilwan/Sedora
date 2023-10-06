@@ -62,7 +62,6 @@ function Dashboard(props) {
               );
             })}
           </Switch>
-          <Footer fluid />
         </div>
       </div>
     </GlobalContextProvider>

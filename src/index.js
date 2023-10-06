@@ -9,12 +9,16 @@ import "assets/demo/demo.css";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
 
 import AdminLayout from "layouts/Admin.js";
+import ErrorBoundary from "./ErrorBoundary";
 
 ReactDOM.render(
   <BrowserRouter>
-    <Switch>
-      <Route path="/" render={(props) => <AdminLayout {...props} />} />
-    </Switch> 
+    <ErrorBoundary>
+      <Switch>
+        <Route path="/" render={(props) => <AdminLayout {...props} />} />
+      </Switch>
+    </ErrorBoundary>
+
   </BrowserRouter>,
   document.getElementById("root")
 );
