@@ -1,6 +1,7 @@
 import parseClip from "components/PasteToTable/parseClip";
 import React, { useState } from "react";
 import "./style.css";
+import { liftManifestTestData } from "../listManifestTestData.js";
 // reactstrap components
 import {
   Button,
@@ -56,6 +57,7 @@ const ClearData = (liftManifest, index) => {
 
 function LiftManifest(props) {
   const { data } = props;
+  const testData = liftManifestTestData;
   const [modalOpen, setModalOpen] = useState(false);
   const [excelData, setExcelData] = useState([]);
   const [liftManifest, setLiftManifest] = useState(() =>
@@ -67,12 +69,12 @@ function LiftManifest(props) {
   var regexWithDecimal = /^-?\d+\.?\d*$/;
 
   const handleExcelData = ({ target: { value } }) => {
+    console.log("value - ", value)
     const parsedData = parseClip(value);
     setExcelData(parsedData);
     const manifestData = sampleData;
     let inValid = false;
     parsedData.forEach((manifest, columnIndex) => {
-      // manifest.splice(0, 1);
       manifest.forEach((item, rowIndex) => {
         manifestData[Object.keys(manifestData)[rowIndex]][columnIndex] = item;
       });
@@ -131,6 +133,16 @@ function LiftManifest(props) {
               />
             </Col>
             <Col md="2" xs="2">
+              <Button
+                className={"clearButton"}
+                aria-label="Cancel"
+                onClick={() => {
+                  handleExcelData({ target: { value: testData } }
+                  );
+                }}
+              >
+                Insert Sample Data
+              </Button>
               <Button
                 className={"clearButton"}
                 aria-label="Cancel"

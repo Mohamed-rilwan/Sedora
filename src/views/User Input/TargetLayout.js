@@ -15,6 +15,7 @@ import {
   UncontrolledTooltip,
 } from "reactstrap";
 import targetRep from "../../assets/img/TargetLayout.png";
+import { targetLaoutTestData } from "views/listManifestTestData";
 
 const validateData = (props) => {
   var item = Array.from({ length: props.depth.length }, () =>
@@ -48,7 +49,7 @@ const validateData = (props) => {
 };
 function TargetLayout(props) {
   const { depth, distance, data, isReadOnly = false } = props;
-
+  const testData = targetLaoutTestData;
   const [tooltipOpen, setTooltipOpen] = useState(false);
   let invalidDistance = [];
   let invalidDepth = [];
@@ -60,7 +61,6 @@ function TargetLayout(props) {
 
   const handleExcelData = ({ target: { value } }) => {
     const parsedData = parseClip(value);
-
     setExcelData(parsedData);
     const targetData = JSON.parse(JSON.stringify(targetLayout));
     let inValid = false;
@@ -163,6 +163,16 @@ function TargetLayout(props) {
               }
               onChange={handleExcelData}
             />
+              <Button
+                className={"clearButton"}
+                aria-label="Cancel"
+                onClick={() => {
+                  handleExcelData({ target: { value: testData } }
+                  );
+                }}
+              >
+                Insert Sample Data
+              </Button>
           </CardHeader>
         )}
         <CardBody>
@@ -170,7 +180,6 @@ function TargetLayout(props) {
             <Table>
               <thead>
                 <th>Depth</th>
-
                 {distance.map((item, index) => (
                   <th>{item}</th>
                 ))}
